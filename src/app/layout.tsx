@@ -22,12 +22,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <Head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css"
-        />
-      </Head>
       <body className={notoSansKR.className}>
         <AppProvider>
           <GlobalLayout>{children}</GlobalLayout>
