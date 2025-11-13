@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import { GlobalLayout } from "@/components/blocks/global";
+import Head from "next/head";
+import { AppProvider } from "@/providers/AppProvider";
 
 const notoSansKR = Noto_Sans_KR({
   variable: "--font-noto-sans-kr",
@@ -10,7 +12,7 @@ const notoSansKR = Noto_Sans_KR({
 
 export const metadata: Metadata = {
   title: "Quokka",
-  description: "기억하고 싶은 대사를 나만의 카드로",
+  description: "기억하고 싶은 문장을 나만의 카드로",
 };
 
 export default function RootLayout({
@@ -21,7 +23,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={notoSansKR.className}>
-        <GlobalLayout>{children}</GlobalLayout>
+        <AppProvider>
+          <GlobalLayout>{children}</GlobalLayout>
+        </AppProvider>
       </body>
     </html>
   );
