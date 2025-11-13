@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import React, { FC } from "react";
-import { GlobalHeader } from "./GlobalHeader";
+import { GlobalHeader } from "./header/GlobalHeader";
 
 interface GlobalLayoutProps {
   children?: React.ReactNode;

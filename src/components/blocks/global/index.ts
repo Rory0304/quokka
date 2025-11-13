@@ -1,2 +1,2 @@
 export { GlobalLayout } from "./GlobalLayout";
-export { GlobalHeader } from "./GlobalHeader";
+export { GlobalHeader } from "./header/DefaultHeader";
