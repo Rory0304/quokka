@@ -1,31 +1,41 @@
-import { FontSize } from "@/data/constants/editor/FontSize";
-import { EditorAction, EditorState } from "./context";
-import { TextAlign } from "@/data/constants/editor/TextAlign";
+import { Editor, EditorAction, EditorElement } from "./context";
 
-export const reducer = (state: EditorState, action: EditorAction) => {
+export const reducer = (editor: Editor, action: EditorAction) => {
   switch (action.type) {
-    case "CHANGE_BACKGROUND":
+    case "UPDATE_CONFIG":
       return {
-        ...state,
-        backgroundColor: action.payload.backgroundColor,
+        ...editor,
+        config: {
+          ...editor.config,
+          ...action.payload,
+        },
       };
 
-    case "CHANGE_CONTENT":
-      return {
-        ...state,
-        content: action.payload.content,
-      };
+    case "UPDATE_ELEMENT": {
+      const newEditorData = editor.elements.map((element) => {
+        if (element.id !== action.payload.id) return element;
+        else {
+          const newElement: EditorElement = {
+            ...element,
+            ...action.payload,
+          };
 
-    case "CHANGE_FONTSIZE":
-      return {
-        ...state,
-        fontSize: action.payload.fontSize,
-      };
+          return newElement;
+        }
+      });
 
-    case "CHANGE_TEXTALIGN":
+      console.log({
+        ...editor,
+        elements: newEditorData,
+      });
+
       return {
-        ...state,
-        textAlign: action.payload.textAlign,
+        ...editor,
+        elements: newEditorData,
       };
+    }
+
+    default:
+      return editor;
   }
 };
