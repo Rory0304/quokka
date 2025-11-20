@@ -18,7 +18,7 @@ export const NavigationHeader: FC<NavigationHeaderProps> = ({
 }) => {
   return (
     <div className="fixed z-10 w-full h-16 max-h-16">
-      <div className="max-w-xl mx-auto bg-white bg-opacity-70 backdrop-blur px-4 flex items-center justify-between h-full">
+      <div className="mx-auto bg-white bg-opacity-70 backdrop-blur px-4 flex items-center justify-between h-full">
         <Link href={RouteConfig[backTo]} aria-label={`back to ${backTo}`}>
           <CaretLeftIcon width={32} height={32} />
         </Link>
