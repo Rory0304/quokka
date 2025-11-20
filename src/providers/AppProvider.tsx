@@ -2,6 +2,7 @@
 
 import { Bar, Progress } from "@bprogress/next";
 import { ProgressProvider } from "@bprogress/next/app";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import React, { FC } from "react";
 
@@ -10,22 +11,26 @@ interface AppProviderProps {
 }
 
 export const AppProvider: FC<AppProviderProps> = ({ children }) => {
-  return (
-    <ProgressProvider
-      color="#e9631a"
-      height="4px"
-      options={{
-        template: null,
-        positionUsing: "width",
-      }}
-    >
-      {children}
+  const [queryClient] = React.useState(() => new QueryClient());
 
-      <div className="fixed top-0 z-9999 overflow-hidden">
-        <Progress>
-          <Bar className="absolute top-0" />
-        </Progress>
-      </div>
-    </ProgressProvider>
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ProgressProvider
+        color="#e9631a"
+        height="4px"
+        options={{
+          template: null,
+          positionUsing: "width",
+        }}
+      >
+        {children}
+
+        <div className="fixed top-0 z-9999 overflow-hidden">
+          <Progress>
+            <Bar className="absolute top-0" />
+          </Progress>
+        </div>
+      </ProgressProvider>
+    </QueryClientProvider>
   );
 };
