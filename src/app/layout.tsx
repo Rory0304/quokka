@@ -24,9 +24,7 @@ export default function RootLayout({
     <html lang="ko">
       <body className={notoSansKR.className}>
         <AuthProvider>
-          <AppProvider>
-            <GlobalLayout>{children}</GlobalLayout>
-          </AppProvider>
+          <AppProvider>{children}</AppProvider>
         </AuthProvider>
       </body>
     </html>
