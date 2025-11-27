@@ -1,11 +1,11 @@
 import { useEditor } from "@/hooks/editor/useEditor";
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import { QuoteCard } from "./element/QuoteCard";
-import { useEditorHandler } from "@/hooks/editor/useEditorHandler";
+import { EditorHandlerContext } from "./contexts/context";
 
 export const EditorMain: FC = () => {
   const { editorData, dispatch } = useEditor();
-  const { quoteCardRef } = useEditorHandler();
+  const { quoteCardRef } = useContext(EditorHandlerContext);
 
   const handleClick = () => {
     dispatch({
