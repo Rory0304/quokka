@@ -1,0 +1,26 @@
+import { Editor } from "@/data/interfaces/editor/Editor";
+import { QuoteCardType } from "@/data/interfaces/quoteCard/QuoteCardType";
+import { initalEditorState } from "../../components/pages/editor/contexts/context";
+import { QuoteCardCategoryType } from "@/data/constants/quoteCard/QuoteCardCategory";
+
+export const createEditorStateFromQuoteCard = (
+  quoteCard: QuoteCardType
+): Editor => {
+  if (!quoteCard) {
+    return initalEditorState;
+  }
+
+  return {
+    config: {
+      title: quoteCard.title,
+      category: quoteCard.category as QuoteCardCategoryType,
+      tags: quoteCard.tags,
+      isPublic: quoteCard.isPublic,
+    },
+    state: {
+      selectedElement: null,
+      selectedLayerId: quoteCard.customFields.data[0].id || null,
+    },
+    data: quoteCard.customFields.data,
+  };
+};
