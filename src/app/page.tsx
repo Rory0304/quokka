@@ -1,13 +1,14 @@
-import { HomeBanner } from "@/components/pages/home/HomeBanner";
-import { BookCarousel } from "@/components/pages/home/BookCarousel";
+import { GlobalLayout } from "@/components/blocks/global";
 import { HomeBookCardPreview } from "@/components/pages/home/HomeBookCardPreview";
+import { HomeFloatingButton } from "@/components/pages/home/HomeFloatingButton";
 
 export default function Home() {
   return (
-    <div>
-      <HomeBanner />
-      <BookCarousel />
-      <HomeBookCardPreview />
-    </div>
+    <GlobalLayout>
+      <div>
+        <HomeBookCardPreview />
+        <HomeFloatingButton />
+      </div>
+    </GlobalLayout>
   );
 }
