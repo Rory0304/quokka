@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
-import { GlobalLayout } from "@/components/blocks/global";
 import { AppProvider } from "@/providers/AppProvider";
 import { AuthProvider } from "@/providers/AuthProvider";
 
