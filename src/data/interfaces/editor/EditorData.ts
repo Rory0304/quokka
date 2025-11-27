@@ -1,15 +1,13 @@
-import { TextAlignType } from "@/data/constants/editor/TextAlign";
-import { FontFamilyType } from "@/data/constants/editor/FontFamily";
-import { AspectRatioType } from "@/data/constants/editor/AspectRatio";
-import { FontSizeType } from "@/data/constants/editor/FontSize";
-import { EditorBackgroundColorType } from "./EditorBackgroundColor";
+import { TemplateType } from "@/data/constants/editor/Template";
+import { EditorElement } from "./EditorElement";
+import { Layout } from "./EditorLayout";
 
 export interface EditorData {
-  content: string;
-  author: string;
-  backgroundColor: EditorBackgroundColorType;
-  fontSize: FontSizeType;
-  textAlign: TextAlignType;
-  fontFamily: FontFamilyType;
-  aspectRatio: AspectRatioType;
+  id: string;
+  template: {
+    type: TemplateType | null;
+    color: string
+  };
+  layout: Layout;
+  elements: EditorElement[];
 }
