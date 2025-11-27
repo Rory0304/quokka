@@ -22,7 +22,7 @@ export const authOptions: NextAuthOptions = {
           ...session.user,
           id: token.sub,
         },
-    };
+      };
     },
   },
 };
