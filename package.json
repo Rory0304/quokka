@@ -25,6 +25,7 @@
     "nanoid": "^5.1.6",
     "next": "15.5.6",
     "next-auth": "^4.24.13",
+    "query-string": "^9.3.1",
     "radix-ui": "^1.4.3",
     "react": "19.1.0",
     "react-best-gradient-color-picker": "^3.0.14",
