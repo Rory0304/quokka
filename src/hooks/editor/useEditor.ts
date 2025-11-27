@@ -2,11 +2,30 @@ import {
   EditorDispatchContext,
   EditorValueContext,
 } from "@/app/editor/context";
+
 import { useContext } from "react";
 
 export const useEditor = () => {
   const state = useContext(EditorValueContext);
   const dispatch = useContext(EditorDispatchContext);
 
-  return { state, dispatch };
+  const editorLayout = state.data.find(
+    (data) => data.id === state.state.selectedLayerId
+  )?.layout;
+
+  const editorTemplate = state.data.find(
+    (data) => data.id === state.state.selectedLayerId
+  )?.template;
+
+  return {
+    state,
+
+    editorState: state.state,
+    editorData: state.data,
+    editorConfig: state.config,
+    editorLayout,
+    editorTemplate,
+
+    dispatch,
+  };
 };
