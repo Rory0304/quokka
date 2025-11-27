@@ -1,29 +1,31 @@
 "use client";
+
 import { RouteConfig } from "@/data/constants/route";
 import { usePathname } from "next/navigation";
 import React, { FC } from "react";
 import { DefaultHeader } from "./DefaultHeader";
 import { NavigationHeader } from "./NavigationHeader";
-import { useGlobalHeader } from "@/store/header/useGlobalHeader";
 
-const NavigationHeaderPathname = [
-  RouteConfig.login,
-  RouteConfig.register,
-  RouteConfig.editor,
-];
+const NavigationHeaderPathname = [RouteConfig.login, RouteConfig.register];
 
-const GlobalHeaderHiddenPathname: string[] = [];
+const GlobalHeaderHiddenPathname: string[] = [RouteConfig.editor];
 
 export const GlobalHeader: FC = () => {
   const pathname = usePathname();
   const isHeaderHidden = GlobalHeaderHiddenPathname.includes(pathname);
   const isNavigation = NavigationHeaderPathname.includes(pathname);
 
-  const { RightSlot } = useGlobalHeader();
+  const renderContent = () => {
+    if (isHeaderHidden) return null;
 
-  if (isHeaderHidden) return null;
+    if (isNavigation) return <NavigationHeader />;
 
-  if (isNavigation) return <NavigationHeader RightSlot={RightSlot} />;
+    return <DefaultHeader />;
+  };
 
-  return <DefaultHeader />;
+  return (
+    <div className="max-w-7xl fixed z-10 w-full h-16 max-h-16">
+      {renderContent()}
+    </div>
+  );
 };
