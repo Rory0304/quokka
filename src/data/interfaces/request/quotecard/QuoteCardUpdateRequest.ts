@@ -1,5 +1,6 @@
 import { EditorData } from "../../editor";
 
-export interface QuoteCardCreateResponse {
+export interface QuoteCardUpdateRequest {
   id: EditorData["id"];
+  isPublic: boolean;
 }
