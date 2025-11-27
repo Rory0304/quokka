@@ -1,5 +1,5 @@
 import { authOptions } from "@/libs/auth/auth";
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
 import { NextResponse } from "next/server";
 
 export type SessionContext = { userId: string };
@@ -8,6 +8,7 @@ export async function withSession<T>(
   handler: (ctx: SessionContext) => Promise<T>
 ) {
   const session = await getServerSession(authOptions);
+
   if (!session?.user?.id) {
     throw new Response("Unauthorized", { status: 401 });
   }
