@@ -1,7 +1,7 @@
 import {
   EditorDispatchContext,
   EditorValueContext,
-} from "@/app/editor/context";
+} from "@/components/pages/editor/contexts/context";
 
 import { useContext } from "react";
 
