@@ -1,6 +1,7 @@
 import React, { FC, PropsWithChildren, Suspense } from "react";
 import { ErrorBoundary } from "./ErrorBoundary";
 import { QueryErrorResetBoundary } from "@tanstack/react-query";
+import SSRSafeSuspense from "./SSRSafeSuspense";
 
 interface AsyncBoundaryProps {
   pendingFallback: React.ReactNode;
@@ -16,7 +17,9 @@ export const AsyncBoundary: FC<PropsWithChildren<AsyncBoundaryProps>> = ({
     <QueryErrorResetBoundary>
       {({ reset }) => (
         <ErrorBoundary errorFallback={errorFallback} resetQuery={reset}>
-          <Suspense fallback={pendingFallback}>{children}</Suspense>
+          <SSRSafeSuspense fallback={pendingFallback}>
+            {children}
+          </SSRSafeSuspense>
         </ErrorBoundary>
       )}
     </QueryErrorResetBoundary>
