@@ -8,4 +8,11 @@ export const QueryKey = {
   image: {
     upload_image: "upload_image",
   },
+  bookmark: {
+    create_bookmark: "create_bookmark",
+    delete_bookmark: "delete_bookmark",
+    toggle_bookmark: "toggle_bookmark",
+    get_bookmark: "get_bookmark",
+    get_bookmark_list: "get_bookmark_list",
+  },
 } as const;
