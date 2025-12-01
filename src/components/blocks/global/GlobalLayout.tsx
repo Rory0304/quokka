@@ -13,10 +13,12 @@ export const metadata: Metadata = {
 
 export const GlobalLayout: FC<GlobalLayoutProps> = ({ children }) => {
   return (
-    <main className="h-full w-full">
-      <div className="w-full h-full max-w-7xl mx-auto">
+    <main className="h-full w-full bg-slate-50">
+      <div className="w-full">
         <GlobalHeader />
-        <div className="pt-16 relative">{children}</div>
+        <div className="pt-16 relative max-w-7xl mx-auto min-h-screen px-6">
+          {children}
+        </div>
       </div>
     </main>
   );
