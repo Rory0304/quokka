@@ -1,9 +1,9 @@
-import { EditorElement } from "@/components/pages/editor/contexts/context";
 import {
   FontFamily,
   FontFamilyMap,
   FontFamilyType,
 } from "@/data/constants/editor/FontFamily";
+import { EditorElement } from "@/data/interfaces/editor/EditorElement";
 
 import { useEditor } from "@/hooks/editor/useEditor";
 import {
