@@ -47,6 +47,7 @@ model User {
     accounts      Account[]
     sessions      Session[]
     quoteCards    QuoteCard[]
+    bookmarks     Bookmark[]
 }
 
 model VerificationToken {
@@ -69,7 +70,22 @@ model QuoteCard {
     updatedAt    DateTime @updatedAt
     thumbnailUrl String?
 
-    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+    bookmarks Bookmark[]
 
     @@index([userId])
+}
+
+model Bookmark {
+    id          String   @id @default(cuid())
+    userId      String
+    quoteCardId String
+    createdAt   DateTime @default(now())
+
+    user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+    quoteCard QuoteCard @relation(fields: [quoteCardId], references: [id], onDelete: Cascade)
+
+    @@unique([userId, quoteCardId])
+    @@index([userId])
+    @@index([quoteCardId])
 }
