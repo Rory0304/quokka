@@ -56,7 +56,6 @@ export const useBookmarkList = ({ enable }: { enable: boolean }) => {
       lastPage.pagination.nextCursor,
   });
 
-  // 모든 페이지의 데이터를 합침
   const list = data?.pages.flatMap((page) => page.data) ?? [];
   const isEmpty = isSuccess && list.length === 0;
 
