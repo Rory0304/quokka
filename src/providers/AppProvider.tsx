@@ -5,6 +5,7 @@ import { ProgressProvider } from "@bprogress/next/app";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import React, { FC } from "react";
+import { Toaster } from "sonner";
 
 interface AppProviderProps {
   children: React.ReactNode;
@@ -30,6 +31,8 @@ export const AppProvider: FC<AppProviderProps> = ({ children }) => {
             <Bar className="absolute top-0" />
           </Progress>
         </div>
+
+        <Toaster />
       </ProgressProvider>
     </QueryClientProvider>
   );
