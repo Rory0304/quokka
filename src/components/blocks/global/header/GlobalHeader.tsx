@@ -23,9 +23,5 @@ export const GlobalHeader: FC = () => {
     return <DefaultHeader />;
   };
 
-  return (
-    <div className="max-w-7xl fixed z-10 w-full h-16 max-h-16">
-      {renderContent()}
-    </div>
-  );
+  return <div className="bg-white fixed z-10 w-full">{renderContent()}</div>;
 };

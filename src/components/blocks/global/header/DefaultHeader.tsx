@@ -1,24 +1,18 @@
 "use client";
 
-import {
-  CaretDownIcon,
-  ExitIcon,
-  GlobeIcon,
-  PersonIcon,
-} from "@radix-ui/react-icons";
+import { CaretDownIcon, ExitIcon } from "@radix-ui/react-icons";
 import { signOut, useSession } from "next-auth/react";
-import Image from "next/image";
+
 import Link from "next/link";
 import { Avatar, DropdownMenu } from "radix-ui";
 
 import React, { FC } from "react";
-import { Button } from "../../button/Button";
-import { usePathname } from "next/navigation";
+
 import { SearchViewToggle } from "./parts/SearchViewToggle";
+import { GoogleLoginButton } from "@/components/pages/login/GoogleLoginButton";
 
 export const DefaultHeader: FC = () => {
   const { data: session } = useSession();
-  const pathname = usePathname();
 
   const handleSignOut = () => {
     signOut({ callbackUrl: "/" });
@@ -28,45 +22,14 @@ export const DefaultHeader: FC = () => {
     return (
       <Link href="/">
         <div className="flex gap-2">
-          <Image
-            src="/quokka_logo.png"
-            alt="quokkalogo"
-            width={30}
-            height={30}
-          />
-          <h1 className="text-primary font-bold">Qukka</h1>
+          <h1 className="text-primary font-bold text-lg">Quokka</h1>
         </div>
       </Link>
     );
   };
 
-  const renderPrivateModeArea = () => {
-    return (
-      <div className="bg-gray-100 rounded-md">
-        <Button asChild variant="ghost" className="rounded-md">
-          <Link href="/my">
-            <div className="flex items-center gap-2">
-              <PersonIcon />
-              <span className="font-medium text-sm  text-muted-foreground">
-                나의 목록
-              </span>
-            </div>
-          </Link>
-        </Button>
-        <Button asChild variant="ghost" className="rounded-md">
-          <Link href="/">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <GlobeIcon />
-              <span className="font-medium text-sm">통합 검색</span>
-            </div>
-          </Link>
-        </Button>
-      </div>
-    );
-  };
-
   return (
-    <div className="w-full bg-white border-b border-gray-100 px-4 flex items-center justify-between h-full">
+    <div className="max-w-7xl h-16 max-h-16 mx-auto border-b border-gray-100 bg-white bg-opacity-70 backdrop-blur px-4 flex items-center justify-between">
       <div className="flex items-center gap-6">
         {renderMainLogoArea()}
         <SearchViewToggle />
@@ -107,9 +70,7 @@ export const DefaultHeader: FC = () => {
             </DropdownMenu.Portal>
           </DropdownMenu.Root>
         ) : (
-          <Link href="/login">
-            <span className="font-semibold">로그인</span>
-          </Link>
+          <GoogleLoginButton />
         )}
       </div>
     </div>
