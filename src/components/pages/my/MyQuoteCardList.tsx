@@ -23,13 +23,17 @@ export const MyQuoteCardList: FC = () => {
     param: Pick<QuoteCardType, "id" | "isPublic">
   ) => {
     updateMutation.mutate({
-      id: param.id,
-      isPublic: !param.isPublic,
+      body: {
+        id: param.id,
+        data: {
+          isPublic: !param.isPublic,
+        },
+      },
     });
   };
 
   return (
-    <div className="grid grid-cols-5 gap-10 group">
+    <div className="grid grid-cols-3 gap-10 group pt-12">
       <Link href={RouteConfig.editor}>
         <div className="w-full h-full bg-green-50 flex flex-col justify-center items-center rounded-xl  text-muted-foreground">
           <div className="flex items-center justify-center rounded-full bg-green-300 w-10 h-10 mb-4">
