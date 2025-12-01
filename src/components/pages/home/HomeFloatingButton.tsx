@@ -5,7 +5,7 @@ import React, { FC } from "react";
 
 export const HomeFloatingButton: FC = () => {
   return (
-    <div className="w-full max-w-7xl mx-auto fixed bottom-8">
+    <div className="w-full fixed left-0 bottom-8">
       <div className="flex justify-center">
         <Link href="/editor">
           <div
