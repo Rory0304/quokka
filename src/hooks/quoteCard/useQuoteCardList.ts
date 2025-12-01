@@ -3,12 +3,22 @@ import { QuoteCardListResponse } from "@/data/interfaces/response/quotecard/Quot
 import { ApiFetch } from "@/libs/api/ApiFetch";
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import qs from "query-string";
+import { QuoteCardCategoryType } from "@/data/constants/quoteCard/QuoteCardCategory";
 
-export const useQuoteCardList = () => {
+interface UseQuoteCardListOptions {
+  category?: QuoteCardCategoryType;
+  searchKey?: string;
+}
+
+export const useQuoteCardList = (options?: UseQuoteCardListOptions) => {
+  const { category, searchKey } = options || {};
+
   const fetchItems = async ({ pageParam }: { pageParam: number | null }) => {
     const query = qs.stringify({
       cursor: pageParam ?? undefined,
       limit: 10,
+      category: category ?? undefined,
+      searchKey: searchKey?.trim() || undefined,
     });
 
     const response = await ApiFetch(`/api/quotecards?${query}`);
@@ -23,7 +33,7 @@ export const useQuoteCardList = () => {
 
   const { data, isSuccess, hasNextPage, isFetchingNextPage } =
     useSuspenseInfiniteQuery({
-      queryKey: [QueryKey.quoteCard.get_quotecard_list],
+      queryKey: [QueryKey.quoteCard.get_quotecard_list, category, searchKey],
       initialPageParam: null,
       queryFn: ({ pageParam }: { pageParam: number | null }) =>
         fetchItems({ pageParam }),
@@ -31,7 +41,7 @@ export const useQuoteCardList = () => {
         lastPage.pagination.nextCursor,
     });
 
-  const list = data?.pages[0].data ?? [];
+  const list = data?.pages.flatMap((page) => page.data) ?? [];
   const isEmpty = isSuccess && list.length === 0;
 
   return {
