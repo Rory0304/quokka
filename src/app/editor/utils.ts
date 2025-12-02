@@ -11,6 +11,7 @@ export const createEditorStateFromQuoteCard = (
   }
 
   return {
+    id: quoteCard.id,
     config: {
       title: quoteCard.title,
       category: quoteCard.category as QuoteCardCategoryType,
