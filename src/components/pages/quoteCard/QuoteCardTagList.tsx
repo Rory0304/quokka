@@ -9,10 +9,10 @@ export const QuoteCardTagList: FC<QuoteCardTagListProps> = ({ tags }) => {
     <div className="flex gap-2">
       {tags.map((tag) => (
         <span
-          className="flex items-center justify-center bg-green-100 p-2"
+          className="flex items-center justify-center bg-gray-50 rounded-md p-2 text-xs text-muted-foreground"
           key={tag}
         >
-          {tag}
+          #{tag}
         </span>
       ))}
     </div>
