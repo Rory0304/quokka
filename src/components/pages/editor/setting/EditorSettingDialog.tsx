@@ -1,42 +1,49 @@
-import { DialogActionButton } from "@/components/blocks/dialog/DialogActionButton";
+import { Button } from "@/components/blocks/button/Button";
 import { DialogClose } from "@/components/blocks/dialog/DialogClose";
 import { DialogOverlay } from "@/components/blocks/dialog/DialogOverlay";
-import { Select } from "@/components/blocks/select/Select";
+
 import { Switch } from "@/components/blocks/switch/Switch";
 import { useEditor } from "@/hooks/editor/useEditor";
+import { useQuoteCardUpdate } from "@/hooks/quoteCard/useQuoteCardUpdate";
 import { Cross1Icon } from "@radix-ui/react-icons";
 
 import { Dialog } from "radix-ui";
 import React, { ChangeEvent, FC, useEffect, useState } from "react";
+import { CategorySelector } from "../tools/selector/CategorySelector";
+import { QuoteCardCategoryType } from "@/data/constants/quoteCard/QuoteCardCategory";
+import { toast } from "sonner";
 
-const categoryItems = [
-  {
-    value: "movie",
-    label: "영화",
-  },
-  {
-    value: "book",
-    label: "책",
-  },
-  {
-    value: "etc",
-    label: "기타",
-  },
-];
+interface EditorSettingDialogProps {
+  closeDialog: () => void;
+}
 
-export const EditorSettingDialog: FC = () => {
-  const { editorConfig } = useEditor();
+export const EditorSettingDialog: FC<EditorSettingDialogProps> = ({
+  closeDialog,
+}) => {
+  const { editorConfig, state, dispatch } = useEditor();
+  const mutation = useQuoteCardUpdate();
 
   const [tags, setTags] = useState<string[]>([]);
-  const [category, setCategory] = useState<string>(categoryItems[0].value);
+  const [category, setCategory] = useState<QuoteCardCategoryType>();
   const [tagInput, setTagInput] = useState("");
   const [isPublic, setIsPublic] = useState(false);
+  const [isChanged, setIsChanged] = useState(false);
 
   useEffect(() => {
     setTags(editorConfig.tags);
     setCategory(editorConfig.category);
     setIsPublic(editorConfig.isPublic);
+    setIsChanged(false);
   }, [editorConfig]);
+
+  useEffect(() => {
+    const hasChanged =
+      category !== editorConfig.category ||
+      isPublic !== editorConfig.isPublic ||
+      JSON.stringify(tags.sort()) !== JSON.stringify(editorConfig.tags.sort());
+
+    setIsChanged(hasChanged);
+  }, [category, tags, isPublic, editorConfig]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.nativeEvent.isComposing) {
@@ -62,12 +69,10 @@ export const EditorSettingDialog: FC = () => {
     setTags((current) => current.filter((item, _index) => _index !== index));
   };
 
-  const handleSaveEditorConfig = () => {};
-
   const renderTag = (tag: string, index: number) => {
     return (
       <div
-        className="flex items-center justify-center rounded-md bg-green-100 p-2 gap-2"
+        className="flex items-center justify-center rounded-md bg-gray-200 p-2 gap-2"
         key={`${tag}-${index}`}
       >
         <span className="font-medium text-xs">{tag}</span>
@@ -78,10 +83,44 @@ export const EditorSettingDialog: FC = () => {
     );
   };
 
+  const handleSaveEditorConfig = () => {
+    if (state.id) {
+      mutation.mutate(
+        {
+          body: {
+            id: state.id,
+            data: {
+              category,
+              tags,
+              isPublic,
+            },
+          },
+        },
+        {
+          onSuccess: () => {
+            dispatch({
+              type: "UPDATE_CONFIG",
+              payload: {
+                isPublic,
+                tags,
+                category,
+              },
+            });
+
+            toast.success("성공적으로 저장되었습니다", {
+              position: "top-center",
+            });
+            closeDialog();
+          },
+        }
+      );
+    }
+  };
+
   return (
     <Dialog.Portal>
       <DialogOverlay />
-      <Dialog.Content className="fixed shadow-md left-1/2 top-1/2 max-h-[85vh] w-[90vw] max-w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-md bg-white p-[25px] focus:outline-none data-[state=open]:animate-contentShow">
+      <Dialog.Content className=" z-11 fixed shadow-md left-1/2 top-1/2 max-h-[85vh] w-[90vw] max-w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-md bg-white p-[25px] focus:outline-none data-[state=open]:animate-contentShow">
         <Dialog.Title className="m-0 text-[17px] font-medium text-foreground">
           인용 카드 설정
         </Dialog.Title>
@@ -111,24 +150,30 @@ export const EditorSettingDialog: FC = () => {
           <div className="flex items-center gap-1">{tags.map(renderTag)}</div>
         </div>
 
-        <Switch
-          label="공개 여부"
-          id="public-hidden"
-          className="mb-8"
-          checked={isPublic}
-        />
+        <div className="mb-8 flex items-center">
+          <p className="pr-4 text-sm font-medium leading-none text-foreground">
+            공개여부
+          </p>
+          <Switch
+            id="public-hidden"
+            checked={isPublic}
+            onCheckedChange={setIsPublic}
+          />
+        </div>
 
-        <Select
-          label="카테고리"
-          value={category}
-          items={categoryItems}
-          onValueChange={(value: string) => {
-            setCategory(value);
-          }}
+        <CategorySelector
+          category={category as string}
+          onValueChange={(value) => setCategory(value as QuoteCardCategoryType)}
         />
 
         <div className="mt-[25px] flex justify-end">
-          <DialogActionButton label="저장" />
+          <Button
+            variant="blue"
+            disabled={!isChanged || mutation.isPending}
+            onClick={handleSaveEditorConfig}
+          >
+            <p>저장</p>
+          </Button>
         </div>
         <DialogClose />
       </Dialog.Content>
