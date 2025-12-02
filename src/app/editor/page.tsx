@@ -1,7 +1,7 @@
 "use client";
 
 import { EditorTool } from "@/components/pages/editor/tools/EditorTool";
-import { useReducer, useRef, Suspense } from "react";
+import { useReducer, useRef } from "react";
 import { reducer } from "../../components/pages/editor/contexts/reducer";
 import {
   EditorDispatchContext,
@@ -12,23 +12,22 @@ import {
 import { EditorMain } from "@/components/pages/editor/EditorMain";
 import { EditorNavigation } from "@/components/pages/editor/navigation/EditorNavigation";
 import { useSearchParams } from "next/navigation";
-import { ErrorBoundary } from "react-error-boundary";
 import { createEditorStateFromQuoteCard } from "./utils";
 import { useQuoteCard } from "@/hooks/quoteCard/useQuoteCard";
+import { AsyncBoundary } from "@/components/blocks/asyncBoundary/AsyncBoundary";
+import { ErrorAlert } from "@/components/blocks/alert/ErrorAlert";
 
 function EditorContent() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
 
-  const { quoteCard, isLoading } = useQuoteCard(id);
+  const { quoteCard } = useQuoteCard(id);
 
   const quoteCardRef = useRef<HTMLDivElement>(null);
 
   const [state, dispatch] = useReducer(reducer, quoteCard, (card) =>
     card ? createEditorStateFromQuoteCard(card) : initalEditorState
   );
-
-  if (isLoading) return null;
 
   return (
     <EditorValueContext.Provider value={state}>
@@ -51,30 +50,24 @@ function EditorContent() {
 
 export default function Editor() {
   return (
-    <ErrorBoundary
-      fallback={
+    <AsyncBoundary
+      pendingFallback={
         <div className="flex items-center justify-center h-screen">
           <div className="text-center">
-            <p className="text-red-500 text-lg mb-2">
-              Failed to load quote card
-            </p>
-            <p className="text-gray-600">Please try again later</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
+            <p className="text-gray-600">인용 카드를 생성 중입니다...</p>
           </div>
         </div>
       }
+      errorFallback={({ reset }) => (
+        <ErrorAlert
+          title="관련 정보를 찾지 못했어요"
+          description="주소가 정확한지 확인해주세요"
+          onReset={reset}
+        />
+      )}
     >
-      <Suspense
-        fallback={
-          <div className="flex items-center justify-center h-screen">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
-              <p className="text-gray-600">Loading quote card...</p>
-            </div>
-          </div>
-        }
-      >
-        <EditorContent />
-      </Suspense>
-    </ErrorBoundary>
+      <EditorContent />
+    </AsyncBoundary>
   );
 }
