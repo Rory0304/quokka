@@ -7,7 +7,7 @@ import { RouteConfig } from "@/data/constants/route";
 interface ErrorAlertProps {
   title: string;
   description: string;
-  onReset: () => void;
+  onReset?: () => void;
 }
 
 export const ErrorAlert: FC<ErrorAlertProps> = ({
@@ -16,7 +16,7 @@ export const ErrorAlert: FC<ErrorAlertProps> = ({
   onReset,
 }) => {
   const handleReset = () => {
-    onReset();
+    onReset?.();
   };
 
   return (
@@ -36,9 +36,11 @@ export const ErrorAlert: FC<ErrorAlertProps> = ({
           <Button variant="outline" asChild>
             <Link href={RouteConfig.home}>홈으로</Link>
           </Button>
-          <Button variant="default" onClick={handleReset}>
-            다시 시도
-          </Button>
+          {typeof onReset === "function" ? (
+            <Button variant="default" onClick={handleReset}>
+              다시 시도
+            </Button>
+          ) : null}
         </div>
       </div>
     </div>

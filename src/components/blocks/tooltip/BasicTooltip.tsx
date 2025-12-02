@@ -1,0 +1,28 @@
+import { Portal } from "@radix-ui/react-tooltip";
+import React, { ComponentProps, FC } from "react";
+import { TooltipContent, TooltipTrigger, Tooltip } from "./Tooltip";
+
+interface TooltipProps extends React.PropsWithChildren {
+  disabled?: boolean;
+  text: string;
+  contentProps?: ComponentProps<typeof TooltipContent>;
+}
+
+export const BasicTooltip: FC<TooltipProps> = ({
+  disabled,
+  text,
+  contentProps,
+  children,
+}) => {
+  return (
+    <Tooltip delayDuration={200} open={disabled === true ? false : undefined}>
+      <TooltipTrigger asChild>
+        <span tabIndex={0}>{children}</span>
+      </TooltipTrigger>
+
+      <Portal>
+        <TooltipContent {...contentProps}>{text}</TooltipContent>
+      </Portal>
+    </Tooltip>
+  );
+};

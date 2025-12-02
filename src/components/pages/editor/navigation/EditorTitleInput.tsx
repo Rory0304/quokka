@@ -9,6 +9,8 @@ import { useMutation } from "@tanstack/react-query";
 import { CheckIcon, Cross1Icon } from "@radix-ui/react-icons";
 import React, { FC, useRef, useState } from "react";
 import { toast } from "sonner";
+import { useAuth } from "@/hooks/auth";
+import { LoginTooltip } from "@/components/blocks/tooltip/LoginTooltip";
 
 export const EditorTitleInput: FC = () => {
   const {
@@ -16,6 +18,7 @@ export const EditorTitleInput: FC = () => {
     state,
     editorConfig: { title },
   } = useEditor();
+  const { isLogin } = useAuth();
 
   const abortControllerRef = useRef<AbortController | null>(null);
   const mutation = useQuoteCardUpdate();
@@ -94,18 +97,25 @@ export const EditorTitleInput: FC = () => {
 
   return (
     <div className="flex items-center gap-2 relative">
-      <input
-        placeholder="제목을 입력해주세요"
-        type="text"
-        className={cn(
-          "border border-gray-200 px-2 py-1 rounded-md",
-          mutation.isError && "focus-within:bg-red-50",
-          mutation.isPending && "bg-gray-100 text-muted-foreground"
-        )}
-        onChange={(e) => setValue(e.target.value)}
-        disabled={mutation.isPending}
-        defaultValue={title}
-      />
+      <LoginTooltip
+        contentProps={{
+          side: "right",
+        }}
+      >
+        <input
+          placeholder="제목을 입력해주세요"
+          type="text"
+          className={cn(
+            "border border-gray-200 px-2 py-1 rounded-md",
+            mutation.isError && "focus-within:bg-red-50",
+            mutation.isPending && "bg-gray-100 text-muted-foreground",
+            isLogin === false && "bg-gray-100 text-muted-foreground"
+          )}
+          onChange={(e) => setValue(e.target.value)}
+          disabled={mutation.isPending || isLogin === false}
+          defaultValue={title}
+        />
+      </LoginTooltip>
       <div
         className={cn(
           "pointer-events-none opacity-0 transition",

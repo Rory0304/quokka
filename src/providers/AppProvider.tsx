@@ -1,5 +1,6 @@
 "use client";
 
+import { TooltipProvider } from "@/components/blocks/tooltip/Tooltip";
 import { Bar, Progress } from "@bprogress/next";
 import { ProgressProvider } from "@bprogress/next/app";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -24,7 +25,7 @@ export const AppProvider: FC<AppProviderProps> = ({ children }) => {
           positionUsing: "width",
         }}
       >
-        {children}
+        <TooltipProvider>{children}</TooltipProvider>
 
         <div className="fixed top-0 z-9999 overflow-hidden">
           <Progress>

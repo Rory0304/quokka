@@ -12,7 +12,7 @@ export const GoogleLoginButton: FC = () => {
   return (
     <form action={googleAuthHandler} className="w-full">
       <button className="cursor-pointer w-full">
-        <div className="w-full flex items-center justify-center bg-white p-2 rounded-md border border-gray-300">
+          <div className="w-full flex items-center justify-center bg-white p-2 rounded-md border border-gray-300">
           <div className="text-black relative flex items-center gap-3">
             <Image
               src="/google_logo.svg"
