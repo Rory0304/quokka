@@ -12,22 +12,29 @@ export const EditorActions: FC = () => {
   const { donwloadImage, createQuoteCard } = useEditorAction();
   const { editorState, state } = useEditor();
 
+  const [open, setOpen] = React.useState(false);
+
   // {TODO} 기존 에디터 id 업데이트 필요
   const id = editorState.selectedLayerId;
+  const aspectRatio = state.data[0].layout.aspectRatio;
 
   const handleImageDownload = () => {
     if (id) {
-      donwloadImage(id);
+      donwloadImage(id, aspectRatio);
     }
   };
 
   const handleQuoteCardSave = () => {
-    return createQuoteCard(state);
+    if (state.id) {
+      return createQuoteCard(state);
+    } else {
+      return createQuoteCard(state);
+    }
   };
 
   const renderSettingButton = () => {
     return (
-      <Dialog.Root>
+      <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger asChild>
           <Button
             type="button"
@@ -37,7 +44,7 @@ export const EditorActions: FC = () => {
             <span className="text-black">설정</span>
           </Button>
         </Dialog.Trigger>
-        <EditorSettingDialog />
+        <EditorSettingDialog closeDialog={() => setOpen(false)} />
       </Dialog.Root>
     );
   };
