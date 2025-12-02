@@ -10,10 +10,9 @@ interface BookmarkDialogProps {
 }
 
 export const BookmarkDialog: FC<BookmarkDialogProps> = ({ open }) => {
-  const { list, isPending, isFetching, isError, isEmpty, refetch } =
-    useBookmarkList({
-      enable: open,
-    });
+  const { list, isPending, isError, isEmpty, refetch } = useBookmarkList({
+    enabled: open,
+  });
 
   useEffect(() => {
     if (open) {
@@ -30,7 +29,7 @@ export const BookmarkDialog: FC<BookmarkDialogProps> = ({ open }) => {
         </Dialog.Title>
 
         <div className="fbg-white border border-gray-100 bg-white rounded-xl p-4">
-          {isPending || isFetching ? (
+          {isPending ? (
             <div className="flex flex-col justify-center gap-1 py-4 items-center mb-4">
               <p className="text-muted-foreground text-sm">로딩 중...</p>
             </div>

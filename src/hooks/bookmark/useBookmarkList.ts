@@ -20,12 +20,11 @@ interface BookmarkListResponse {
 /**
  * 사용자의 북마크된 QuoteCard 리스트를 가져오는 hook
  */
-export const useBookmarkList = ({ enable }: { enable: boolean }) => {
+export const useBookmarkList = ({ enabled }: { enabled: boolean }) => {
   const fetchItems = async ({ pageParam }: { pageParam: number | null }) => {
     const query = qs.stringify({
       cursor: pageParam ?? undefined,
       limit: 10,
-      enable,
     });
 
     const response = await ApiFetch(`/api/bookmark-list?${query}`);
@@ -54,6 +53,8 @@ export const useBookmarkList = ({ enable }: { enable: boolean }) => {
       fetchItems({ pageParam }),
     getNextPageParam: (lastPage: BookmarkListResponse) =>
       lastPage.pagination.nextCursor,
+    staleTime: 5000, // 5000ms
+    enabled,
   });
 
   const list = data?.pages.flatMap((page) => page.data) ?? [];
