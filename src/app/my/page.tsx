@@ -7,7 +7,11 @@ import { MyQuoteCardList } from "@/components/pages/my/MyQuoteCardList";
 import { useAuth } from "@/hooks/auth";
 
 export default function MyPage() {
-  const { isLogin } = useAuth();
+  const { isLogin, status } = useAuth();
+
+  if (status === "loading") {
+    return <div></div>;
+  }
 
   if (!isLogin) {
     return (
