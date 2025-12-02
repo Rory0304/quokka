@@ -7,6 +7,7 @@ import { withAuthHandler } from "@/middlewares/withAuthHandler";
 import zod from "zod";
 import { QuoteCardUpdateRequest } from "@/data/interfaces/request/quotecard/QuoteCardUpdateRequest";
 import { QuoteCardCreateRequest } from "@/data/interfaces/request/quotecard/QuoteCardCreateRequest";
+import { EditorData } from "@/data/interfaces/editor";
 
 const querySchema = zod.object({
   id: zod.string(),
@@ -29,9 +30,19 @@ export const GET = withAuthHandler(async ({ request, sessionCtx }) => {
 
     const query: Prisma.QuoteCardFindUniqueArgs = {
       where: { userId: sessionCtx.userId, id },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            image: true,
+          },
+        },
+      },
     };
 
-    const quoteCard = await prisma.quoteCard.findUnique(query);
+    const quoteCard = await prisma.quoteCard.findUniqueOrThrow(query);
 
     return NextResponse.json({
       data: quoteCard,
@@ -84,21 +95,22 @@ export const POST = withAuthHandler(async ({ request, sessionCtx }) => {
 export const PATCH = withAuthHandler(async ({ request }) => {
   try {
     const body = await request.json();
-    const { id, isPublic } = body as QuoteCardUpdateRequest;
+    const { id, data } = body as QuoteCardUpdateRequest;
 
     const quoteCard = await prisma.quoteCard.update({
       where: {
         id,
       },
       data: {
-        isPublic,
+        ...data,
+        customFields: data.customFields as unknown as Prisma.InputJsonValue,
       },
     });
 
     return NextResponse.json(
       {
         id: quoteCard.id,
-        customFields: quoteCard.customFields,
+        quoteCard: quoteCard,
         message: "QuoteCard saved successfully",
       },
       { status: 201 }
@@ -108,6 +120,35 @@ export const PATCH = withAuthHandler(async ({ request }) => {
 
     return NextResponse.json(
       { error: "Failed to save QuoteCard" },
+      { status: 500 }
+    );
+  }
+});
+
+export const DELETE = withAuthHandler(async ({ request }) => {
+  try {
+    const body = await request.json();
+    const { id } = body as { id: EditorData["id"] };
+
+    const quoteCard = await prisma.quoteCard.delete({
+      where: {
+        id,
+      },
+    });
+
+    return NextResponse.json(
+      {
+        id: quoteCard.id,
+        customFields: quoteCard.customFields,
+        message: "QuoteCard deleted successfully",
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    console.error("Error delete QuoteCard:", error);
+
+    return NextResponse.json(
+      { error: "Failed to delete QuoteCard" },
       { status: 500 }
     );
   }
