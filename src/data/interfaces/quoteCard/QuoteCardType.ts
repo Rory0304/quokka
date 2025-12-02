@@ -1,5 +1,12 @@
 import { Editor } from "../editor/Editor";
 
+export interface QuoteCardUser {
+  id: string;
+  name: string | null;
+  email: string | null;
+  image: string | null;
+}
+
 export interface QuoteCardType {
   id: string;
   userId: string;
@@ -11,4 +18,6 @@ export interface QuoteCardType {
   createdAt: string;
   updatedAt: string;
   thumbnailUrl?: string;
+  isBookmarked?: boolean;
+  user?: QuoteCardUser;
 }
