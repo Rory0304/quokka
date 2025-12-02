@@ -1,6 +1,7 @@
 import { EditorData } from "../../editor";
+import { QuoteCardCreateRequest } from "./QuoteCardCreateRequest";
 
 export interface QuoteCardUpdateRequest {
   id: EditorData["id"];
-  isPublic: boolean;
+  data: Partial<QuoteCardCreateRequest>;
 }

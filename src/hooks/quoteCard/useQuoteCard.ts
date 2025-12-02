@@ -9,8 +9,8 @@ interface QuoteCardResponse {
 }
 
 export const useQuoteCard = (id: string | null) => {
-  const { data, isSuccess, isError, isLoading } = useSuspenseQuery(
-    id
+  const { data, isSuccess, isError, isPending } = useSuspenseQuery({
+    ...(id
       ? {
           queryKey: [QueryKey.quoteCard.get_quotecrad, id],
           queryFn: async () => {
@@ -24,17 +24,20 @@ export const useQuoteCard = (id: string | null) => {
             const data = await response.json();
             return data as QuoteCardResponse;
           },
+          retry: 0,
+          staleTime: 2000, // 2min
+          cacheTime: 5000, // 5min
         }
       : {
           queryKey: [QueryKey.quoteCard.get_quotecrad, skipToken],
           queryFn: async () => null,
-        }
-  );
+        }),
+  });
 
   return {
     quoteCard: data?.data || null,
     isSuccess,
     isError,
-    isLoading,
+    isPending,
   };
 };
