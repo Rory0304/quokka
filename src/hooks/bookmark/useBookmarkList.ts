@@ -53,7 +53,7 @@ export const useBookmarkList = ({ enabled }: { enabled: boolean }) => {
       fetchItems({ pageParam }),
     getNextPageParam: (lastPage: BookmarkListResponse) =>
       lastPage.pagination.nextCursor,
-    staleTime: 5000, // 5000ms
+    gcTime: 2 * 60 * 1000, // 2min
     enabled,
   });
 
