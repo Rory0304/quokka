@@ -32,6 +32,16 @@ export const GET = withAuthHandler(async ({ request, sessionCtx }) => {
     const query: Prisma.QuoteCardFindManyArgs = {
       where: { userId: sessionCtx.userId },
       take: limit,
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            image: true,
+          },
+        },
+      },
     };
 
     if (sort) {
