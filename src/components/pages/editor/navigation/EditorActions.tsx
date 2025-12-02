@@ -7,10 +7,13 @@ import { EditorSettingDialog } from "../setting/EditorSettingDialog";
 import { Dialog } from "radix-ui";
 import { useEditor } from "@/hooks/editor/useEditor";
 import { useEditorAction } from "@/hooks/editor/useEditorAction";
+import { useAuth } from "@/hooks/auth";
+import { LoginTooltip } from "@/components/blocks/tooltip/LoginTooltip";
 
 export const EditorActions: FC = () => {
   const { donwloadImage, createQuoteCard } = useEditorAction();
   const { editorState, state } = useEditor();
+  const { isLogin } = useAuth();
 
   const [open, setOpen] = React.useState(false);
 
@@ -36,13 +39,12 @@ export const EditorActions: FC = () => {
     return (
       <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger asChild>
-          <Button
-            type="button"
-            className="bg-gray-200 hover:bg-gray-300 flex items-center gap-2"
-          >
-            <GearIcon color="black" width={8} height={8} />
-            <span className="text-black">설정</span>
-          </Button>
+          <LoginTooltip>
+            <Button type="button" variant="gray" disabled={isLogin === false}>
+              <GearIcon color="black" width={8} height={8} />
+              <span className="text-black">설정</span>
+            </Button>
+          </LoginTooltip>
         </Dialog.Trigger>
         <EditorSettingDialog closeDialog={() => setOpen(false)} />
       </Dialog.Root>
@@ -64,22 +66,25 @@ export const EditorActions: FC = () => {
 
   const renderSaveButton = () => {
     return (
-      <Button
-        type="button"
-        className="bg-blue-500 hover:bg-blue-600 flex items-center gap-2"
-        onClick={handleQuoteCardSave}
-      >
-        <FileIcon color="white" width={8} height={8} />
-        <span className="text-white">저장</span>
-      </Button>
+      <LoginTooltip>
+        <Button
+          type="button"
+          className="bg-blue-500 hover:bg-blue-600 flex items-center gap-2"
+          onClick={handleQuoteCardSave}
+          disabled={isLogin === false}
+        >
+          <FileIcon color="white" width={8} height={8} />
+          <span className="text-white">저장</span>
+        </Button>
+      </LoginTooltip>
     );
   };
 
   return (
     <div className="flex items-center gap-2">
-      {renderSettingButton()}
       {renderDownloadButton()}
       {renderSaveButton()}
+      {renderSettingButton()}
     </div>
   );
 };
