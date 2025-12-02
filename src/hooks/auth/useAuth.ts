@@ -5,6 +5,7 @@ export const useAuth = () => {
 
   return {
     user: data?.user || null,
+    status,
     isLogin: status === "authenticated",
   };
 };
