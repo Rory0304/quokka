@@ -12,11 +12,5 @@ export const useQuoteCardCreate = () => {
 
       return response.json();
     },
-    onSuccess: () => {
-      console.log("Todo created successfully!");
-    },
-    onError: (error) => {
-      console.error("Error creating todo:", error.message);
-    },
   });
 };

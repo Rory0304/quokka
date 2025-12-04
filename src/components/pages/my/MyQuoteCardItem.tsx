@@ -2,26 +2,56 @@ import { RouteConfig } from "@/data/constants/route";
 import { QuoteCardType } from "@/data/interfaces/quoteCard/QuoteCardType";
 import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
-import React, { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import { QuoteCardCategory } from "../quoteCard/QuoteCardCategory";
 import { QuoteCardTagList } from "../quoteCard/QuoteCardTagList";
 import { Button } from "@/components/blocks/button/Button";
 import { Switch } from "@/components/blocks/switch/Switch";
 import { useQuoteCardDelete } from "@/hooks/quoteCard/useQuoteCardDelete";
+import { useQuoteCardUpdate } from "@/hooks/quoteCard/useQuoteCardUpdate";
+import { toast } from "sonner";
 
 interface QuoteCardItemProps {
   item: QuoteCardType;
-  onClickPublicStatus: (item: QuoteCardType) => void;
 }
 
-export const MyQuoteCardItem: FC<QuoteCardItemProps> = ({
-  item,
-  onClickPublicStatus,
-}) => {
+export const MyQuoteCardItem: FC<QuoteCardItemProps> = ({ item }) => {
   const url = `${RouteConfig.editor}?id=${item.id}`;
 
   const deleteMutation = useQuoteCardDelete();
+  const updateMutation = useQuoteCardUpdate();
+
+  const [isPublic, setIsPublic] = useState(item.isPublic);
+
+  useEffect(() => {
+    setIsPublic(item.isPublic);
+  }, [item.isPublic]);
+
+  const handleChangePublicStatus = (isPublic: boolean) => {
+    const prevStatus = !isPublic;
+
+    setIsPublic(isPublic);
+
+    updateMutation.mutate(
+      {
+        body: {
+          id: item.id,
+          data: {
+            isPublic,
+          },
+        },
+      },
+      {
+        onError: () => {
+          setIsPublic(prevStatus);
+          toast.error("공개 수정에 오류가 발생했습니다. 다시 시도해주세요", {
+            position: "top-center",
+          });
+        },
+      }
+    );
+  };
 
   const handleDelete = () => {
     deleteMutation.mutate({
@@ -47,8 +77,10 @@ export const MyQuoteCardItem: FC<QuoteCardItemProps> = ({
 
   const renderContent = () => {
     return (
-      <div className="pt-4 px-4 pb-5 flex flex-col">
-        <p className="text-foreground font-medium text-sm">{item.title}</p>
+      <div className="px-4 flex flex-col">
+        <p className="text-foreground font-medium text-sm line-clamp-1">
+          {item.title}
+        </p>
         <QuoteCardCategory category={item.category} />
         <QuoteCardTagList tags={item.tags} />
       </div>
@@ -59,9 +91,13 @@ export const MyQuoteCardItem: FC<QuoteCardItemProps> = ({
     return (
       <div className="flex justify-between border-t border-gray-100 pt-4">
         <div className="flex items-center gap-2">
-          <Switch id="public-hidden" checked={item.isPublic} />
+          <Switch
+            id="public-hidden"
+            checked={isPublic}
+            onCheckedChange={handleChangePublicStatus}
+          />
           <span className="text-xs font-medium">
-            {item.isPublic ? "공개" : "비공개"}
+            {isPublic ? "공개" : "비공개"}
           </span>
         </div>
 
@@ -91,7 +127,7 @@ export const MyQuoteCardItem: FC<QuoteCardItemProps> = ({
 
   return (
     <div className="w-full bg-white shadow-xs mx-auto rounded-xl flex-col border overflow-hidden border-gray-200 p-4">
-      <div className="flex gap-4 items-start mb-4 group">
+      <div className="flex gap-4 items-center mb-4 group">
         {renderImage()}
         {renderContent()}
       </div>
