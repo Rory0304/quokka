@@ -2,7 +2,7 @@ import { useEditor } from "@/hooks/editor/useEditor";
 import React, { FC, useState } from "react";
 
 import { FontSizeIcon } from "@radix-ui/react-icons";
-import { EditorElement } from "@/components/pages/editor/contexts/context";
+import { EditorElement } from "@/data/interfaces/editor/EditorElement";
 
 interface FontSizeSelectorProps {
   element: EditorElement;
@@ -46,8 +46,8 @@ export const FontSizeSelector: FC<FontSizeSelectorProps> = ({ element }) => {
   };
 
   return (
-    <div className="flex items-center gap-2 py-4 px-4">
-      <FontSizeIcon />
+    <div className="flex items-center gap-6 py-4">
+      <FontSizeIcon color="gray" />
       <input
         type="number"
         min="1"
