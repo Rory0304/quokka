@@ -13,13 +13,15 @@ export const LoginTooltip: FC<LoginTooltipProps> = ({
 }) => {
   const { isLogin } = useAuth();
 
+  if (isLogin) return children;
+
   return (
     <BasicTooltip
       contentProps={{
         side: "bottom",
         ...contentProps,
       }}
-      disabled={isLogin === true}
+      disabled={false}
       text={"로그인 후 이용 가능합니다"}
     >
       {children}
