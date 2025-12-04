@@ -8,15 +8,16 @@ import { QuoteCardCategoryType } from "@/data/constants/quoteCard/QuoteCardCateg
 interface UseQuoteCardListOptions {
   category?: QuoteCardCategoryType;
   searchKey?: string;
+  limit?: number;
 }
 
 export const useQuoteCardList = (options?: UseQuoteCardListOptions) => {
-  const { category, searchKey } = options || {};
+  const { category, searchKey, limit = 10 } = options || {};
 
   const fetchItems = async ({ pageParam }: { pageParam: number | null }) => {
     const query = qs.stringify({
       cursor: pageParam ?? undefined,
-      limit: 10,
+      limit,
       category: category ?? undefined,
       searchKey: searchKey?.trim() || undefined,
     });
