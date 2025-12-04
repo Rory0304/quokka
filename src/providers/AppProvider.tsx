@@ -5,8 +5,8 @@ import { TooltipProvider } from "@/components/blocks/tooltip/Tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import React, { FC } from "react";
-import { Toaster } from "sonner";
 import { ProgressProvider } from "./ProgressProvider";
+import { Toaster } from "@/components/blocks/toaster";
 
 interface AppProviderProps {
   children: React.ReactNode;
