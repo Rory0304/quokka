@@ -19,6 +19,7 @@ export const EditorElementRenderer: FC<{
             placeholder={"내용을 입력해주세요"}
             fontSize={element.content.fontSize}
             textAlign={element.content.textAlign}
+            color={element.content.color}
             fontFamily={element.content.fontFamily}
             onClick={() => {
               dispatch({
