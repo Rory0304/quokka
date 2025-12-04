@@ -2,7 +2,7 @@ import {
   FontFamilyMap,
   FontFamilyType,
 } from "@/data/constants/editor/FontFamily";
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC, useRef } from "react";
 import ContentEditable, { ContentEditableEvent } from "react-contenteditable";
 
 interface TextElementProps {
@@ -11,6 +11,7 @@ interface TextElementProps {
   defaultValue?: string;
   fontFamily: FontFamilyType;
   placeholder?: string;
+  color?: string;
   onClick: () => void;
   onChange?: (text: string) => void;
 }
@@ -21,6 +22,7 @@ export const TextElement: FC<TextElementProps> = (props) => {
     textAlign,
     fontFamily,
     placeholder,
+    color = "#000",
     defaultValue,
     onChange,
     onClick,
@@ -45,7 +47,7 @@ export const TextElement: FC<TextElementProps> = (props) => {
     <ContentEditable
       className="content-editable-placeholder overlfow-scroll"
       style={{
-        color: "white",
+        color,
         marginBottom: "4px",
         fontSize: `${fontSize}px`,
         fontFamily: FontFamilyMap[fontFamily].value,
