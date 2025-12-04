@@ -17,29 +17,41 @@ export const SearchViewToggle: FC = () => {
   };
 
   return (
-    <div className="bg-gray-100 rounded-md p-1 box-border">
-      <SearchViewToggleLink
-        linkTo={RouteConfig.home}
-        icon={<GlobeIcon width={8} />}
-        label="통합 검색"
-        active={pathname === RouteConfig.home}
-      />
-
-      {isLogin ? (
+    <div className="bg-gray-100 rounded-md p-1 box-border flex">
+      <div
+        className={cn(
+          pathname === RouteConfig.home ? "hidden sm:block" : "sm:block"
+        )}
+      >
         <SearchViewToggleLink
-          linkTo={RouteConfig.my}
-          icon={<PersonIcon width={8} />}
-          label="나의 목록"
-          active={pathname === RouteConfig.my}
+          linkTo={RouteConfig.home}
+          icon={<GlobeIcon width={8} />}
+          label="통합 검색"
+          active={pathname === RouteConfig.home}
         />
-      ) : (
-        <SearchViewToggleButton
-          icon={<PersonIcon width={8} />}
-          label="나의 목록"
-          active={pathname === RouteConfig.my}
-          onClick={googleAuthHandler}
-        />
-      )}
+      </div>
+
+      <div
+        className={cn(
+          pathname === RouteConfig.my ? "hidden sm:block" : "sm:block"
+        )}
+      >
+        {isLogin ? (
+          <SearchViewToggleLink
+            linkTo={RouteConfig.my}
+            icon={<PersonIcon width={8} />}
+            label="나의 목록"
+            active={pathname === RouteConfig.my}
+          />
+        ) : (
+          <SearchViewToggleButton
+            icon={<PersonIcon width={8} />}
+            label="나의 목록"
+            active={pathname === RouteConfig.my}
+            onClick={googleAuthHandler}
+          />
+        )}
+      </div>
     </div>
   );
 };
