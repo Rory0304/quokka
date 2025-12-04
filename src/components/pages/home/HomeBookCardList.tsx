@@ -10,6 +10,7 @@ import { ErrorAlert } from "@/components/blocks/alert/ErrorAlert";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { HomeBookMarkedQuoteCardList } from "./HomeBookMarkedQuoteCardList";
 import { QuoteCardCategoryType } from "@/data/constants/quoteCard/QuoteCardCategory";
+import { HomeQuoteCardItemLoading } from "./HomeQuoteCardItemLoading";
 
 export const HomeBookCardList: FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<
@@ -52,7 +53,11 @@ export const HomeBookCardList: FC = () => {
         </div>
 
         <AsyncBoundary
-          pendingFallback={<div>Loading...</div>}
+          pendingFallback={
+            <div className="flex flex-col gap-10 pb-25">
+              <HomeQuoteCardItemLoading count={5} />
+            </div>
+          }
           errorFallback={({ reset }) => (
             <ErrorAlert
               title="관련 정보를 찾지 못했어요"
