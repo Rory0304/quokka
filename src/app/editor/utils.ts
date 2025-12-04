@@ -4,7 +4,7 @@ import { initalEditorState } from "../../components/pages/editor/contexts/contex
 import { QuoteCardCategoryType } from "@/data/constants/quoteCard/QuoteCardCategory";
 
 export const createEditorStateFromQuoteCard = (
-  quoteCard: QuoteCardType
+  quoteCard: QuoteCardType | null
 ): Editor => {
   if (!quoteCard) {
     return initalEditorState;
@@ -19,6 +19,7 @@ export const createEditorStateFromQuoteCard = (
       isPublic: quoteCard.isPublic,
     },
     state: {
+      isDirty: false,
       selectedElement: null,
       selectedLayerId: quoteCard.customFields.data[0].id || null,
     },
