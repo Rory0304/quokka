@@ -1,14 +1,15 @@
-import { EditorElement, TextElement } from "@/components/pages/editor/contexts/context";
 import {
   TextAlign,
   TextAlignMap,
   TextAlignType,
 } from "@/data/constants/editor/TextAlign";
+import { EditorElement } from "@/data/interfaces/editor/EditorElement";
 import { useEditor } from "@/hooks/editor/useEditor";
 import {
   TextAlignCenterIcon,
   TextAlignLeftIcon,
   TextAlignRightIcon,
+  TextIcon,
 } from "@radix-ui/react-icons";
 import React, { FC } from "react";
 
@@ -23,7 +24,8 @@ export const TextAlignSelector: FC<TextAlignSelectorProps> = ({ element }) => {
   } = element;
 
   return (
-    <div className="flex items-center gap-2 py-4 px-4">
+    <div className="flex items-center gap-6 py-4">
+      <TextIcon color="gray" />
       {(Object.keys(TextAlign) as TextAlignType[]).map((item) => (
         <TextAlignItem
           textAlign={item}
