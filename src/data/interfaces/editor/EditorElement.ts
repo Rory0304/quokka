@@ -14,5 +14,6 @@ export interface TextElement {
   fontSize: number;
   textAlign: TextAlignType;
   fontFamily: FontFamilyType;
+  color: string;
   text: string;
 }

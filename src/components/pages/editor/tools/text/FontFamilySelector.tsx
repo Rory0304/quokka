@@ -30,11 +30,8 @@ export const FontFamilySelector: FC<FontFamilySelectorProps> = ({
   } = element;
 
   return (
-    <div
-      className="flex items-center gap-4 py-4 px-4 min-w-20"
-      ref={selectorRef}
-    >
-      <FontStyleIcon />
+    <div className="flex items-center gap-6 py-4 min-w-20" ref={selectorRef}>
+      <FontStyleIcon color="gray" />
       <Select.Root
         value={fontFamily}
         onValueChange={(value) => {

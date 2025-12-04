@@ -66,6 +66,7 @@ const initialEditorData: EditorData = {
         fontSize: 16,
         textAlign: TextAlign.left,
         fontFamily: FontFamily.serif,
+        color: "#fff",
       },
     },
     {
@@ -76,6 +77,7 @@ const initialEditorData: EditorData = {
         fontSize: 12,
         textAlign: TextAlign.left,
         fontFamily: FontFamily.serif,
+        color: "#fff",
       },
     },
   ],

@@ -8,6 +8,7 @@ import {
 } from "../selector";
 import { Sheet } from "../sheet";
 import { EditorElement } from "@/data/interfaces/editor/EditorElement";
+import { TextColorSelector } from "./TextColorSelector";
 
 interface TextContainerToolProps {
   selectedElement: EditorElement;
@@ -26,6 +27,7 @@ export const TextContainerTool: FC<TextContainerToolProps> = ({
         <FontSizeSelector element={selectedElement} />
         <FontFamilySelector element={selectedElement} />
         <TextAlignSelector element={selectedElement} />
+        <TextColorSelector element={selectedElement} />
       </Sheet.ItemContainer>
     </Sheet.Container>
   );
