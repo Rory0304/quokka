@@ -25,8 +25,7 @@ export const useQuoteCard = (id: string | null) => {
             return data as QuoteCardResponse;
           },
           retry: 0,
-          staleTime: 2000, // 2min
-          cacheTime: 5000, // 5min
+          gcTime: 0,
         }
       : {
           queryKey: [QueryKey.quoteCard.get_quotecrad, skipToken],
