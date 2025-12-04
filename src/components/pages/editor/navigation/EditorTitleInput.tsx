@@ -7,7 +7,7 @@ import { cn } from "@/libs/styles/cn";
 import { delay } from "@/libs/utils/delay";
 import { useMutation } from "@tanstack/react-query";
 import { CheckIcon, Cross1Icon } from "@radix-ui/react-icons";
-import React, { FC, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/auth";
 import { LoginTooltip } from "@/components/blocks/tooltip/LoginTooltip";
@@ -21,6 +21,8 @@ export const EditorTitleInput: FC = () => {
   const { isLogin } = useAuth();
 
   const abortControllerRef = useRef<AbortController | null>(null);
+  const isUserInputRef = useRef(false);
+  const prevTitleRef = useRef(title);
   const mutation = useQuoteCardUpdate();
   const delayMutation = useMutation({
     mutationFn: () => {
@@ -29,6 +31,18 @@ export const EditorTitleInput: FC = () => {
   });
 
   const [value, setValue] = useState<string>(title);
+
+  // 외부에서 title이 변경될 때 (데이터 fetch 등) value 동기화
+  useEffect(() => {
+    const isTitleChanged = prevTitleRef.current !== title;
+    prevTitleRef.current = title;
+
+    if (!isUserInputRef.current && isTitleChanged && value !== title) {
+      setValue(title);
+    }
+    isUserInputRef.current = false;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [title]);
 
   const updateQuoteCardTitle = async ({
     quoteCardId,
@@ -61,10 +75,14 @@ export const EditorTitleInput: FC = () => {
           },
         }
       );
+    } else {
+      if (isLogin) {
+        // create and then mutate
+      }
     }
   };
 
-  const _ = useDebounce({
+  useDebounce({
     deps: [value],
     ms: 400,
     fn: () => {
@@ -75,12 +93,6 @@ export const EditorTitleInput: FC = () => {
   });
 
   const handleTitleInput = (title: string) => {
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-    }
-
-    abortControllerRef.current = new AbortController();
-
     dispatch({
       type: "UPDATE_CONFIG",
       payload: {
@@ -88,11 +100,20 @@ export const EditorTitleInput: FC = () => {
       },
     });
 
-    updateQuoteCardTitle({
-      quoteCardId: state.id,
-      title,
-      signal: abortControllerRef.current.signal,
-    });
+    // [TODO] AbortSignal 로직 확인
+    if (state.id) {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+
+      abortControllerRef.current = new AbortController();
+
+      updateQuoteCardTitle({
+        quoteCardId: state.id,
+        title,
+        signal: abortControllerRef.current.signal,
+      });
+    }
   };
 
   return (
@@ -111,9 +132,12 @@ export const EditorTitleInput: FC = () => {
             mutation.isPending && "bg-gray-100 text-muted-foreground",
             isLogin === false && "bg-gray-100 text-muted-foreground"
           )}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => {
+            isUserInputRef.current = true;
+            setValue(e.target.value);
+          }}
           disabled={mutation.isPending || isLogin === false}
-          defaultValue={title}
+          value={value}
         />
       </LoginTooltip>
       <div
