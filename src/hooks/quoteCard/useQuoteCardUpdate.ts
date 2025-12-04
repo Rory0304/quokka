@@ -24,9 +24,6 @@ export const useQuoteCardUpdate = () => {
 
       return response.json();
     },
-    onSuccess: () => {
-      console.log("Todo created successfully!");
-    },
     onError: (error) => {
       toast.error(`Error creating todo: ${error.message}`);
     },
