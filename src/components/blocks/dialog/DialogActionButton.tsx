@@ -1,16 +1,17 @@
-import { Dialog } from "radix-ui";
-import React, { FC } from "react";
+import React, { ComponentProps, FC } from "react";
+import { Button } from "../button/Button";
 
-interface DialogActionButtonProps {
+interface DialogActionButtonProps extends ComponentProps<typeof Button> {
   label: string;
 }
 
-export const DialogActionButton: FC<DialogActionButtonProps> = ({ label }) => {
+export const DialogActionButton: FC<DialogActionButtonProps> = ({
+  label,
+  ...props
+}) => {
   return (
-    <Dialog.Close asChild>
-      <button className="inline-flex h-[35px] items-center justify-center rounded bg-blue-500 px-[15px] font-medium leading-none text-white outline-none outline-offset-1 select-none">
-        {label}
-      </button>
-    </Dialog.Close>
+    <Button {...props}>
+      <span>{label}</span>
+    </Button>
   );
 };
