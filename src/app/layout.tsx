@@ -3,6 +3,7 @@ import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import { AppProvider } from "@/providers/AppProvider";
 import { AuthProvider } from "@/providers/AuthProvider";
+import { NavigationGuardProvider } from "next-navigation-guard";
 
 const notoSansKR = Noto_Sans_KR({
   variable: "--font-noto-sans-kr",
@@ -22,9 +23,11 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={notoSansKR.className}>
-        <AuthProvider>
-          <AppProvider>{children}</AppProvider>
-        </AuthProvider>
+        <NavigationGuardProvider>
+          <AuthProvider>
+            <AppProvider>{children}</AppProvider>
+          </AuthProvider>
+        </NavigationGuardProvider>
       </body>
     </html>
   );

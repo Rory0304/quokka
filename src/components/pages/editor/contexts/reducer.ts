@@ -5,11 +5,22 @@ import { EditorData } from "@/data/interfaces/editor";
 export const reducer = (editor: Editor, action: EditorAction): Editor => {
   switch (action.type) {
     case "INIT_STATE":
-      return action.payload;
+      return {
+        ...action.payload,
+        state: {
+          ...action.payload.state,
+          isDirty: false,
+          isSaving: false,
+        },
+      };
 
     case "UPDATE_CONFIG":
       return {
         ...editor,
+        state: {
+          ...editor.state,
+          isDirty: true,
+        },
         config: {
           ...editor.config,
           ...action.payload,
@@ -32,6 +43,10 @@ export const reducer = (editor: Editor, action: EditorAction): Editor => {
 
       return {
         ...editor,
+        state: {
+          ...editor.state,
+          isDirty: true,
+        },
         data: newEditorData,
       };
 
@@ -39,6 +54,7 @@ export const reducer = (editor: Editor, action: EditorAction): Editor => {
       return {
         ...editor,
         state: {
+          ...editor.state,
           selectedLayerId: editor.state.selectedLayerId,
           selectedElement: action.payload,
         },
@@ -61,6 +77,10 @@ export const reducer = (editor: Editor, action: EditorAction): Editor => {
       return {
         ...editor,
         data: newEditorData,
+        state: {
+          ...editor.state,
+          isDirty: true,
+        },
       };
     }
 
@@ -90,10 +110,19 @@ export const reducer = (editor: Editor, action: EditorAction): Editor => {
         data: newEditorData,
         state: {
           ...editor.state,
+          isDirty: true,
           selectedElement: action.payload.element,
         },
       };
     }
+    case "UPDATE_EDITOR_SAVE":
+      return {
+        ...editor,
+        state: {
+          ...editor.state,
+          isSaving: action.payload,
+        },
+      };
 
     default:
       return editor;
