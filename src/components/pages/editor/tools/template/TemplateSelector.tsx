@@ -12,7 +12,7 @@ import {
   Cross1Icon,
 } from "@radix-ui/react-icons";
 import { useEditor } from "@/hooks/editor/useEditor";
-import { GradientColorPicker } from "@/components/blocks/colorPicker/GradientColorPicker";
+import { TemplateColorSelcetor } from "./TemplaceColorSelcetor";
 
 export const TemplateSelector: FC = () => {
   const { dispatch, editorTemplate } = useEditor();
@@ -23,17 +23,6 @@ export const TemplateSelector: FC = () => {
       payload: {
         template: {
           type: template,
-        },
-      },
-    });
-  };
-
-  const handleTemplateColorChange = (color: string) => {
-    dispatch({
-      type: "UPDATE_TEMPLATE",
-      payload: {
-        template: {
-          color: color,
         },
       },
     });
@@ -70,11 +59,7 @@ export const TemplateSelector: FC = () => {
 
       <div className="flex items-center gap-6">
         <Sheet.ItemTitle title="템플릿 색상" />
-        <GradientColorPicker
-          value={editorTemplate?.color}
-          onClick={handleTemplateColorChange}
-          onChange={handleTemplateColorChange}
-        />
+        <TemplateColorSelcetor />
       </div>
     </Sheet.ItemContainer>
   );
