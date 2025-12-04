@@ -1,5 +1,6 @@
 import { EditorTemplate } from "@/data/interfaces/editor/EditorTemplate";
 import { cn } from "@/libs/styles/cn";
+import { QuoteIcon } from "@radix-ui/react-icons";
 import React, { FC } from "react";
 
 interface TemplatePlaceholderProps {
@@ -49,14 +50,15 @@ export const TemplateUnderlinePlaceholder: FC<TemplatePlaceholderProps> = ({
 }) => {
   return (
     <div
-      className={cn(
-        "relative border-b py-1 max-h-[90%]",
-        "before:absolute before:content-[''] before:bg-[url(/quote.png)] before:bg-no-repeat before:w-4 before:h-4  before:bg-contain before:top-[-16px] before:left-0"
-      )}
+      className={cn("relative border-b py-1 max-h-[90%]")}
       style={{
         borderBottomColor: color,
       }}
     >
+      <QuoteIcon
+        className="absolute w-6 h-6 top-[-25px] left-0 rotate-180"
+        style={{ color }}
+      />
       <div className="overflow-scroll max-h-full gap-1 flex flex-col">
         {children}
       </div>
