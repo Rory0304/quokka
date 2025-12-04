@@ -43,6 +43,10 @@ export type EditorAction =
   | {
       type: "UPDATE_SELECTED_ELEMENT";
       payload: EditorState["selectedElement"];
+    }
+  | {
+      type: "UPDATE_EDITOR_SAVE";
+      payload: EditorState["isSaving"];
     };
 
 const initialElementId = nanoid();
@@ -91,6 +95,7 @@ export const initalEditorState: Editor = {
     isPublic: false,
   },
   state: {
+    isDirty: false,
     selectedLayerId: initialElementId,
     selectedElement: null,
   },
