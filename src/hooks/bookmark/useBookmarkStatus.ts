@@ -1,5 +1,4 @@
 import { QueryKey } from "@/data/constants/querykey/QueryKey";
-import { ApiFetch } from "@/libs/api/ApiFetch";
 import { useQuery } from "@tanstack/react-query";
 
 interface BookmarkStatusResponse {
@@ -28,9 +27,7 @@ export const useBookmarkStatus = (quoteCardId: string | null) => {
         throw new Error("quoteCardId is required");
       }
 
-      const response = await ApiFetch(
-        `/api/bookmark?quoteCardId=${quoteCardId}`
-      );
+      const response = await fetch(`/api/bookmark?quoteCardId=${quoteCardId}`);
 
       if (!response.ok) {
         throw new Error(`Failed to fetch bookmark status: ${response.status}`);
@@ -51,7 +48,7 @@ export const useBookmarkIdSet = () => {
   return useQuery<Set<string>, Error>({
     queryKey: [QueryKey.bookmark.get_bookmark_list],
     queryFn: async () => {
-      const response = await ApiFetch("/api/bookmark");
+      const response = await fetch("/api/bookmark");
 
       if (!response.ok) {
         throw new Error(`Failed to fetch bookmarks: ${response.status}`);

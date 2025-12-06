@@ -1,6 +1,5 @@
 import { QueryKey } from "@/data/constants/querykey/QueryKey";
 import { QuoteCardListResponse } from "@/data/interfaces/response/quotecard/QuoteCardListResponse";
-import { ApiFetch } from "@/libs/api/ApiFetch";
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import qs from "query-string";
 
@@ -12,7 +11,7 @@ export const useMyQuoteCardList = () => {
       sort: "desc",
     });
 
-    const response = await ApiFetch(`/api/quotecard-list?${query}`);
+    const response = await fetch(`/api/quotecard-list?${query}`);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch quote cards: ${response.status}`);

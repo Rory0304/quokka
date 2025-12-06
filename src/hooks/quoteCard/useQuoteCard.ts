@@ -1,6 +1,5 @@
 import { QueryKey } from "@/data/constants/querykey/QueryKey";
 import { QuoteCardType } from "@/data/interfaces/quoteCard/QuoteCardType";
-import { ApiFetch } from "@/libs/api/ApiFetch";
 import { skipToken, useSuspenseQuery } from "@tanstack/react-query";
 import qs from "query-string";
 
@@ -15,7 +14,7 @@ export const useQuoteCard = (id: string | null) => {
           queryKey: [QueryKey.quoteCard.get_quotecrad, id],
           queryFn: async () => {
             const query = qs.stringify({ id });
-            const response = await ApiFetch(`/api/quotecard?${query}`);
+            const response = await fetch(`/api/quotecard?${query}`);
 
             if (!response.ok) {
               throw new Error(`Failed to fetch quote card: ${response.status}`);

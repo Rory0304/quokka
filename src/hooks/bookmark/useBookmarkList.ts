@@ -1,5 +1,4 @@
 import { QueryKey } from "@/data/constants/querykey/QueryKey";
-import { ApiFetch } from "@/libs/api/ApiFetch";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { QuoteCardType } from "@/data/interfaces/quoteCard/QuoteCardType";
 import qs from "query-string";
@@ -27,7 +26,7 @@ export const useBookmarkList = ({ enabled }: { enabled: boolean }) => {
       limit: 10,
     });
 
-    const response = await ApiFetch(`/api/bookmark-list?${query}`);
+    const response = await fetch(`/api/bookmark-list?${query}`);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch bookmark list: ${response.status}`);
