@@ -59,6 +59,7 @@ export const MyQuoteCardItem: FC<QuoteCardItemProps> = ({ item }) => {
 
   const handleDelete = () => {
     toast.promise(deleteMutation.mutateAsync({ id: item.id }), {
+      success: "인용 카드가 삭제되었습니다",
       error: "인용 카드 삭제에 실패했습니다.",
     });
   };
@@ -149,7 +150,8 @@ export const MyQuoteCardItem: FC<QuoteCardItemProps> = ({ item }) => {
         {renderImage()}
         {renderContent()}
       </div>
-      <div>{renderActionButtons()}</div>
+
+      {renderActionButtons()}
     </div>
   );
 };
