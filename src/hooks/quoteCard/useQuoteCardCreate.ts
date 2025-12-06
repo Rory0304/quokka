@@ -1,7 +1,10 @@
+import { QueryKey } from "@/data/constants/querykey/QueryKey";
 import { QuoteCardCreateRequest } from "@/data/interfaces/request/quotecard/QuoteCardCreateRequest";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useQuoteCardCreate = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: async (body: QuoteCardCreateRequest) => {
       const response = await fetch("/api/quotecard", {
@@ -11,6 +14,14 @@ export const useQuoteCardCreate = () => {
       });
 
       return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [
+          QueryKey.quoteCard.get_my_quotecard_list,
+          QueryKey.quoteCard.get_quotecard_list,
+        ],
+      });
     },
   });
 };
