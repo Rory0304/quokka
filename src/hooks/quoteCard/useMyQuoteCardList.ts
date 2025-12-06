@@ -9,6 +9,7 @@ export const useMyQuoteCardList = () => {
     const query = qs.stringify({
       cursor: pageParam ?? undefined,
       limit: 10,
+      sort: "desc",
     });
 
     const response = await ApiFetch(`/api/quotecard-list?${query}`);
