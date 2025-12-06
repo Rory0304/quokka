@@ -1,5 +1,6 @@
 import { useNavgationGuard } from "../common";
 import { useEditor } from "./useEditor";
+import { isEqual } from "es-toolkit/predicate";
 
 /**
  * 뒤로가기, 새로고침을 방지하는 훅
@@ -8,14 +9,25 @@ import { useEditor } from "./useEditor";
  */
 export const useEditorNavigationGuard = () => {
   const {
-    editorState: { isDirty, isSaving },
+    editorState: { isSaving },
+    state,
+    initialState,
   } = useEditor();
 
   const {
     onCancel,
     onDiscard,
     active: openSaveModal,
-  } = useNavgationGuard({ enabled: isDirty && !isSaving });
+  } = useNavgationGuard({
+    enabled:
+      !isEqual(
+        {
+          config: state.config,
+          data: state.data,
+        },
+        initialState
+      ) && !isSaving,
+  });
 
   return {
     onCancel,
