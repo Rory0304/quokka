@@ -8,9 +8,12 @@ import { QuoteCardCategory } from "../quoteCard/QuoteCardCategory";
 import { QuoteCardTagList } from "../quoteCard/QuoteCardTagList";
 import { Button } from "@/components/blocks/button/Button";
 import { Switch } from "@/components/blocks/switch/Switch";
-import { useQuoteCardDelete } from "@/hooks/quoteCard/useQuoteCardDelete";
+import { useMyQuoteCardListDelete } from "@/hooks/quoteCard/useMyQuoteCardListDelete";
 import { useQuoteCardUpdate } from "@/hooks/quoteCard/useQuoteCardUpdate";
 import { toast } from "sonner";
+import { cn } from "@/libs/styles/cn";
+import { MyQuoteDeleteDialog } from "./MyQuoteDeleteDialog";
+import { Dialog } from "radix-ui";
 
 interface QuoteCardItemProps {
   item: QuoteCardType;
@@ -19,10 +22,11 @@ interface QuoteCardItemProps {
 export const MyQuoteCardItem: FC<QuoteCardItemProps> = ({ item }) => {
   const url = `${RouteConfig.editor}?id=${item.id}`;
 
-  const deleteMutation = useQuoteCardDelete();
+  const deleteMutation = useMyQuoteCardListDelete();
   const updateMutation = useQuoteCardUpdate();
 
   const [isPublic, setIsPublic] = useState(item.isPublic);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     setIsPublic(item.isPublic);
@@ -54,8 +58,8 @@ export const MyQuoteCardItem: FC<QuoteCardItemProps> = ({ item }) => {
   };
 
   const handleDelete = () => {
-    deleteMutation.mutate({
-      body: { id: item.id },
+    toast.promise(deleteMutation.mutateAsync({ id: item.id }), {
+      error: "인용 카드 삭제에 실패했습니다.",
     });
   };
 
@@ -101,32 +105,46 @@ export const MyQuoteCardItem: FC<QuoteCardItemProps> = ({ item }) => {
           </span>
         </div>
 
-        <div className="flex items-center gap-2">
-          <Button
-            size="sm"
-            className="border-gray-200"
-            variant="outline"
-            data-prevent-progress={true}
-            onClick={handleDelete}
-            disabled={deleteMutation.isPending}
-          >
-            <TrashIcon color="red" aria-label="delete" />
-          </Button>
-          <Button asChild size="sm" data-prevent-progress={true}>
-            <Link href={url}>
-              <div className="flex items-center gap-1">
-                <Pencil1Icon />
-                <span>편집</span>
-              </div>
-            </Link>
-          </Button>
-        </div>
+        <Dialog.Root onOpenChange={setIsOpen} open={isOpen}>
+          <div className="flex items-center gap-2">
+            <Dialog.Trigger asChild>
+              <Button
+                size="sm"
+                className="border-gray-200"
+                variant="outline"
+                data-prevent-progress={true}
+              >
+                <div className="flex items-center gap-1">
+                  <TrashIcon color="red" aria-label="delete" />
+                  <span className="text-red-500">삭제</span>
+                </div>
+              </Button>
+            </Dialog.Trigger>
+            <Button asChild size="sm" data-prevent-progress={true}>
+              <Link href={url}>
+                <div className="flex items-center gap-1">
+                  <Pencil1Icon />
+                  <span>편집</span>
+                </div>
+              </Link>
+            </Button>
+          </div>
+          <MyQuoteDeleteDialog
+            onConfirm={handleDelete}
+            onCancel={() => setIsOpen(false)}
+          />
+        </Dialog.Root>
       </div>
     );
   };
 
   return (
-    <div className="w-full bg-white shadow-xs mx-auto rounded-xl flex-col border overflow-hidden border-gray-200 p-4">
+    <div
+      className={cn(
+        "w-full bg-white shadow-xs mx-auto rounded-xl flex-col border overflow-hidden border-gray-200 p-4",
+        deleteMutation.isPending ? "opacity-50" : "bg-white"
+      )}
+    >
       <div className="flex gap-4 items-center mb-4 group">
         {renderImage()}
         {renderContent()}
