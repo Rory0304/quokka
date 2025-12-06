@@ -32,7 +32,7 @@ export default function MyPage() {
 
   return (
     <GlobalLayout>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 group pt-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 group py-12">
         <Link href={RouteConfig.editor}>
           <div className="w-full h-full bg-green-50 flex flex-col justify-center items-center rounded-xl py-6 text-muted-foreground">
             <div className="flex items-center justify-center rounded-full bg-green-300 w-10 h-10 mb-4">
