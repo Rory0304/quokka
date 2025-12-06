@@ -31,8 +31,17 @@ export const TextElement: FC<TextElementProps> = (props) => {
   const textRef = useRef(defaultValue || "");
 
   const handleChange = (event: ContentEditableEvent) => {
-    textRef.current = event.target.value;
-    onChange?.(event.target.value);
+    const htmlValue = event.target.value;
+    const target = event.currentTarget as HTMLElement;
+
+    // innerText를 사용하여 실제 텍스트 내용만 추출
+    const textContent = target.innerText || target.textContent || "";
+
+    // 빈 텍스트인 경우 빈 문자열로 설정 (HTML도 빈 문자열로)
+    const normalizedValue = textContent.trim() === "" ? "" : htmlValue;
+
+    textRef.current = normalizedValue;
+    onChange?.(normalizedValue);
   };
 
   const handlePaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
