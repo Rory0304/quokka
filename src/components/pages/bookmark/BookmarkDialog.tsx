@@ -47,7 +47,7 @@ export const BookmarkDialog: FC<BookmarkDialogProps> = ({ open }) => {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
               {list.map((item) => (
                 <BookmarkItem key={item.id} item={item.quoteCard} />
               ))}
