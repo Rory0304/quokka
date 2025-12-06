@@ -2,15 +2,15 @@ import { SupabaseStorageType } from "@/data/constants/supabase";
 import { useMutation } from "@tanstack/react-query";
 import { QueryKey } from "@/data/constants/querykey/QueryKey";
 
-interface UploadImageResponse {
+interface useImageUploadResponse {
   storage: string;
   path: string;
   publicUrl: string;
 }
 
-export const useUploadImage = () => {
+export const useImageUpload = () => {
   return useMutation<
-    UploadImageResponse,
+    useImageUploadResponse,
     Error,
     { storage: SupabaseStorageType; file: File }
   >({

@@ -4,6 +4,7 @@ import { useBookmarkList } from "@/hooks/bookmark";
 import { Dialog } from "radix-ui";
 import React, { FC, useEffect } from "react";
 import { BookmarkItem } from "./BookmarkItem";
+import { DialogClose } from "@/components/blocks/dialog/DialogClose";
 
 interface BookmarkDialogProps {
   open: boolean;
@@ -18,17 +19,17 @@ export const BookmarkDialog: FC<BookmarkDialogProps> = ({ open }) => {
     if (open) {
       refetch();
     }
-  }, [open]);
+  }, [open, refetch]);
 
   return (
     <Dialog.Portal>
       <DialogOverlay />
-      <Dialog.Content className="fixed z-11 shadow-md left-1/2  top-1/2 mt-10 max-h-[85vh] w-[90vw] max-w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-md bg-white p-[25px] focus:outline-none data-[state=open]:animate-contentShow">
+      <Dialog.Content className="fixed z-11 shadow-md left-1/2  top-1/2 mt-10 max-h-[80vh] w-full max-w-[80vw] -translate-x-1/2 -translate-y-1/2 rounded-md bg-white p-[25px] focus:outline-none overflow-scroll">
         <Dialog.Title className="mb-4 text-[17px] font-medium text-foreground">
           내가 북마크한 인용 카드
         </Dialog.Title>
 
-        <div className="fbg-white border border-gray-100 bg-white rounded-xl p-4">
+        <div className="rounded-xl p-4">
           {isPending ? (
             <div className="flex flex-col justify-center gap-1 py-4 items-center mb-4">
               <p className="text-muted-foreground text-sm">로딩 중...</p>
@@ -46,13 +47,14 @@ export const BookmarkDialog: FC<BookmarkDialogProps> = ({ open }) => {
               </p>
             </div>
           ) : (
-            <div>
+            <div className="grid grid-cols-3">
               {list.map((item) => (
                 <BookmarkItem key={item.id} item={item.quoteCard} />
               ))}
             </div>
           )}
         </div>
+        <DialogClose />
       </Dialog.Content>
     </Dialog.Portal>
   );

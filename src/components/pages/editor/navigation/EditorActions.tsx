@@ -6,14 +6,19 @@ import { Button } from "@/components/blocks/button/Button";
 import { EditorSettingDialog } from "../setting/EditorSettingDialog";
 import { Dialog } from "radix-ui";
 import { useEditor } from "@/hooks/editor/useEditor";
-import { useEditorAction } from "@/hooks/editor/useEditorAction";
+import { useEditorCreate } from "@/hooks/editor/useEditorCreate";
 import { useAuth } from "@/hooks/auth";
 import { LoginTooltip } from "@/components/blocks/tooltip/LoginTooltip";
 import { EditorSaveDialog } from "./EditorSaveDialog";
 import { toast } from "sonner";
+import { useEditorImageHandle } from "@/hooks/editor/useEditorImageHandle";
+import { useEditorUpdate } from "@/hooks/editor/useEditorUpdate";
 
 export const EditorActions: FC = () => {
-  const { donwloadImage, createQuoteCard, updateQuoteCard } = useEditorAction();
+  const { createQuoteCard } = useEditorCreate();
+  const { updateQuoteCard } = useEditorUpdate();
+  const { donwloadImage } = useEditorImageHandle();
+
   const { state } = useEditor();
   const { isLogin } = useAuth();
 
@@ -36,8 +41,6 @@ export const EditorActions: FC = () => {
         error: "일시적인 오류가 발생되었습니다.",
         position: "top-center",
       });
-
-      return updateQuoteCard(state);
     } else {
       return createQuoteCard(state);
     }
