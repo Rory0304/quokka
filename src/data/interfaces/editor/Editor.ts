@@ -6,5 +6,9 @@ export interface Editor {
   id?: string;
   config: EditorConfig;
   state: EditorState;
+  intiailData: {
+    config: EditorConfig;
+    data: EditorData[];
+  } | null;
   data: EditorData[];
 }
