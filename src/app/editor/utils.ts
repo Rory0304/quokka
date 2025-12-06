@@ -10,19 +10,26 @@ export const createEditorStateFromQuoteCard = (
     return initalEditorState;
   }
 
+  const config = {
+    title: quoteCard.title,
+    category: quoteCard.category as QuoteCardCategoryType,
+    tags: quoteCard.tags,
+    isPublic: quoteCard.isPublic,
+  };
+
+  const data = quoteCard.customFields.data;
+
   return {
     id: quoteCard.id,
-    config: {
-      title: quoteCard.title,
-      category: quoteCard.category as QuoteCardCategoryType,
-      tags: quoteCard.tags,
-      isPublic: quoteCard.isPublic,
-    },
+    config,
     state: {
-      isDirty: false,
       selectedElement: null,
       selectedLayerId: quoteCard.customFields.data[0].id || null,
     },
-    data: quoteCard.customFields.data,
+    data,
+    intiailData: {
+      config,
+      data,
+    },
   };
 };

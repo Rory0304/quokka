@@ -19,6 +19,7 @@ export const useEditor = () => {
 
   return {
     state,
+    initialState: state.intiailData,
 
     editorState: state.state,
     editorData: state.data,

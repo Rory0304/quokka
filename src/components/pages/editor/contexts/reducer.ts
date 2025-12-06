@@ -9,7 +9,6 @@ export const reducer = (editor: Editor, action: EditorAction): Editor => {
         ...action.payload,
         state: {
           ...action.payload.state,
-          isDirty: false,
           isSaving: false,
         },
       };
@@ -19,7 +18,6 @@ export const reducer = (editor: Editor, action: EditorAction): Editor => {
         ...editor,
         state: {
           ...editor.state,
-          isDirty: true,
         },
         config: {
           ...editor.config,
@@ -45,7 +43,6 @@ export const reducer = (editor: Editor, action: EditorAction): Editor => {
         ...editor,
         state: {
           ...editor.state,
-          isDirty: true,
         },
         data: newEditorData,
       };
@@ -79,7 +76,6 @@ export const reducer = (editor: Editor, action: EditorAction): Editor => {
         data: newEditorData,
         state: {
           ...editor.state,
-          isDirty: true,
         },
       };
     }
@@ -110,7 +106,6 @@ export const reducer = (editor: Editor, action: EditorAction): Editor => {
         data: newEditorData,
         state: {
           ...editor.state,
-          isDirty: true,
           selectedElement: action.payload.element,
         },
       };

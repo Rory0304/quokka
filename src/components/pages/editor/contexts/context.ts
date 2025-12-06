@@ -95,11 +95,11 @@ export const initalEditorState: Editor = {
     isPublic: false,
   },
   state: {
-    isDirty: false,
     selectedLayerId: initialElementId,
     selectedElement: null,
   },
   data: [initialEditorData],
+  intiailData: null,
 };
 
 export const EditorValueContext = createContext<Editor>(initalEditorState);
