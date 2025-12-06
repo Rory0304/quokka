@@ -1,4 +1,4 @@
-import { EditorElement } from "@/components/pages/editor/contexts/context";
+import { EditorElement } from "@/data/interfaces/editor/EditorElement";
 import { useEditor } from "@/hooks/editor/useEditor";
 import React, { FC } from "react";
 

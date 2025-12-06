@@ -42,7 +42,6 @@ export const TextColorSelector: FC<TextColorSelectorProps> = ({ element }) => {
         />
       </button>
       <GradientColorPicker
-        hideGradientControls
         open={open}
         value={color}
         onChange={handleTextColorChange}
