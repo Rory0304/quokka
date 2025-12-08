@@ -4,7 +4,7 @@ import { useAuth } from "@/hooks/auth";
 
 type LoginTooltipProps = Pick<
   React.ComponentProps<typeof BasicTooltip>,
-  "contentProps" | "children"
+  "contentProps" | "children" | "delayDuration"
 >;
 
 export const LoginTooltip: FC<LoginTooltipProps> = ({
