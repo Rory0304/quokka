@@ -5,6 +5,7 @@ import { TooltipContent, TooltipTrigger, Tooltip } from "./Tooltip";
 interface TooltipProps extends React.PropsWithChildren {
   disabled?: boolean;
   text: string;
+  delayDuration?: number;
   contentProps?: ComponentProps<typeof TooltipContent>;
 }
 
@@ -12,10 +13,14 @@ export const BasicTooltip: FC<TooltipProps> = ({
   disabled,
   text,
   contentProps,
+  delayDuration = 200,
   children,
 }) => {
   return (
-    <Tooltip delayDuration={200} open={disabled === true ? false : undefined}>
+    <Tooltip
+      delayDuration={delayDuration}
+      open={disabled === true ? false : undefined}
+    >
       <TooltipTrigger asChild>
         <span tabIndex={0}>{children}</span>
       </TooltipTrigger>
