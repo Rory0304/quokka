@@ -51,7 +51,9 @@ export const GET = async (request: NextRequest) => {
           },
         },
 
-        _count: { select: { bookmarks: { where: { userId } } } },
+        ...(userId && {
+          _count: { select: { bookmarks: { where: { userId } } } },
+        }),
       },
     };
 
