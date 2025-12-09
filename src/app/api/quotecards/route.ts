@@ -50,6 +50,10 @@ export const GET = async (request: NextRequest) => {
             image: true,
           },
         },
+
+        ...(userId && {
+          _count: { select: { bookmarks: { where: { userId } } } },
+        }),
       },
     };
 
@@ -88,36 +92,18 @@ export const GET = async (request: NextRequest) => {
 
     const quoteCards = await prisma.quoteCard.findMany(query);
 
-    // credential의 userId를 활용하여 북마크 상태 확인
-    let quoteCardsWithBookmark = quoteCards;
+    const quoteCardsWithBookmark = quoteCards.map((quote) => {
+      const cardWithCount = quote as typeof quote & {
+        _count?: { bookmarks: number };
+      };
 
-    if (userId && quoteCards.length > 0) {
-      // 인증된 사용자인 경우: 해당 사용자의 북마크 상태 조회
-      const quoteCardIds = quoteCards.map((card) => card.id);
+      const { _count, ...cardData } = cardWithCount;
 
-      const bookmarks = await prisma.bookmark.findMany({
-        where: {
-          userId,
-          quoteCardId: { in: quoteCardIds },
-        },
-        select: {
-          quoteCardId: true,
-        },
-      });
-
-      const bookmarkedIds = new Set(bookmarks.map((b) => b.quoteCardId));
-
-      quoteCardsWithBookmark = quoteCards.map((card) => ({
-        ...card,
-        isBookmarked: bookmarkedIds.has(card.id),
-      }));
-    } else {
-      // 인증되지 않은 사용자 또는 빈 리스트인 경우: isBookmarked를 false로 설정
-      quoteCardsWithBookmark = quoteCards.map((card) => ({
-        ...card,
-        isBookmarked: false,
-      }));
-    }
+      return {
+        ...cardData,
+        isBookmarked: Boolean(_count?.bookmarks),
+      };
+    });
 
     const hasNextPage = quoteCards.length > (limit ?? 0);
     const nextCursor = hasNextPage
