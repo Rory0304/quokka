@@ -107,9 +107,11 @@ export const EditorSettingDialog: FC<EditorSettingDialogProps> = ({
               },
             });
 
-            toast.success("성공적으로 저장되었습니다", {
-              position: "top-center",
-            });
+            toast.success("성공적으로 저장되었습니다");
+            closeDialog();
+          },
+          onError: () => {
+            toast.error("인용 카드 업데이트에 실패했습니다. 다시 시도해주세요");
             closeDialog();
           },
         }
