@@ -19,6 +19,7 @@ export const QuoteCard = forwardRef<HTMLDivElement, EditorData>(
         style={{
           width: "50%",
           height: "auto",
+          maxHeight: "100%",
           aspectRatio: AspectRatioMap[aspectRatio].value,
           background: backgroundColor?.bgColor ?? customBackgroundColor,
         }}
