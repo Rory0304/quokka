@@ -25,7 +25,8 @@ export const EditorActions: FC = () => {
   const [open, setOpen] = React.useState(false);
 
   const handleImageDownload = () => {
-    const id = state.id;
+    const datetime = Date.now();
+    const id = state.id || state.config.title || datetime.toString();
     const aspectRatio = state.data[0].layout.aspectRatio;
 
     if (id) {
@@ -42,11 +43,13 @@ export const EditorActions: FC = () => {
         position: "top-center",
       });
     } else {
-      return createQuoteCard(state);
+      createQuoteCard(state);
     }
   };
 
   const renderSettingButton = () => {
+    if (!state.id) return null;
+
     return (
       <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger asChild>
