@@ -1,19 +1,16 @@
 import { Editor } from "@/data/interfaces/editor/Editor";
 import { useEditorImageHandle } from "./useEditorImageHandle";
 import { useQuoteCardUpdate } from "../quoteCard/useQuoteCardUpdate";
-import { useState } from "react";
+import { toast } from "sonner";
 
 export const useEditorUpdate = () => {
   const { uploadImageFile } = useEditorImageHandle();
   const updateMutation = useQuoteCardUpdate();
-  const [isLoading, setIsLoading] = useState(false);
 
   const updateQuoteCard = async (editor: Editor) => {
     if (!editor.id) return;
 
     try {
-      setIsLoading(true);
-
       const thumbnailUrl = await uploadImageFile({
         aspectRatio: editor.data[0].layout.aspectRatio,
         quoteCardId: editor.id,
@@ -33,14 +30,13 @@ export const useEditorUpdate = () => {
             thumbnailUrl,
           },
         },
-      },);
-    } finally {
-      setIsLoading(false);
+      });
+    } catch (error) {
+      toast.error("인용 카드 업데이트에 실패했습니다. 다시 시도해주세요");
     }
   };
 
   return {
     updateQuoteCard,
-    isLoading,
   };
 };
