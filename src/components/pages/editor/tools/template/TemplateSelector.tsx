@@ -12,7 +12,7 @@ import {
   Cross1Icon,
 } from "@radix-ui/react-icons";
 import { useEditor } from "@/hooks/editor/useEditor";
-import { TemplateColorSelcetor } from "./TemplaceColorSelcetor";
+import { TemplateColorSelcetor } from "./TemplateColorSelcetor";
 
 export const TemplateSelector: FC = () => {
   const { dispatch, editorTemplate } = useEditor();
@@ -57,7 +57,7 @@ export const TemplateSelector: FC = () => {
         ))}
       </div>
 
-      <div className="flex items-center gap-6">
+      <div className="flex flex-col gap-2 relative">
         <Sheet.ItemTitle title="템플릿 색상" />
         <TemplateColorSelcetor />
       </div>

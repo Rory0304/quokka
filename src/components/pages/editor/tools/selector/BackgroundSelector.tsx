@@ -49,32 +49,30 @@ export const BackgroundSelector: FC = () => {
   };
 
   return (
-    <div className="flex gap-2 py-4">
-      <div className="relative">
-        <button
-          type="button"
-          onClick={handleColorPickerOpen}
-          className={cn(
-            "p-2 w-12 h-12 rounded-md flex items-center justify-center",
-            Boolean(editorLayout?.customBackgroundColor)
-              ? "border-2 border-blue-500"
-              : "border border-gray-400"
-          )}
-          style={{
-            background: editorLayout?.customBackgroundColor,
-          }}
-        >
-          {typeof editorLayout?.customBackgroundColor === "undefined" ? (
-            <BlendingModeIcon color="gray" />
-          ) : null}
-        </button>
+    <div className="flex gap-2 py-4 relative">
+      <button
+        type="button"
+        onClick={handleColorPickerOpen}
+        className={cn(
+          "p-2 w-12 h-12 rounded-md flex items-center justify-center",
+          Boolean(editorLayout?.customBackgroundColor)
+            ? "border-2 border-blue-500"
+            : "border border-gray-400"
+        )}
+        style={{
+          background: editorLayout?.customBackgroundColor,
+        }}
+      >
+        {typeof editorLayout?.customBackgroundColor === "undefined" ? (
+          <BlendingModeIcon color="gray" />
+        ) : null}
+      </button>
 
-        <GradientColorPicker
-          open={open}
-          value={editorLayout?.customBackgroundColor}
-          onChange={(color) => handleBackgroundChange({ color })}
-        />
-      </div>
+      <GradientColorPicker
+        open={open}
+        value={editorLayout?.customBackgroundColor}
+        onChange={(color) => handleBackgroundChange({ color })}
+      />
 
       {BackgroundColor.map((item, index) => (
         <BackgroundColorItem
