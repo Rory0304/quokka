@@ -66,9 +66,9 @@ export const useEditorImageHandle = () => {
     return result.publicUrl;
   };
 
-  const donwloadImage = async (id: string, aspectRatio: AspectRatioType) => {
-    const file = await _createImageFile(id, aspectRatio);
-    const fileName = _getImageFileName(id);
+  const donwloadImage = async (name: string, aspectRatio: AspectRatioType) => {
+    const file = await _createImageFile(name, aspectRatio);
+    const fileName = _getImageFileName(name);
 
     saveAs(file, fileName);
   };
