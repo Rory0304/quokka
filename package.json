@@ -37,6 +37,7 @@
     "react-best-gradient-color-picker": "^3.0.14",
     "react-contenteditable": "^3.3.7",
     "react-dom": "^19.2.1",
+    "react-intersection-observer": "^10.0.0",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0",
     "zod": "^4.1.13",
