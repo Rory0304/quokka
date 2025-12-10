@@ -7,6 +7,7 @@ import { HomeQuoteCardItem } from "./HomeQuoteCardItem";
 import { QuoteCardCategoryType } from "@/data/constants/quoteCard/QuoteCardCategory";
 import { HomeQuoteCardListPlaceholder } from "./HomeQuoteCardListPlaceholder";
 import { HomeQuoteCardItemLoading } from "./HomeQuoteCardItemLoading";
+import { Visibility } from "@/components/blocks/visibility/Visibility";
 
 interface HomeQuoteCardListProps {
   category?: QuoteCardCategoryType;
@@ -17,11 +18,12 @@ export const HomeQuoteCardList: FC<HomeQuoteCardListProps> = ({
   category,
   searchKey,
 }) => {
-  const { list, isEmpty, isFetchingNextPage } = useQuoteCardList({
-    category,
-    searchKey,
-    limit: 10,
-  });
+  const { list, isEmpty, hasNextPage, isFetchingNextPage, onEndReached } =
+    useQuoteCardList({
+      category,
+      searchKey,
+      limit: 10,
+    });
 
   if (isEmpty) {
     return <HomeQuoteCardListPlaceholder searchKey={searchKey} />;
@@ -33,6 +35,9 @@ export const HomeQuoteCardList: FC<HomeQuoteCardListProps> = ({
         <HomeQuoteCardItem key={item.id} item={item} />
       ))}
       {isFetchingNextPage && <HomeQuoteCardItemLoading count={5} />}
+      {hasNextPage ? (
+        <Visibility onChange={onEndReached} rootMargin="0px 0px 200px 0px" />
+      ) : null}
     </div>
   );
 };

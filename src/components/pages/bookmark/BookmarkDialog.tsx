@@ -5,13 +5,24 @@ import { Dialog } from "radix-ui";
 import React, { FC, useEffect } from "react";
 import { BookmarkItem } from "./BookmarkItem";
 import { DialogClose } from "@/components/blocks/dialog/DialogClose";
+import { Visibility } from "@/components/blocks/visibility/Visibility";
+import { LoadingIndicator } from "@/components/blocks/loading/LoadingIndicator";
 
 interface BookmarkDialogProps {
   open: boolean;
 }
 
 export const BookmarkDialog: FC<BookmarkDialogProps> = ({ open }) => {
-  const { list, isPending, isError, isEmpty, refetch } = useBookmarkList({
+  const {
+    list,
+    isPending,
+    isError,
+    isEmpty,
+    hasNextPage,
+    isFetchingNextPage,
+    refetch,
+    onEndReached,
+  } = useBookmarkList({
     enabled: open,
   });
 
@@ -47,10 +58,17 @@ export const BookmarkDialog: FC<BookmarkDialogProps> = ({ open }) => {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {list.map((item) => (
                 <BookmarkItem key={item.id} item={item.quoteCard} />
               ))}
+              {isFetchingNextPage ? <LoadingIndicator /> : null}
+              {hasNextPage ? (
+                <Visibility
+                  onChange={onEndReached}
+                  rootMargin="0px 0px 200px 0px"
+                />
+              ) : null}
             </div>
           )}
         </div>
