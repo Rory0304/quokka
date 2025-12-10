@@ -17,6 +17,7 @@ import {
 } from "@/components/pages/editor/contexts/context";
 import { reducer } from "@/components/pages/editor/contexts/reducer";
 import { useEditor } from "@/hooks/editor/useEditor";
+import { EditorDesktopOnlyView } from "@/components/pages/editor/EditorDesktopOnlyView";
 
 const EditorContent: FC = () => {
   const searchParams = useSearchParams();
@@ -55,6 +56,9 @@ const EditorContent: FC = () => {
       <div className="relative w-full bg-gray-100 flex flex-row justify-between h-full gap-4 pt-16">
         <EditorMain />
         <EditorTool />
+      </div>
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-white sm:hidden">
+        <EditorDesktopOnlyView />
       </div>
     </EditorHandlerContext.Provider>
   );
