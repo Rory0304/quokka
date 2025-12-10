@@ -9,7 +9,7 @@ import { withAuthHandler } from "@/middlewares/withAuthHandler";
 
 const querySchema = zod.object({
   cursor: zod.string().optional(),
-  limit: zod.string().transform(Number).optional(),
+  limit: zod.string().transform(Number),
   sort: zod.enum(["asc", "desc"]).optional(),
 });
 
@@ -30,7 +30,7 @@ export const GET = withAuthHandler(async ({ request, sessionCtx }) => {
 
     const query: Prisma.BookmarkFindManyArgs = {
       where: { userId: sessionCtx.userId },
-      take: limit,
+      take: limit + 1,
       include: {
         quoteCard: {
           include: {
@@ -58,13 +58,16 @@ export const GET = withAuthHandler(async ({ request, sessionCtx }) => {
 
     const bookmarks = await prisma.bookmark.findMany(query);
 
-    const hasNextPage = bookmarks.length > (limit ?? 0);
+    const hasNextPage = bookmarks.length > limit;
+    const data = hasNextPage ? bookmarks.slice(0, limit) : bookmarks;
     const nextCursor = hasNextPage
-      ? bookmarks[bookmarks.length - 1]?.id ?? null
+      ? data.length > 0
+        ? data[data.length - 1]?.id ?? null
+        : null
       : null;
 
     return NextResponse.json({
-      data: bookmarks,
+      data,
       pagination: {
         limit,
         nextCursor,
