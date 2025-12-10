@@ -1,35 +1,33 @@
 "use client";
 
-import { useDebounce } from "@/hooks/common";
-import React, { FC, useState } from "react";
+import { cn } from "@/libs/styles/cn";
+import { FC, useState } from "react";
 import ColorPicker from "react-best-gradient-color-picker";
+import { ClassNameValue } from "tailwind-merge";
+import { throttle } from "es-toolkit/function";
 
 interface GradientColorPickerProps {
   open: boolean;
   value?: string;
+  className?: ClassNameValue;
   onChange: (color: string) => void;
 }
 
 export const GradientColorPicker: FC<GradientColorPickerProps> = ({
   open,
   value,
+  className = "bottom-0 left-[-240px]",
   onChange,
 }) => {
   const [color, setColor] = useState(value);
 
-  const _ = useDebounce({
-    deps: [color],
-    ms: 200,
-    fn: () => {
-      if (color) {
-        onChange(color);
-      }
-    },
-  });
-
-  const handleColorChange = (color: string) => {
+  const handleColorChange = throttle((color: string) => {
     setColor(color);
-  };
+
+    if (color) {
+      onChange(color);
+    }
+  }, 300);
 
   if (!open) return null;
 
@@ -37,7 +35,7 @@ export const GradientColorPicker: FC<GradientColorPickerProps> = ({
     <ColorPicker
       width={240}
       height={240}
-      className="absolute right-14 bottom-0"
+      className={cn("absolute", className)}
       hideColorGuide
       hidePresets
       hideInputs
