@@ -2,6 +2,7 @@ import { QueryKey } from "@/data/constants/querykey/QueryKey";
 import { QuoteCardListResponse } from "@/data/interfaces/response/quotecard/QuoteCardListResponse";
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import qs from "query-string";
+import { useCallback } from "react";
 
 export const useMyQuoteCardList = () => {
   const fetchItems = async ({ pageParam }: { pageParam: number | null }) => {
@@ -21,18 +22,29 @@ export const useMyQuoteCardList = () => {
     return data as QuoteCardListResponse;
   };
 
-  const { data, isSuccess, hasNextPage, isFetchingNextPage } =
-    useSuspenseInfiniteQuery({
-      queryKey: [QueryKey.quoteCard.get_my_quotecard_list],
-      initialPageParam: null,
-      queryFn: ({ pageParam }: { pageParam: number | null }) =>
-        fetchItems({ pageParam }),
-      getNextPageParam: (lastPage: QuoteCardListResponse) =>
-        lastPage.pagination.nextCursor,
-    });
+  const {
+    data,
+    isSuccess,
+    isError,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = useSuspenseInfiniteQuery({
+    queryKey: [QueryKey.quoteCard.get_my_quotecard_list],
+    initialPageParam: null,
+    queryFn: ({ pageParam }: { pageParam: number | null }) =>
+      fetchItems({ pageParam }),
+    getNextPageParam: (lastPage: QuoteCardListResponse) =>
+      lastPage.pagination.nextCursor,
+  });
 
   const list = data?.pages[0].data ?? [];
   const isEmpty = isSuccess && list.length === 0;
+
+  const onEndReached = useCallback(() => {
+    if (isFetchingNextPage || !hasNextPage || isError) return;
+    fetchNextPage();
+  }, [isFetchingNextPage, hasNextPage, isError, fetchNextPage]);
 
   return {
     list,
@@ -40,5 +52,7 @@ export const useMyQuoteCardList = () => {
     isFetchingNextPage,
     isEmpty,
     hasNextPage,
+
+    onEndReached,
   };
 };

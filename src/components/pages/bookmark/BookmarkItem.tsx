@@ -43,7 +43,7 @@ export const BookmarkItem: FC<BookmarkItemProps> = ({ item }) => {
   };
 
   return (
-    <div className="w-full aspect-square mx-auto flex flex-col">
+    <div className="w-full h-full mx-auto flex flex-col">
       <div>
         <div className="flex items-center gap-2 mb-2">
           <Avatar.Root className="rounded-full p-2 bg-white flex items-center justify-center">
@@ -61,28 +61,31 @@ export const BookmarkItem: FC<BookmarkItemProps> = ({ item }) => {
           </span>
         </div>
       </div>
-      <div className="flex-1 border border-gray-100 shadow-sm bg-white duration-150 rounded-2xl  p-4 flex flex-col ">
-        <div className="flex justify-between items-center">
-          <QuoteCardCategory category={item.category} />
-          <Button
-            variant="outline"
-            onClick={handleBookmarkDelete}
-            disabled={isPending}
-          >
-            {isPending ? <LoadingIndicator /> : <p>북마크 삭제</p>}
-          </Button>
+      <div className="flex-1 border justify-between border-gray-100 shadow-sm bg-white duration-150 rounded-2xl  p-4 flex flex-col ">
+        <div>
+          <div className="flex justify-between items-center">
+            <QuoteCardCategory category={item.category} />
+            <Button
+              variant="outline"
+              onClick={handleBookmarkDelete}
+              disabled={isPending}
+            >
+              {isPending ? <LoadingIndicator /> : <p>북마크 삭제</p>}
+            </Button>
+          </div>
+
+          <p className="text-foreground font-medium text-sm mb-4">
+            {item.title}
+          </p>
+          <QuoteCardTagList tags={item.tags} />
         </div>
 
-        <p className="text-foreground font-medium text-sm mb-4">{item.title}</p>
-        <QuoteCardTagList tags={item.tags} />
-
-        <div className="aspect-square relative overflow-hidden border rounded-2xl border-gray-300 flex-1">
+        <div className="aspect-square w-full h-auto relative overflow-hidden border rounded-2xl border-gray-300">
           {item.thumbnailUrl ? (
             <Image
               fill
               alt="thumbnail-image"
               src={item.thumbnailUrl}
-              className="object-contain"
               quality={80}
             />
           ) : null}

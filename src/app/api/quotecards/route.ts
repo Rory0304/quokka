@@ -11,7 +11,7 @@ import { QuoteCardCategory } from "@/data/constants/quoteCard/QuoteCardCategory"
 
 const querySchema = zod.object({
   cursor: zod.string().optional(),
-  limit: zod.string().transform(Number).optional(),
+  limit: zod.string().transform(Number),
   sort: zod.enum(["asc", "desc"]).optional(),
   category: zod.enum(QuoteCardCategory).optional(),
   searchKey: zod.string().optional(),
@@ -40,7 +40,7 @@ export const GET = async (request: NextRequest) => {
         isPublic: true,
       },
       orderBy: { createdAt: sort },
-      take: limit,
+      take: limit + 1,
       include: {
         user: {
           select: {
@@ -105,13 +105,19 @@ export const GET = async (request: NextRequest) => {
       };
     });
 
-    const hasNextPage = quoteCards.length > (limit ?? 0);
+    const hasNextPage = quoteCards.length > limit;
+    const data = hasNextPage
+      ? quoteCardsWithBookmark.slice(0, limit)
+      : quoteCardsWithBookmark;
+
     const nextCursor = hasNextPage
-      ? quoteCards[quoteCards.length - 1]?.id ?? null
+      ? data.length > 0
+        ? data[data.length - 1]?.id ?? null
+        : null
       : null;
 
     return NextResponse.json({
-      data: quoteCardsWithBookmark,
+      data,
       pagination: {
         limit,
         nextCursor,

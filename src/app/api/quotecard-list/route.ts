@@ -31,7 +31,7 @@ export const GET = withAuthHandler(async ({ request, sessionCtx }) => {
 
     const query: Prisma.QuoteCardFindManyArgs = {
       where: { userId: sessionCtx.userId },
-      take: limit,
+      take: limit + 1,
       include: {
         user: {
           select: {
@@ -55,13 +55,17 @@ export const GET = withAuthHandler(async ({ request, sessionCtx }) => {
 
     const quoteCards = await prisma.quoteCard.findMany(query);
 
-    const hasNextPage = quoteCards.length > (limit ?? 0);
+    const hasNextPage = quoteCards.length > limit;
+    const data = hasNextPage ? quoteCards.slice(0, limit) : quoteCards;
+
     const nextCursor = hasNextPage
-      ? quoteCards[quoteCards.length - 1]?.id ?? null
+      ? data.length > 0
+        ? data[data.length - 1]?.id ?? null
+        : null
       : null;
 
     return NextResponse.json({
-      data: quoteCards,
+      data,
       pagination: {
         limit,
         nextCursor,

@@ -3,6 +3,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { QuoteCardType } from "@/data/interfaces/quoteCard/QuoteCardType";
 import qs from "query-string";
 import { CursorPaginationResponse } from "@/data/interfaces/request/pagination/cursor/CursorPaginationResponse";
+import { useCallback } from "react";
 
 interface BookmarkItem {
   id: string;
@@ -45,6 +46,7 @@ export const useBookmarkList = ({ enabled }: { enabled: boolean }) => {
     hasNextPage,
     isFetchingNextPage,
     refetch,
+    fetchNextPage,
   } = useInfiniteQuery({
     queryKey: [QueryKey.bookmark.get_bookmark_list],
     initialPageParam: null,
@@ -59,6 +61,11 @@ export const useBookmarkList = ({ enabled }: { enabled: boolean }) => {
   const list = data?.pages.flatMap((page) => page.data) ?? [];
   const isEmpty = isSuccess && list.length === 0;
 
+  const onEndReached = useCallback(() => {
+    if (isFetchingNextPage || !hasNextPage || isError) return;
+    fetchNextPage();
+  }, [isFetchingNextPage, hasNextPage, isError, fetchNextPage]);
+
   return {
     list,
     isSuccess,
@@ -68,6 +75,8 @@ export const useBookmarkList = ({ enabled }: { enabled: boolean }) => {
     isPending,
     isFetching,
     hasNextPage,
+    fetchNextPage,
+    onEndReached,
     refetch,
   };
 };
