@@ -38,14 +38,25 @@ export const DefaultHeader: FC = () => {
         {session ? (
           <DropdownMenu.Root>
             <DropdownMenu.Trigger asChild>
-              <button aria-label="Profile Menu">
-                <div className="flex gap-1 items-center p-2 hover:bg-slate-50 transition-colors ease-in-out duration-100 rounded-3xl">
-                  <Avatar.Root className="inline-flex size-[32px] select-none items-center justify-center overflow-hidden rounded-full bg-white border border-black  bg-blackA1 align-middle">
-                    <Avatar.Fallback className="leading-1 flex size-full items-center justify-center bg-white text-sm font-medium text-black">
-                      PD
+              <button aria-label="Profile Menu" className="outline-none">
+                <div className="flex gap-1 items-center p-2 hover:bg-slate-50 transition-colors ease-in-out duration-100 rounded-md bg-white border border-gray-300">
+                  <Avatar.Root>
+                    <Avatar.Fallback className="flex items-center justify-center">
+                      <div className="bg-linear-to-r from-green-400 to-blue-500 rounded-full w-6 h-6 flex items-center justify-center mr-2">
+                        <span className="text-white text-xs font-bold">
+                          {session.user.name?.slice(0, 1)}
+                        </span>
+                      </div>
+                      <p className="text-xs font-medium text-muted-foreground">
+                        {session.user.email?.split("@")[0]}
+                      </p>
                     </Avatar.Fallback>
                   </Avatar.Root>
-                  <CaretDownIcon width={24} height={24} />
+                  <CaretDownIcon
+                    width={24}
+                    height={24}
+                    className="text-muted-foreground"
+                  />
                 </div>
               </button>
             </DropdownMenu.Trigger>
@@ -53,13 +64,13 @@ export const DefaultHeader: FC = () => {
             <DropdownMenu.Portal>
               <DropdownMenu.Content
                 align="end"
-                className="rounded-md bg-white p-[5px] will-change-[opacity,transform] data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade data-[side=right]:animate-slideLeftAndFade data-[side=top]:animate-slideDownAndFade"
-                sideOffset={7}
+                className="bg-white outline-none cursor-pointer rounded-md p-1.5 shadow-2xl border border-gray-100 z-1000"
+                sideOffset={4}
               >
-                <DropdownMenu.Item className="group relative flex select-none items-center rounded-[3px] leading-none outline-none ">
+                <DropdownMenu.Item className="group relative flex select-none items-center rounded-[3px] leading-none hover:outline-none hover:bg-gray-50 ">
                   <button
                     type="button"
-                    className="flex items-center gap-2 py-2 px-2"
+                    className="flex items-center gap-2 py-2 px-2 cursor-pointer"
                     onClick={handleSignOut}
                   >
                     <ExitIcon className="text-red-500" />
