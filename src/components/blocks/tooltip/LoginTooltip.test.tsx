@@ -21,7 +21,7 @@ describe('LoginTooltip', () => {
     vi.clearAllMocks();
   });
 
-  it('로그인하지 않았을 때 Login Tooltip이 보여야 한다', async () => {
+  it('로그인하지 않았을 때 Login Tooltip이 보여야 한다.', async () => {
     // 로그인하지 않은 상태로 mock 설정
     (useAuth as ReturnType<typeof vi.fn>).mockReturnValue({
       isLogin: false,
