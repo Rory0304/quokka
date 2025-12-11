@@ -46,3 +46,22 @@ jobs:
         with:
           commit_message: 'chore: lint'
           push_options: --force
+
+  TEST:
+    needs: CI
+    if: ${{ github.event_name == 'pull_request' && needs.CI.result == 'success' }}
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Run Test with coverage
+        run: npx vitest --coverage.enabled true
+
+      - name: Report Coverage
+        if: always()
+        uses: davelosert/vitest-coverage-report-action@v2
+        with:
+          threshold-icons: "{0: '🔴', 80: '🟠', 90: '🟢'}"
