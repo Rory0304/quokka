@@ -47,6 +47,7 @@ export const GradientColorPicker: FC<GradientColorPickerProps> = ({
         body: {
           boxShadow: "0px 0px 2px 1px #dddddd",
           borderRadius: "8px",
+          zIndex: 1,
         },
       }}
     />

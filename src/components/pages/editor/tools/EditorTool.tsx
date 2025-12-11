@@ -11,7 +11,7 @@ export const EditorTool: FC = () => {
   } = useEditor();
 
   return (
-    <div className="bg-white border-l border-l-gray-300 flex-[0.4] relative overflow-scroll">
+    <div className="bg-white border-l border-l-gray-300 flex-[0.4] relative">
       {!selectedElement && <FrameTool />}
       {selectedElement?.type === "text" && (
         <TextContainerTool selectedElement={selectedElement} />
