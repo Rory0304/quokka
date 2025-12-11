@@ -1,8 +1,8 @@
-import { useEditor } from "@/hooks/editor/useEditor";
-import React, { FC, useState } from "react";
+import React, { FC, useState } from 'react';
 
-import { FontSizeIcon } from "@radix-ui/react-icons";
-import { EditorElement } from "@/data/interfaces/editor/EditorElement";
+import { EditorElement } from '@/data/interfaces/editor/EditorElement';
+import { useEditor } from '@/hooks/editor/useEditor';
+import { FontSizeIcon } from '@radix-ui/react-icons';
 
 interface FontSizeSelectorProps {
   element: EditorElement;
@@ -24,14 +24,14 @@ export const FontSizeSelector: FC<FontSizeSelectorProps> = ({ element }) => {
     setInputValue(value);
 
     // Only dispatch if it's a valid number
-    if (value === "" || value === "-") {
+    if (value === '' || value === '-') {
       return;
     }
 
     const numberValue = Number(value);
     if (!isNaN(numberValue) && numberValue > 0) {
       dispatch({
-        type: "UPDATE_ELEMENT",
+        type: 'UPDATE_ELEMENT',
         payload: {
           element: {
             ...element,

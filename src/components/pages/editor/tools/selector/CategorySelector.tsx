@@ -1,19 +1,20 @@
-import { CheckIcon, ChevronDownIcon } from "@radix-ui/react-icons";
-import { Select } from "radix-ui";
-import React, { FC, useRef } from "react";
+import React, { FC, useRef } from 'react';
+
+import { CheckIcon, ChevronDownIcon } from '@radix-ui/react-icons';
+import { Select } from 'radix-ui';
 
 const categoryItems = [
   {
-    value: "movie",
-    label: "영화",
+    value: 'movie',
+    label: '영화',
   },
   {
-    value: "book",
-    label: "책",
+    value: 'book',
+    label: '책',
   },
   {
-    value: "etc",
-    label: "기타",
+    value: 'etc',
+    label: '기타',
   },
 ];
 
@@ -49,7 +50,7 @@ export const CategorySelector: FC<CategorySelectorProps> = ({
           <Select.Content className="overflow-hidden z-20 rounded-md bg-white shadow-xl border border-gray-50">
             <Select.Viewport className="p-2">
               <Select.Group>
-                {categoryItems.map((item) => (
+                {categoryItems.map(item => (
                   <SelectItem
                     label={item.label}
                     value={item.value}
@@ -81,4 +82,4 @@ const SelectItem: FC<{ value: string; label: string }> = ({ value, label }) => {
   );
 };
 
-SelectItem.displayName = "SelectItem";
+SelectItem.displayName = 'SelectItem';

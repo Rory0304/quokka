@@ -1,10 +1,12 @@
-import { useCallback, useContext } from "react";
-import { useImageUpload } from "../image/useImageUpload";
-import { AspectRatioType } from "@/data/constants/editor/AspectRatio";
-import { EditorHandlerContext } from "@/components/pages/editor/contexts/context";
-import { canvasToBlob } from "@/libs/canvas/canvasToBlob";
-import html2canvas from "html2canvas";
-import { saveAs } from "file-saver";
+import { useCallback, useContext } from 'react';
+
+import { EditorHandlerContext } from '@/components/pages/editor/contexts/context';
+import { AspectRatioType } from '@/data/constants/editor/AspectRatio';
+import { canvasToBlob } from '@/libs/canvas/canvasToBlob';
+import { saveAs } from 'file-saver';
+import html2canvas from 'html2canvas';
+
+import { useImageUpload } from '../image/useImageUpload';
 
 export const useEditorImageHandle = () => {
   const { quoteCardRef } = useContext(EditorHandlerContext);
@@ -15,7 +17,7 @@ export const useEditorImageHandle = () => {
   }, []);
 
   const _getImageSize = (aspectRatio: AspectRatioType) => {
-    if (aspectRatio === "square") {
+    if (aspectRatio === 'square') {
       return {
         windowWidth: 1200,
         windowHeight: 1200,
@@ -35,15 +37,15 @@ export const useEditorImageHandle = () => {
     const elem = quoteCardRef?.current;
 
     if (!elem) {
-      throw new Error("Not found matched quote card element");
+      throw new Error('Not found matched quote card element');
     }
 
     const canvas = await html2canvas(elem, _getImageSize(aspectRatio));
-    const blob = await canvasToBlob(canvas, "image/jpg");
+    const blob = await canvasToBlob(canvas, 'image/jpg');
 
     const fileName = _getImageFileName(id);
     const file = new File([blob], fileName, {
-      type: "image/jpg",
+      type: 'image/jpg',
     });
     return file;
   };
@@ -59,7 +61,7 @@ export const useEditorImageHandle = () => {
 
     const file = await _createImageFile(id, aspectRatio);
     const result = await uploadImageMutation.mutateAsync({
-      storage: "CardThumbnail" as const,
+      storage: 'CardThumbnail' as const,
       file,
     });
 

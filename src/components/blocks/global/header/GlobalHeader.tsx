@@ -1,10 +1,12 @@
-"use client";
+'use client';
 
-import { RouteConfig } from "@/data/constants/route";
-import { usePathname } from "next/navigation";
-import React, { FC } from "react";
-import { DefaultHeader } from "./DefaultHeader";
-import { NavigationHeader } from "./NavigationHeader";
+import React, { FC } from 'react';
+
+import { RouteConfig } from '@/data/constants/route';
+import { usePathname } from 'next/navigation';
+
+import { DefaultHeader } from './DefaultHeader';
+import { NavigationHeader } from './NavigationHeader';
 
 const NavigationHeaderPathname = [RouteConfig.login, RouteConfig.register];
 

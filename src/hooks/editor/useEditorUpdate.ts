@@ -1,7 +1,8 @@
-import { Editor } from "@/data/interfaces/editor/Editor";
-import { useEditorImageHandle } from "./useEditorImageHandle";
-import { useQuoteCardUpdate } from "../quoteCard/useQuoteCardUpdate";
-import { toast } from "sonner";
+import { Editor } from '@/data/interfaces/editor/Editor';
+import { toast } from 'sonner';
+
+import { useQuoteCardUpdate } from '../quoteCard/useQuoteCardUpdate';
+import { useEditorImageHandle } from './useEditorImageHandle';
 
 export const useEditorUpdate = () => {
   const { uploadImageFile } = useEditorImageHandle();
@@ -32,7 +33,7 @@ export const useEditorUpdate = () => {
         },
       });
     } catch (error) {
-      toast.error("인용 카드 업데이트에 실패했습니다. 다시 시도해주세요");
+      toast.error('인용 카드 업데이트에 실패했습니다. 다시 시도해주세요');
     }
   };
 

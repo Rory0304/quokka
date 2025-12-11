@@ -1,5 +1,6 @@
-import { Dialog } from "radix-ui";
-import React, { FC } from "react";
+import React, { FC } from 'react';
+
+import { Dialog } from 'radix-ui';
 
 export const DialogOverlay: FC = () => {
   return (

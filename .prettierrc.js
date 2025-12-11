@@ -1,2 +1,3 @@
-import config from "@rorysa/prettier-config";
+import config from '@rorysa/prettier-config';
+
 export default config;

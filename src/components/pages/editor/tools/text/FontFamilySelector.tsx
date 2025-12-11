@@ -1,18 +1,18 @@
+import React, { FC, useRef } from 'react';
+
 import {
   FontFamily,
   FontFamilyMap,
   FontFamilyType,
-} from "@/data/constants/editor/FontFamily";
-import { EditorElement } from "@/data/interfaces/editor/EditorElement";
-
-import { useEditor } from "@/hooks/editor/useEditor";
+} from '@/data/constants/editor/FontFamily';
+import { EditorElement } from '@/data/interfaces/editor/EditorElement';
+import { useEditor } from '@/hooks/editor/useEditor';
 import {
   CheckIcon,
   ChevronDownIcon,
   FontStyleIcon,
-} from "@radix-ui/react-icons";
-import { Select } from "radix-ui";
-import React, { FC, useRef } from "react";
+} from '@radix-ui/react-icons';
+import { Select } from 'radix-ui';
 
 interface FontFamilySelectorProps {
   element: EditorElement;
@@ -34,9 +34,9 @@ export const FontFamilySelector: FC<FontFamilySelectorProps> = ({
       <FontStyleIcon color="gray" />
       <Select.Root
         value={fontFamily}
-        onValueChange={(value) => {
+        onValueChange={value => {
           dispatch({
-            type: "UPDATE_ELEMENT",
+            type: 'UPDATE_ELEMENT',
             payload: {
               element: {
                 ...element,
@@ -63,7 +63,7 @@ export const FontFamilySelector: FC<FontFamilySelectorProps> = ({
           <Select.Content className="overflow-hidden rounded-md bg-white shadow-xl border border-gray-50">
             <Select.Viewport className="p-2">
               <Select.Group>
-                {(Object.keys(FontFamily) as FontFamilyType[]).map((item) => (
+                {(Object.keys(FontFamily) as FontFamilyType[]).map(item => (
                   <SelectItem fontFamily={item} key={item} />
                 ))}
               </Select.Group>
@@ -98,4 +98,4 @@ const SelectItem: FC<{ fontFamily: FontFamilyType }> = ({ fontFamily }) => {
   );
 };
 
-SelectItem.displayName = "SelectItem";
+SelectItem.displayName = 'SelectItem';

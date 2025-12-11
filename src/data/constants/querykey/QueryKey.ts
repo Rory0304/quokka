@@ -1,18 +1,18 @@
 export const QueryKey = {
   quoteCard: {
-    get_quotecrad: "get_quotecrad",
-    get_quotecard_list: "get_quotecard_list",
-    get_my_quotecard_list: "get_my_quotecard_list",
-    create_quotecard: "create_quotecard",
+    get_quotecrad: 'get_quotecrad',
+    get_quotecard_list: 'get_quotecard_list',
+    get_my_quotecard_list: 'get_my_quotecard_list',
+    create_quotecard: 'create_quotecard',
   },
   image: {
-    upload_image: "upload_image",
+    upload_image: 'upload_image',
   },
   bookmark: {
-    create_bookmark: "create_bookmark",
-    delete_bookmark: "delete_bookmark",
-    toggle_bookmark: "toggle_bookmark",
-    get_bookmark: "get_bookmark",
-    get_bookmark_list: "get_bookmark_list",
+    create_bookmark: 'create_bookmark',
+    delete_bookmark: 'delete_bookmark',
+    toggle_bookmark: 'toggle_bookmark',
+    get_bookmark: 'get_bookmark',
+    get_bookmark_list: 'get_bookmark_list',
   },
 } as const;

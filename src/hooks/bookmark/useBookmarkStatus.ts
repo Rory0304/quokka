@@ -1,5 +1,5 @@
-import { QueryKey } from "@/data/constants/querykey/QueryKey";
-import { useQuery } from "@tanstack/react-query";
+import { QueryKey } from '@/data/constants/querykey/QueryKey';
+import { useQuery } from '@tanstack/react-query';
 
 interface BookmarkStatusResponse {
   data: {
@@ -24,7 +24,7 @@ export const useBookmarkStatus = (quoteCardId: string | null) => {
     queryKey: [QueryKey.bookmark.get_bookmark, quoteCardId],
     queryFn: async () => {
       if (!quoteCardId) {
-        throw new Error("quoteCardId is required");
+        throw new Error('quoteCardId is required');
       }
 
       const response = await fetch(`/api/bookmark?quoteCardId=${quoteCardId}`);
@@ -48,16 +48,16 @@ export const useBookmarkIdSet = () => {
   return useQuery<Set<string>, Error>({
     queryKey: [QueryKey.bookmark.get_bookmark_list],
     queryFn: async () => {
-      const response = await fetch("/api/bookmark");
+      const response = await fetch('/api/bookmark');
 
       if (!response.ok) {
         throw new Error(`Failed to fetch bookmarks: ${response.status}`);
       }
 
       const data = (await response.json()) as BookmarkListResponse;
-      return new Set(data.data.map((bookmark) => bookmark.quoteCardId));
+      return new Set(data.data.map(bookmark => bookmark.quoteCardId));
     },
     staleTime: 1000 * 60 * 5, // 5분
-    select: (data) => data, // Set을 그대로 반환
+    select: data => data, // Set을 그대로 반환
   });
 };

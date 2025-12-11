@@ -1,19 +1,18 @@
-import Image from "next/image";
+import React, { FC } from 'react';
 
-import React, { FC } from "react";
-import { QuoteCardCategory } from "../quoteCard/QuoteCardCategory";
-import { QuoteCardType } from "@/data/interfaces/quoteCard/QuoteCardType";
-import { QuoteCardTagList } from "../quoteCard/QuoteCardTagList";
+import { Button } from '@/components/blocks/button/Button';
+import { LoadingIndicator } from '@/components/blocks/loading/LoadingIndicator';
+import { QueryKey } from '@/data/constants/querykey/QueryKey';
+import { QuoteCardType } from '@/data/interfaces/quoteCard/QuoteCardType';
+import { useBookmarkDelete } from '@/hooks/bookmark';
+import { formatRelativeTime } from '@/libs/utils/formatRelativeTime';
+import { PersonIcon } from '@radix-ui/react-icons';
+import { useQueryClient } from '@tanstack/react-query';
+import Image from 'next/image';
+import { Avatar } from 'radix-ui';
 
-import { Avatar } from "radix-ui";
-import { PersonIcon } from "@radix-ui/react-icons";
-import { formatRelativeTime } from "@/libs/utils/formatRelativeTime";
-
-import { QueryKey } from "@/data/constants/querykey/QueryKey";
-import { Button } from "@/components/blocks/button/Button";
-import { useBookmarkDelete } from "@/hooks/bookmark";
-import { useQueryClient } from "@tanstack/react-query";
-import { LoadingIndicator } from "@/components/blocks/loading/LoadingIndicator";
+import { QuoteCardCategory } from '../quoteCard/QuoteCardCategory';
+import { QuoteCardTagList } from '../quoteCard/QuoteCardTagList';
 
 interface BookmarkItemProps {
   item: QuoteCardType;
@@ -53,7 +52,7 @@ export const BookmarkItem: FC<BookmarkItemProps> = ({ item }) => {
           </Avatar.Root>
 
           <p className="text-muted-foreground font-medium text-xs">
-            {item.user?.name || "Anonymous"}
+            {item.user?.name || 'Anonymous'}
           </p>
 
           <span className="text-muted-foreground font-medium text-xs before:content-['·'] before:left-[-5px] before:absolute relative">

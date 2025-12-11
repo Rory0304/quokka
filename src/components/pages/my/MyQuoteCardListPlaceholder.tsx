@@ -1,8 +1,9 @@
-import { Button } from "@/components/blocks/button/Button";
-import { RouteConfig } from "@/data/constants/route";
-import Image from "next/image";
-import Link from "next/link";
-import React, { FC } from "react";
+import React, { FC } from 'react';
+
+import { Button } from '@/components/blocks/button/Button';
+import { RouteConfig } from '@/data/constants/route';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export const MyQuoteCardListPlaceholder: FC = () => {
   return (

@@ -1,6 +1,6 @@
-import { authOptions } from "@/libs/auth/auth";
-import { getServerSession } from "next-auth/next";
-import { NextResponse } from "next/server";
+import { authOptions } from '@/libs/auth/auth';
+import { getServerSession } from 'next-auth/next';
+import { NextResponse } from 'next/server';
 
 export type SessionContext = { userId: string };
 
@@ -10,7 +10,7 @@ export async function withSession<T>(
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.id) {
-    throw new Response("Unauthorized", { status: 401 });
+    throw new Response('Unauthorized', { status: 401 });
   }
 
   return handler({ userId: session.user.id });
@@ -26,7 +26,7 @@ type HandlerFn = ({
 
 export function withAuthHandler(fn: HandlerFn) {
   return async (request: Request) => {
-    return withSession(async (sessionCtx) => {
+    return withSession(async sessionCtx => {
       return fn({ request, sessionCtx });
     });
   };

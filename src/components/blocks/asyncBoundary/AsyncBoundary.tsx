@@ -1,7 +1,9 @@
-import React, { FC, PropsWithChildren, Suspense } from "react";
-import { ErrorBoundary } from "./ErrorBoundary";
-import { QueryErrorResetBoundary } from "@tanstack/react-query";
-import SSRSafeSuspense from "./SSRSafeSuspense";
+import React, { FC, PropsWithChildren, Suspense } from 'react';
+
+import { QueryErrorResetBoundary } from '@tanstack/react-query';
+
+import { ErrorBoundary } from './ErrorBoundary';
+import SSRSafeSuspense from './SSRSafeSuspense';
 
 interface AsyncBoundaryProps {
   pendingFallback: React.ReactNode;

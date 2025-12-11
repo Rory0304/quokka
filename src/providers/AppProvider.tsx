@@ -1,12 +1,13 @@
-"use client";
+'use client';
 
-import { GlobalLoading } from "@/components/blocks/global/GlobalLoading";
-import { TooltipProvider } from "@/components/blocks/tooltip/Tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import React, { FC } from 'react';
 
-import React, { FC } from "react";
-import { ProgressProvider } from "./ProgressProvider";
-import { Toaster } from "@/components/blocks/toaster";
+import { GlobalLoading } from '@/components/blocks/global/GlobalLoading';
+import { Toaster } from '@/components/blocks/toaster';
+import { TooltipProvider } from '@/components/blocks/tooltip/Tooltip';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import { ProgressProvider } from './ProgressProvider';
 
 interface AppProviderProps {
   children: React.ReactNode;

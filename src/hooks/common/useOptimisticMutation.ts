@@ -3,12 +3,12 @@ import {
   type QueryKey,
   useMutation,
   useQueryClient,
-} from "@tanstack/react-query";
+} from '@tanstack/react-query';
 
 type OptimisticProps<
   TData = unknown,
   TVariables = void,
-  TQueryFnData = unknown
+  TQueryFnData = unknown,
 > = {
   queryKey: QueryKey;
   invalidates: QueryKey[];
@@ -22,7 +22,7 @@ type OptimisticProps<
 export const useOptimisticMutation = <
   TData = unknown,
   TVariables = void,
-  TQueryFnData = unknown
+  TQueryFnData = unknown,
 >({
   queryKey,
   invalidates,
@@ -33,7 +33,7 @@ export const useOptimisticMutation = <
 
   return useMutation({
     mutationFn,
-    onMutate: async (variables) => {
+    onMutate: async variables => {
       await queryClient.cancelQueries({
         queryKey,
       });
@@ -52,7 +52,7 @@ export const useOptimisticMutation = <
       rollback?.();
     },
     onSettled: () => {
-      const fn = invalidates.map((invalidateKey) =>
+      const fn = invalidates.map(invalidateKey =>
         queryClient.invalidateQueries({
           queryKey: invalidateKey,
         })

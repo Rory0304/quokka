@@ -1,6 +1,7 @@
-import { EditorElement } from "@/data/interfaces/editor/EditorElement";
-import { useEditor } from "@/hooks/editor/useEditor";
-import React, { FC } from "react";
+import React, { FC } from 'react';
+
+import { EditorElement } from '@/data/interfaces/editor/EditorElement';
+import { useEditor } from '@/hooks/editor/useEditor';
 
 interface ElementWrapperProps {
   element: EditorElement;
@@ -17,7 +18,7 @@ export const ElementWrapper: FC<ElementWrapperProps> = ({
     e.stopPropagation();
 
     dispatch({
-      type: "UPDATE_SELECTED_ELEMENT",
+      type: 'UPDATE_SELECTED_ELEMENT',
       payload: element,
     });
   };

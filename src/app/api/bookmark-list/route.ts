@@ -1,16 +1,13 @@
-import { NextResponse } from "next/server";
-
-import { prisma } from "@/libs/prisma/prisma";
-
-import { Prisma } from "@prisma/client";
-
-import zod from "zod";
-import { withAuthHandler } from "@/middlewares/withAuthHandler";
+import { prisma } from '@/libs/prisma/prisma';
+import { withAuthHandler } from '@/middlewares/withAuthHandler';
+import { Prisma } from '@prisma/client';
+import { NextResponse } from 'next/server';
+import zod from 'zod';
 
 const querySchema = zod.object({
   cursor: zod.string().optional(),
   limit: zod.string().transform(Number),
-  sort: zod.enum(["asc", "desc"]).optional(),
+  sort: zod.enum(['asc', 'desc']).optional(),
 });
 
 export const GET = withAuthHandler(async ({ request, sessionCtx }) => {
@@ -62,7 +59,7 @@ export const GET = withAuthHandler(async ({ request, sessionCtx }) => {
     const data = hasNextPage ? bookmarks.slice(0, limit) : bookmarks;
     const nextCursor = hasNextPage
       ? data.length > 0
-        ? data[data.length - 1]?.id ?? null
+        ? (data[data.length - 1]?.id ?? null)
         : null
       : null;
 
@@ -75,10 +72,10 @@ export const GET = withAuthHandler(async ({ request, sessionCtx }) => {
       },
     });
   } catch (error) {
-    console.error("Error fetching bookmarks:", error);
+    console.error('Error fetching bookmarks:', error);
 
     return NextResponse.json(
-      { error: "Failed to fetch bookmarks" },
+      { error: 'Failed to fetch bookmarks' },
       { status: 500 }
     );
   }

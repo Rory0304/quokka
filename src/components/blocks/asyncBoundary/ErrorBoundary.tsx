@@ -1,4 +1,4 @@
-import { Component, ComponentType, ErrorInfo, ReactNode } from "react";
+import { Component, ComponentType, ErrorInfo, ReactNode } from 'react';
 
 interface ErrorBoundaryProps {
   errorFallback: ({ reset }: { reset: () => void }) => React.ReactNode;
@@ -39,7 +39,7 @@ export class ErrorBoundary extends Component<
 
   /** 오류 로깅 */
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error("ErrorBoundary caught an error:", error, errorInfo);
+    console.error('ErrorBoundary caught an error:', error, errorInfo);
   }
 
   render() {

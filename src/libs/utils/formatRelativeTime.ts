@@ -5,19 +5,19 @@
  */
 export function formatRelativeTime(date: Date | string): string {
   const now = new Date();
-  const targetDate = typeof date === "string" ? new Date(date) : date;
+  const targetDate = typeof date === 'string' ? new Date(date) : date;
   const diffInSeconds = Math.floor(
     (now.getTime() - targetDate.getTime()) / 1000
   );
 
   // 미래 날짜인 경우
   if (diffInSeconds < 0) {
-    return "방금 전";
+    return '방금 전';
   }
 
   // 1분 미만 (60초 미만)
   if (diffInSeconds < 60) {
-    return "방금 전";
+    return '방금 전';
   }
 
   // 1시간 미만 (60분 미만)

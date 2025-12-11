@@ -1,12 +1,14 @@
-"use client";
+'use client';
 
-import { FC } from "react";
-import { EditorActions } from "./EditorActions";
-import { EditorTitleInput } from "./EditorTitleInput";
-import { CaretLeftIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
-import { RouteConfig } from "@/data/constants/route";
-import { useAuth } from "@/hooks/auth";
+import { FC } from 'react';
+
+import { RouteConfig } from '@/data/constants/route';
+import { useAuth } from '@/hooks/auth';
+import { CaretLeftIcon } from '@radix-ui/react-icons';
+import Link from 'next/link';
+
+import { EditorActions } from './EditorActions';
+import { EditorTitleInput } from './EditorTitleInput';
 
 export const EditorNavigation: FC = () => {
   const { status } = useAuth();
@@ -17,7 +19,7 @@ export const EditorNavigation: FC = () => {
         <div className="flex items-center gap-2">
           <Link
             href={
-              status === "authenticated" ? RouteConfig.my : RouteConfig.home
+              status === 'authenticated' ? RouteConfig.my : RouteConfig.home
             }
             aria-label="back to my page"
           >

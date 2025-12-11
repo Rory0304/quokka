@@ -1,7 +1,7 @@
-import { EditorData } from "../../editor";
-import { QuoteCardCreateRequest } from "./QuoteCardCreateRequest";
+import { EditorData } from '../../editor';
+import { QuoteCardCreateRequest } from './QuoteCardCreateRequest';
 
 export interface QuoteCardUpdateRequest {
-  id: EditorData["id"];
+  id: EditorData['id'];
   data: Partial<QuoteCardCreateRequest>;
 }

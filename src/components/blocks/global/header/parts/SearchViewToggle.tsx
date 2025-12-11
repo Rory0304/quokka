@@ -1,26 +1,27 @@
-import { Button } from "@/components/blocks/button/Button";
-import { RouteConfig } from "@/data/constants/route";
-import { useAuth } from "@/hooks/auth";
-import { cn } from "@/libs/styles/cn";
-import { GlobeIcon, PersonIcon } from "@radix-ui/react-icons";
-import { signIn } from "next-auth/react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import React, { FC } from "react";
+import React, { FC } from 'react';
+
+import { Button } from '@/components/blocks/button/Button';
+import { RouteConfig } from '@/data/constants/route';
+import { useAuth } from '@/hooks/auth';
+import { cn } from '@/libs/styles/cn';
+import { GlobeIcon, PersonIcon } from '@radix-ui/react-icons';
+import { signIn } from 'next-auth/react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export const SearchViewToggle: FC = () => {
   const { isLogin } = useAuth();
   const pathname = usePathname();
 
   const googleAuthHandler = async () => {
-    await signIn("google", { callbackUrl: RouteConfig.my });
+    await signIn('google', { callbackUrl: RouteConfig.my });
   };
 
   return (
     <div className="bg-gray-100 rounded-md p-1 box-border flex">
       <div
         className={cn(
-          pathname === RouteConfig.home ? "hidden sm:block" : "sm:block"
+          pathname === RouteConfig.home ? 'hidden sm:block' : 'sm:block'
         )}
       >
         <SearchViewToggleLink
@@ -33,7 +34,7 @@ export const SearchViewToggle: FC = () => {
 
       <div
         className={cn(
-          pathname === RouteConfig.my ? "hidden sm:block" : "sm:block"
+          pathname === RouteConfig.my ? 'hidden sm:block' : 'sm:block'
         )}
       >
         {isLogin ? (
@@ -73,17 +74,17 @@ const SearchViewToggleButton: FC<SearchViewToggleButtonProps> = ({
     <Button
       variant="ghost"
       size="sm"
-      className={cn("rounded-md", active ? "bg-blue-100" : "bg-gray-100")}
+      className={cn('rounded-md', active ? 'bg-blue-100' : 'bg-gray-100')}
       onClick={onClick}
     >
       <div
         className={cn(
-          "flex items-center gap-1",
-          active ? " text-foreground" : "text-muted-foreground"
+          'flex items-center gap-1',
+          active ? ' text-foreground' : 'text-muted-foreground'
         )}
       >
         {icon}
-        <span className={cn("font-medium text-xs")}>{label}</span>
+        <span className={cn('font-medium text-xs')}>{label}</span>
       </div>
     </Button>
   );
@@ -107,17 +108,17 @@ const SearchViewToggleLink: FC<SearchViewToggleLinkProps> = ({
       asChild
       variant="ghost"
       size="sm"
-      className={cn("rounded-md", active ? "bg-blue-100" : "bg-gray-100")}
+      className={cn('rounded-md', active ? 'bg-blue-100' : 'bg-gray-100')}
     >
       <Link href={linkTo}>
         <div
           className={cn(
-            "flex items-center gap-1",
-            active ? " text-foreground" : "text-muted-foreground"
+            'flex items-center gap-1',
+            active ? ' text-foreground' : 'text-muted-foreground'
           )}
         >
           {icon}
-          <span className={cn("font-medium text-xs")}>{label}</span>
+          <span className={cn('font-medium text-xs')}>{label}</span>
         </div>
       </Link>
     </Button>

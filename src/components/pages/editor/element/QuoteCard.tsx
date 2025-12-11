@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
-import React, { forwardRef } from "react";
+import React, { forwardRef } from 'react';
 
-import { AspectRatioMap } from "@/data/constants/editor/AspectRatio";
-import { EditorElementRenderer } from "./EditorElementRenderer";
-import { EditorData } from "@/data/interfaces/editor";
+import { AspectRatioMap } from '@/data/constants/editor/AspectRatio';
+import { EditorData } from '@/data/interfaces/editor';
+
+import { EditorElementRenderer } from './EditorElementRenderer';
 
 export const QuoteCard = forwardRef<HTMLDivElement, EditorData>(
   (props, ref) => {
@@ -17,9 +18,9 @@ export const QuoteCard = forwardRef<HTMLDivElement, EditorData>(
         ref={ref}
         className="p-4 transition-all duration-300 ease-in-out"
         style={{
-          width: "50%",
-          height: "auto",
-          maxHeight: "100%",
+          width: '50%',
+          height: 'auto',
+          maxHeight: '100%',
           aspectRatio: AspectRatioMap[aspectRatio].value,
           background: backgroundColor?.bgColor ?? customBackgroundColor,
         }}
@@ -32,4 +33,4 @@ export const QuoteCard = forwardRef<HTMLDivElement, EditorData>(
   }
 );
 
-QuoteCard.displayName = "QuoteCard";
+QuoteCard.displayName = 'QuoteCard';

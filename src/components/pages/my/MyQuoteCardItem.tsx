@@ -1,19 +1,21 @@
-import { RouteConfig } from "@/data/constants/route";
-import { QuoteCardType } from "@/data/interfaces/quoteCard/QuoteCardType";
-import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
-import { FC, useEffect, useState } from "react";
-import Image from "next/image";
-import { QuoteCardCategory } from "../quoteCard/QuoteCardCategory";
-import { QuoteCardTagList } from "../quoteCard/QuoteCardTagList";
-import { Button } from "@/components/blocks/button/Button";
-import { Switch } from "@/components/blocks/switch/Switch";
-import { useMyQuoteCardListDelete } from "@/hooks/quoteCard/useMyQuoteCardListDelete";
-import { useQuoteCardUpdate } from "@/hooks/quoteCard/useQuoteCardUpdate";
-import { toast } from "sonner";
-import { cn } from "@/libs/styles/cn";
-import { MyQuoteDeleteDialog } from "./MyQuoteDeleteDialog";
-import { Dialog } from "radix-ui";
+import { FC, useEffect, useState } from 'react';
+
+import { Button } from '@/components/blocks/button/Button';
+import { Switch } from '@/components/blocks/switch/Switch';
+import { RouteConfig } from '@/data/constants/route';
+import { QuoteCardType } from '@/data/interfaces/quoteCard/QuoteCardType';
+import { useMyQuoteCardListDelete } from '@/hooks/quoteCard/useMyQuoteCardListDelete';
+import { useQuoteCardUpdate } from '@/hooks/quoteCard/useQuoteCardUpdate';
+import { cn } from '@/libs/styles/cn';
+import { Pencil1Icon, TrashIcon } from '@radix-ui/react-icons';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Dialog } from 'radix-ui';
+import { toast } from 'sonner';
+
+import { QuoteCardCategory } from '../quoteCard/QuoteCardCategory';
+import { QuoteCardTagList } from '../quoteCard/QuoteCardTagList';
+import { MyQuoteDeleteDialog } from './MyQuoteDeleteDialog';
 
 interface QuoteCardItemProps {
   item: QuoteCardType;
@@ -49,8 +51,8 @@ export const MyQuoteCardItem: FC<QuoteCardItemProps> = ({ item }) => {
       {
         onError: () => {
           setIsPublic(prevStatus);
-          toast.error("공개 수정에 오류가 발생했습니다. 다시 시도해주세요", {
-            position: "top-center",
+          toast.error('공개 수정에 오류가 발생했습니다. 다시 시도해주세요', {
+            position: 'top-center',
           });
         },
       }
@@ -59,8 +61,8 @@ export const MyQuoteCardItem: FC<QuoteCardItemProps> = ({ item }) => {
 
   const handleDelete = () => {
     toast.promise(deleteMutation.mutateAsync({ id: item.id }), {
-      success: "인용 카드가 삭제되었습니다",
-      error: "인용 카드 삭제에 실패했습니다.",
+      success: '인용 카드가 삭제되었습니다',
+      error: '인용 카드 삭제에 실패했습니다.',
     });
   };
 
@@ -102,7 +104,7 @@ export const MyQuoteCardItem: FC<QuoteCardItemProps> = ({ item }) => {
             onCheckedChange={handleChangePublicStatus}
           />
           <span className="text-xs font-medium">
-            {isPublic ? "공개" : "비공개"}
+            {isPublic ? '공개' : '비공개'}
           </span>
         </div>
 
@@ -142,8 +144,8 @@ export const MyQuoteCardItem: FC<QuoteCardItemProps> = ({ item }) => {
   return (
     <div
       className={cn(
-        "w-full bg-white shadow-xs mx-auto rounded-xl flex-col border overflow-hidden border-gray-200 p-4",
-        deleteMutation.isPending ? "opacity-50" : "bg-white"
+        'w-full bg-white shadow-xs mx-auto rounded-xl flex-col border overflow-hidden border-gray-200 p-4',
+        deleteMutation.isPending ? 'opacity-50' : 'bg-white'
       )}
     >
       <div className="flex gap-4 items-center mb-4 group">

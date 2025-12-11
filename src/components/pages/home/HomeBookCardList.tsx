@@ -1,29 +1,29 @@
-"use client";
+'use client';
 
-import React, { FC, useState } from "react";
+import React, { FC, useState } from 'react';
 
-import { QuoteCardCategoryFilter } from "../quoteCard/QuoteCardCategoryFilter";
-import { HomeQuoteCardList } from "./HomeQuoteCardList";
+import { ErrorAlert } from '@/components/blocks/alert/ErrorAlert';
+import { AsyncBoundary } from '@/components/blocks/asyncBoundary/AsyncBoundary';
+import { QuoteCardCategoryType } from '@/data/constants/quoteCard/QuoteCardCategory';
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 
-import { AsyncBoundary } from "@/components/blocks/asyncBoundary/AsyncBoundary";
-import { ErrorAlert } from "@/components/blocks/alert/ErrorAlert";
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { HomeBookMarkedQuoteCardList } from "./HomeBookMarkedQuoteCardList";
-import { QuoteCardCategoryType } from "@/data/constants/quoteCard/QuoteCardCategory";
-import { HomeQuoteCardItemLoading } from "./HomeQuoteCardItemLoading";
+import { QuoteCardCategoryFilter } from '../quoteCard/QuoteCardCategoryFilter';
+import { HomeBookMarkedQuoteCardList } from './HomeBookMarkedQuoteCardList';
+import { HomeQuoteCardItemLoading } from './HomeQuoteCardItemLoading';
+import { HomeQuoteCardList } from './HomeQuoteCardList';
 
 export const HomeBookCardList: FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<
     QuoteCardCategoryType | undefined
   >(undefined);
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState('');
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.nativeEvent.isComposing) {
       return;
     }
 
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       e.preventDefault();
 
       const value = e.currentTarget.value;

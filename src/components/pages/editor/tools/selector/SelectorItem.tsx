@@ -1,4 +1,4 @@
-import { CSSProperties, FC } from "react";
+import { CSSProperties, FC } from 'react';
 
 interface SelectorItemProps {
   label: string;
@@ -19,7 +19,7 @@ export const SelectorItem: FC<SelectorItemProps> = ({
         className="rounded-md p-2 text-sm font-medium"
         style={{
           ...styles,
-          backgroundColor: active ? "#f1f1f1" : "transparent",
+          backgroundColor: active ? '#f1f1f1' : 'transparent',
         }}
       >
         {label}

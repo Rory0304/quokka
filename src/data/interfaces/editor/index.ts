@@ -1,1 +1,1 @@
-export type { EditorData } from "./EditorData";
+export type { EditorData } from './EditorData';

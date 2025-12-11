@@ -1,11 +1,12 @@
+import React, { FC } from 'react';
+
+import { QuoteCardCategoryType } from '@/data/constants/quoteCard/QuoteCardCategory';
 import {
   PlayIcon,
   PlusIcon,
   ReaderIcon,
   VideoIcon,
-} from "@radix-ui/react-icons";
-import React, { FC } from "react";
-import { QuoteCardCategoryType } from "@/data/constants/quoteCard/QuoteCardCategory";
+} from '@radix-ui/react-icons';
 
 interface QuoteCardCategoryFilterProps {
   selectedCategory?: QuoteCardCategoryType;
@@ -29,9 +30,9 @@ export const QuoteCardCategoryFilter: FC<QuoteCardCategoryFilterProps> = ({
     <div className="flex-col items-center bg-white sticky top-20 h-fit border border-gray-100 rounded-xl md:flex hidden">
       <button
         type="button"
-        onClick={() => handleCategoryClick("book")}
+        onClick={() => handleCategoryClick('book')}
         className={`w-full flex items-center gap-2 p-4 hover:bg-gray-100 ${
-          selectedCategory === "book" ? "bg-gray-100" : ""
+          selectedCategory === 'book' ? 'bg-gray-100' : ''
         }`}
       >
         <ReaderIcon />
@@ -39,9 +40,9 @@ export const QuoteCardCategoryFilter: FC<QuoteCardCategoryFilterProps> = ({
       </button>
       <button
         type="button"
-        onClick={() => handleCategoryClick("movie")}
+        onClick={() => handleCategoryClick('movie')}
         className={`w-full flex items-center gap-2 p-4 hover:bg-gray-100 ${
-          selectedCategory === "movie" ? "bg-gray-100" : ""
+          selectedCategory === 'movie' ? 'bg-gray-100' : ''
         }`}
       >
         <VideoIcon />
@@ -49,9 +50,9 @@ export const QuoteCardCategoryFilter: FC<QuoteCardCategoryFilterProps> = ({
       </button>
       <button
         type="button"
-        onClick={() => handleCategoryClick("music")}
+        onClick={() => handleCategoryClick('music')}
         className={`w-full flex items-center gap-2 p-4 hover:bg-gray-100 ${
-          selectedCategory === "music" ? "bg-gray-100" : ""
+          selectedCategory === 'music' ? 'bg-gray-100' : ''
         }`}
       >
         <PlayIcon />
@@ -60,9 +61,9 @@ export const QuoteCardCategoryFilter: FC<QuoteCardCategoryFilterProps> = ({
 
       <button
         type="button"
-        onClick={() => handleCategoryClick("etc")}
+        onClick={() => handleCategoryClick('etc')}
         className={`w-full flex items-center gap-2 p-4 hover:bg-gray-100 ${
-          selectedCategory === "etc" ? "bg-gray-100" : ""
+          selectedCategory === 'etc' ? 'bg-gray-100' : ''
         }`}
       >
         <PlusIcon />

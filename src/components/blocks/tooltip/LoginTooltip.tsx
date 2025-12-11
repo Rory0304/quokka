@@ -1,10 +1,12 @@
-import React, { FC } from "react";
-import { BasicTooltip } from "./BasicTooltip";
-import { useAuth } from "@/hooks/auth";
+import React, { FC } from 'react';
+
+import { useAuth } from '@/hooks/auth';
+
+import { BasicTooltip } from './BasicTooltip';
 
 type LoginTooltipProps = Pick<
   React.ComponentProps<typeof BasicTooltip>,
-  "contentProps" | "children" | "delayDuration"
+  'contentProps' | 'children' | 'delayDuration'
 >;
 
 export const LoginTooltip: FC<LoginTooltipProps> = ({
@@ -18,11 +20,11 @@ export const LoginTooltip: FC<LoginTooltipProps> = ({
   return (
     <BasicTooltip
       contentProps={{
-        side: "bottom",
+        side: 'bottom',
         ...contentProps,
       }}
       disabled={false}
-      text={"로그인 후 이용 가능합니다"}
+      text={'로그인 후 이용 가능합니다'}
     >
       {children}
     </BasicTooltip>

@@ -1,5 +1,6 @@
-import Image from "next/image";
-import React, { FC } from "react";
+import React, { FC } from 'react';
+
+import Image from 'next/image';
 
 export const LoginBanner: FC = () => {
   return (
@@ -12,7 +13,7 @@ export const LoginBanner: FC = () => {
         quality={100}
       />
       <p className="text-secondary font-medium text-sm">
-        기억하고 싶은 대사를 나만의 카드로,{" "}
+        기억하고 싶은 대사를 나만의 카드로,{' '}
         <span className="font-bold">Quokka</span>
       </p>
     </div>

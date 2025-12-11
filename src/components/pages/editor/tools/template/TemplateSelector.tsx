@@ -1,25 +1,27 @@
-import { Template } from "@/data/constants/editor";
+import React, { FC } from 'react';
+
+import { Template } from '@/data/constants/editor';
 import {
   TemplateMap,
   type TemplateType,
-} from "@/data/constants/editor/Template";
-import React, { FC } from "react";
-import { Sheet } from "../sheet";
+} from '@/data/constants/editor/Template';
+import { useEditor } from '@/hooks/editor/useEditor';
 import {
   ChatBubbleIcon,
+  Cross1Icon,
   DividerVerticalIcon,
   QuoteIcon,
-  Cross1Icon,
-} from "@radix-ui/react-icons";
-import { useEditor } from "@/hooks/editor/useEditor";
-import { TemplateColorSelcetor } from "./TemplateColorSelcetor";
+} from '@radix-ui/react-icons';
+
+import { Sheet } from '../sheet';
+import { TemplateColorSelcetor } from './TemplateColorSelcetor';
 
 export const TemplateSelector: FC = () => {
   const { dispatch, editorTemplate } = useEditor();
 
   const handleClick = (template: TemplateType | null) => {
     dispatch({
-      type: "UPDATE_TEMPLATE",
+      type: 'UPDATE_TEMPLATE',
       payload: {
         template: {
           type: template,
@@ -40,14 +42,14 @@ export const TemplateSelector: FC = () => {
           <div
             className="rounded-md bg-[#f1f1f1] flex flex-col gap-2 p-3 justify-center items-center border border-[#f1f1f1] text-muted-foreground"
             style={{
-              backgroundColor: !editorTemplate ? "#f1f1f1" : "transparent",
+              backgroundColor: !editorTemplate ? '#f1f1f1' : 'transparent',
             }}
           >
             <Cross1Icon />
             <p className="text-xs font-medium ">적용 안 함</p>
           </div>
         </button>
-        {(Object.keys(Template) as TemplateType[]).map((item) => (
+        {(Object.keys(Template) as TemplateType[]).map(item => (
           <TemplateSelectorItem
             key={item}
             active={editorTemplate?.type === item}
@@ -87,7 +89,7 @@ const TemplateSelectorItem: FC<TemplateSelectorItemProps> = ({
       <div
         className="rounded-md bg-[#f1f1f1] border border-[#f1f1f1] flex flex-col gap-2 p-3 justify-center items-center text-muted-foreground"
         style={{
-          backgroundColor: active ? "#f1f1f1" : "transparent",
+          backgroundColor: active ? '#f1f1f1' : 'transparent',
         }}
       >
         {TemplateSelectIconMap[template]}

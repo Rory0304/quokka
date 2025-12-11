@@ -1,8 +1,7 @@
-import { NextResponse } from "next/server";
-
-import { prisma } from "@/libs/prisma/prisma";
-import { withAuthHandler } from "@/middlewares/withAuthHandler";
-import zod from "zod";
+import { prisma } from '@/libs/prisma/prisma';
+import { withAuthHandler } from '@/middlewares/withAuthHandler';
+import { NextResponse } from 'next/server';
+import zod from 'zod';
 
 const bodySchema = zod.object({
   quoteCardId: zod.string(),
@@ -29,7 +28,7 @@ export const POST = withAuthHandler(async ({ request, sessionCtx }) => {
 
     if (!quoteCard) {
       return NextResponse.json(
-        { error: "QuoteCard not found" },
+        { error: 'QuoteCard not found' },
         { status: 404 }
       );
     }
@@ -46,7 +45,7 @@ export const POST = withAuthHandler(async ({ request, sessionCtx }) => {
 
     if (existingBookmark) {
       return NextResponse.json(
-        { error: "Bookmark already exists" },
+        { error: 'Bookmark already exists' },
         { status: 409 }
       );
     }
@@ -62,15 +61,15 @@ export const POST = withAuthHandler(async ({ request, sessionCtx }) => {
     return NextResponse.json(
       {
         id: bookmark.id,
-        message: "Bookmark created successfully",
+        message: 'Bookmark created successfully',
       },
       { status: 201 }
     );
   } catch (error) {
-    console.error("Error creating bookmark:", error);
+    console.error('Error creating bookmark:', error);
 
     return NextResponse.json(
-      { error: "Failed to create bookmark" },
+      { error: 'Failed to create bookmark' },
       { status: 500 }
     );
   }
@@ -102,7 +101,7 @@ export const DELETE = withAuthHandler(async ({ request, sessionCtx }) => {
 
     if (!bookmark) {
       return NextResponse.json(
-        { error: "Bookmark not found" },
+        { error: 'Bookmark not found' },
         { status: 404 }
       );
     }
@@ -115,15 +114,15 @@ export const DELETE = withAuthHandler(async ({ request, sessionCtx }) => {
 
     return NextResponse.json(
       {
-        message: "Bookmark deleted successfully",
+        message: 'Bookmark deleted successfully',
       },
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error deleting bookmark:", error);
+    console.error('Error deleting bookmark:', error);
 
     return NextResponse.json(
-      { error: "Failed to delete bookmark" },
+      { error: 'Failed to delete bookmark' },
       { status: 500 }
     );
   }
@@ -187,7 +186,7 @@ export const GET = withAuthHandler(async ({ request, sessionCtx }) => {
         },
       },
       orderBy: {
-        createdAt: "desc",
+        createdAt: 'desc',
       },
     });
 
@@ -195,10 +194,10 @@ export const GET = withAuthHandler(async ({ request, sessionCtx }) => {
       data: bookmarks,
     });
   } catch (error) {
-    console.error("Error fetching bookmarks:", error);
+    console.error('Error fetching bookmarks:', error);
 
     return NextResponse.json(
-      { error: "Failed to fetch bookmarks" },
+      { error: 'Failed to fetch bookmarks' },
       { status: 500 }
     );
   }

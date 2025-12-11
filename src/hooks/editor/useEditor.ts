@@ -1,20 +1,20 @@
+import { useContext } from 'react';
+
 import {
   EditorDispatchContext,
   EditorValueContext,
-} from "@/components/pages/editor/contexts/context";
-
-import { useContext } from "react";
+} from '@/components/pages/editor/contexts/context';
 
 export const useEditor = () => {
   const state = useContext(EditorValueContext);
   const dispatch = useContext(EditorDispatchContext);
 
   const editorLayout = state.data.find(
-    (data) => data.id === state.state.selectedLayerId
+    data => data.id === state.state.selectedLayerId
   )?.layout;
 
   const editorTemplate = state.data.find(
-    (data) => data.id === state.state.selectedLayerId
+    data => data.id === state.state.selectedLayerId
   )?.template;
 
   return {

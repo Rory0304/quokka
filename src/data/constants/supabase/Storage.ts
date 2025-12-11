@@ -1,5 +1,5 @@
 export const SupabaseStorage = {
-  CardThumbnail: "card_thumbnail",
+  CardThumbnail: 'card_thumbnail',
 } as const;
 
 export type SupabaseStorageType = keyof typeof SupabaseStorage;

@@ -1,7 +1,8 @@
-import { EditorTemplate } from "@/data/interfaces/editor/EditorTemplate";
-import { cn } from "@/libs/styles/cn";
-import { QuoteIcon } from "@radix-ui/react-icons";
-import React, { FC } from "react";
+import React, { FC } from 'react';
+
+import { EditorTemplate } from '@/data/interfaces/editor/EditorTemplate';
+import { cn } from '@/libs/styles/cn';
+import { QuoteIcon } from '@radix-ui/react-icons';
 
 interface TemplatePlaceholderProps {
   color: string;
@@ -16,7 +17,7 @@ export const TemplateBubblePlaceholder: FC<TemplatePlaceholderProps> = ({
     <div className="relative after:absolute after:content-[''] after:left-[16px] after:bottom-0 after:border-6 after:border-transparent after:mb-[-12px] max-h-[90%]">
       <div
         className={
-          "relative gap-1 flex flex-col p-5 border-solid border-4  overflow-scroll max-h-full m-auto after:border-t-inherit"
+          'relative gap-1 flex flex-col p-5 border-solid border-4  overflow-scroll max-h-full m-auto after:border-t-inherit'
         }
         style={{
           borderColor: color,
@@ -50,7 +51,7 @@ export const TemplateUnderlinePlaceholder: FC<TemplatePlaceholderProps> = ({
 }) => {
   return (
     <div
-      className={cn("relative border-b py-1 max-h-[90%]")}
+      className={cn('relative border-b py-1 max-h-[90%]')}
       style={{
         borderBottomColor: color,
       }}
@@ -79,21 +80,21 @@ export const TemplatePlaceholderRenderer: FC<
   }
 
   switch (template.type) {
-    case "Bubble":
+    case 'Bubble':
       return (
         <TemplateBubblePlaceholder color={template.color}>
           {children}
         </TemplateBubblePlaceholder>
       );
 
-    case "Underline":
+    case 'Underline':
       return (
         <TemplateUnderlinePlaceholder color={template.color}>
           {children}
         </TemplateUnderlinePlaceholder>
       );
 
-    case "Vertical":
+    case 'Vertical':
       return (
         <TemplateVerticalPlaceholder color={template.color}>
           {children}

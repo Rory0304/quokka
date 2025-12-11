@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
-import { cn } from "@/libs/styles/cn";
-import { FC, useState } from "react";
-import ColorPicker from "react-best-gradient-color-picker";
-import { ClassNameValue } from "tailwind-merge";
-import { throttle } from "es-toolkit/function";
+import { FC, useState } from 'react';
+import ColorPicker from 'react-best-gradient-color-picker';
+
+import { cn } from '@/libs/styles/cn';
+import { throttle } from 'es-toolkit/function';
+import { ClassNameValue } from 'tailwind-merge';
 
 interface GradientColorPickerProps {
   open: boolean;
@@ -16,7 +17,7 @@ interface GradientColorPickerProps {
 export const GradientColorPicker: FC<GradientColorPickerProps> = ({
   open,
   value,
-  className = "bottom-0 left-[-240px]",
+  className = 'bottom-0 left-[-240px]',
   onChange,
 }) => {
   const [color, setColor] = useState(value);
@@ -35,7 +36,7 @@ export const GradientColorPicker: FC<GradientColorPickerProps> = ({
     <ColorPicker
       width={240}
       height={240}
-      className={cn("absolute", className)}
+      className={cn('absolute', className)}
       hideColorGuide
       hidePresets
       hideInputs
@@ -45,8 +46,8 @@ export const GradientColorPicker: FC<GradientColorPickerProps> = ({
       onChange={handleColorChange}
       style={{
         body: {
-          boxShadow: "0px 0px 2px 1px #dddddd",
-          borderRadius: "8px",
+          boxShadow: '0px 0px 2px 1px #dddddd',
+          borderRadius: '8px',
           zIndex: 1,
         },
       }}

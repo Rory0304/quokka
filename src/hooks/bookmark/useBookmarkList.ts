@@ -1,9 +1,10 @@
-import { QueryKey } from "@/data/constants/querykey/QueryKey";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { QuoteCardType } from "@/data/interfaces/quoteCard/QuoteCardType";
-import qs from "query-string";
-import { CursorPaginationResponse } from "@/data/interfaces/request/pagination/cursor/CursorPaginationResponse";
-import { useCallback } from "react";
+import { useCallback } from 'react';
+
+import { QueryKey } from '@/data/constants/querykey/QueryKey';
+import { QuoteCardType } from '@/data/interfaces/quoteCard/QuoteCardType';
+import { CursorPaginationResponse } from '@/data/interfaces/request/pagination/cursor/CursorPaginationResponse';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import qs from 'query-string';
 
 interface BookmarkItem {
   id: string;
@@ -58,7 +59,7 @@ export const useBookmarkList = ({ enabled }: { enabled: boolean }) => {
     enabled,
   });
 
-  const list = data?.pages.flatMap((page) => page.data) ?? [];
+  const list = data?.pages.flatMap(page => page.data) ?? [];
   const isEmpty = isSuccess && list.length === 0;
 
   const onEndReached = useCallback(() => {

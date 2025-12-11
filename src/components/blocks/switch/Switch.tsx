@@ -1,5 +1,6 @@
-import React, { FC } from "react";
-import { Switch as RadixSwitch } from "radix-ui";
+import React, { FC } from 'react';
+
+import { Switch as RadixSwitch } from 'radix-ui';
 
 interface SwitchProps {
   id: string;

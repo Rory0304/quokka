@@ -1,6 +1,6 @@
 export const AspectRatio = {
-  square: "square",
-  vertical: "vertical",
+  square: 'square',
+  vertical: 'vertical',
 } as const;
 
 export type AspectRatioType = keyof typeof AspectRatio;
@@ -13,12 +13,12 @@ export const AspectRatioMap: Record<
   }
 > = {
   square: {
-    label: "정방형",
+    label: '정방형',
     value: 1,
   },
 
   vertical: {
-    label: "세로형",
+    label: '세로형',
     value: 3 / 4,
   },
 };

@@ -1,5 +1,6 @@
-import { Skeleton } from "@/components/blocks/skeleton/Skeleton";
-import { FC } from "react";
+import { FC } from 'react';
+
+import { Skeleton } from '@/components/blocks/skeleton/Skeleton';
 
 interface HomeQuoteCardItemLoadingProps {
   count?: number;

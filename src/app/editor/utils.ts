@@ -1,7 +1,8 @@
-import { Editor } from "@/data/interfaces/editor/Editor";
-import { QuoteCardType } from "@/data/interfaces/quoteCard/QuoteCardType";
-import { initalEditorState } from "../../components/pages/editor/contexts/context";
-import { QuoteCardCategoryType } from "@/data/constants/quoteCard/QuoteCardCategory";
+import { QuoteCardCategoryType } from '@/data/constants/quoteCard/QuoteCardCategory';
+import { Editor } from '@/data/interfaces/editor/Editor';
+import { QuoteCardType } from '@/data/interfaces/quoteCard/QuoteCardType';
+
+import { initalEditorState } from '../../components/pages/editor/contexts/context';
 
 export const createEditorStateFromQuoteCard = (
   quoteCard: QuoteCardType | null

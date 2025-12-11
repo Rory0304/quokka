@@ -1,8 +1,9 @@
-import { GradientColorPicker } from "@/components/blocks/colorPicker/GradientColorPicker";
-import { EditorElement } from "@/data/interfaces/editor/EditorElement";
-import { useEditor } from "@/hooks/editor/useEditor";
-import { BlendingModeIcon } from "@radix-ui/react-icons";
-import React, { FC, useState } from "react";
+import React, { FC, useState } from 'react';
+
+import { GradientColorPicker } from '@/components/blocks/colorPicker/GradientColorPicker';
+import { EditorElement } from '@/data/interfaces/editor/EditorElement';
+import { useEditor } from '@/hooks/editor/useEditor';
+import { BlendingModeIcon } from '@radix-ui/react-icons';
 
 interface TextColorSelectorProps {
   element: EditorElement;
@@ -16,7 +17,7 @@ export const TextColorSelector: FC<TextColorSelectorProps> = ({ element }) => {
 
   const handleTextColorChange = (color: string) => {
     dispatch({
-      type: "UPDATE_ELEMENT",
+      type: 'UPDATE_ELEMENT',
       payload: {
         element: {
           ...element,
@@ -33,7 +34,7 @@ export const TextColorSelector: FC<TextColorSelectorProps> = ({ element }) => {
     <div className="flex relative items-center gap-6 py-4 ">
       <BlendingModeIcon color="gray" />
 
-      <button type="button" onClick={() => setOpen((current) => !current)}>
+      <button type="button" onClick={() => setOpen(current => !current)}>
         <div
           className="w-6 h-6 rounded-md border border-gray-400"
           style={{

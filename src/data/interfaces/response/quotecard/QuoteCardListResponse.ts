@@ -1,5 +1,5 @@
-import { CursorPaginationResponse } from "../../request/pagination/cursor/CursorPaginationResponse";
-import { QuoteCardType } from "../../quoteCard/QuoteCardType";
+import { QuoteCardType } from '../../quoteCard/QuoteCardType';
+import { CursorPaginationResponse } from '../../request/pagination/cursor/CursorPaginationResponse';
 
 // export type QuoteCardListItem = Omit<QuoteCard, "customFields"> & {
 //   customFields: EditorData;

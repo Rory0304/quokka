@@ -1,10 +1,11 @@
-import { Editor } from "@/data/interfaces/editor/Editor";
-import { EditorAction } from "./context";
-import { EditorData } from "@/data/interfaces/editor";
+import { EditorData } from '@/data/interfaces/editor';
+import { Editor } from '@/data/interfaces/editor/Editor';
+
+import { EditorAction } from './context';
 
 export const reducer = (editor: Editor, action: EditorAction): Editor => {
   switch (action.type) {
-    case "INIT_STATE":
+    case 'INIT_STATE':
       return {
         ...action.payload,
         state: {
@@ -13,7 +14,7 @@ export const reducer = (editor: Editor, action: EditorAction): Editor => {
         },
       };
 
-    case "UPDATE_CONFIG":
+    case 'UPDATE_CONFIG':
       return {
         ...editor,
         state: {
@@ -25,8 +26,8 @@ export const reducer = (editor: Editor, action: EditorAction): Editor => {
         },
       };
 
-    case "UPDATE_TEMPLATE":
-      const newEditorData = editor.data.map((data) => {
+    case 'UPDATE_TEMPLATE':
+      const newEditorData = editor.data.map(data => {
         if (data.id === editor.state.selectedLayerId) {
           const newData: EditorData = {
             ...data,
@@ -47,7 +48,7 @@ export const reducer = (editor: Editor, action: EditorAction): Editor => {
         data: newEditorData,
       };
 
-    case "UPDATE_SELECTED_ELEMENT":
+    case 'UPDATE_SELECTED_ELEMENT':
       return {
         ...editor,
         state: {
@@ -57,8 +58,8 @@ export const reducer = (editor: Editor, action: EditorAction): Editor => {
         },
       };
 
-    case "UPDATE_LAYOUT": {
-      const newEditorData = editor.data.map((data) => {
+    case 'UPDATE_LAYOUT': {
+      const newEditorData = editor.data.map(data => {
         if (data.id === editor.state.selectedLayerId) {
           const newData: EditorData = {
             ...data,
@@ -80,13 +81,13 @@ export const reducer = (editor: Editor, action: EditorAction): Editor => {
       };
     }
 
-    case "UPDATE_ELEMENT": {
-      const newEditorData = editor.data.map((data) => {
+    case 'UPDATE_ELEMENT': {
+      const newEditorData = editor.data.map(data => {
         if (data.id !== editor.state.selectedLayerId) return data;
         else {
           const newElement: EditorData = {
             ...data,
-            elements: data.elements.map((elem) => {
+            elements: data.elements.map(elem => {
               if (elem.content.id !== action.payload.element.content?.id)
                 return elem;
 
@@ -110,7 +111,7 @@ export const reducer = (editor: Editor, action: EditorAction): Editor => {
         },
       };
     }
-    case "UPDATE_EDITOR_SAVE":
+    case 'UPDATE_EDITOR_SAVE':
       return {
         ...editor,
         state: {

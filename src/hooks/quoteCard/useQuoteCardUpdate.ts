@@ -1,6 +1,6 @@
-import { QueryKey } from "@/data/constants/querykey/QueryKey";
-import { QuoteCardUpdateRequest } from "@/data/interfaces/request/quotecard/QuoteCardUpdateRequest";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { QueryKey } from '@/data/constants/querykey/QueryKey';
+import { QuoteCardUpdateRequest } from '@/data/interfaces/request/quotecard/QuoteCardUpdateRequest';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const useQuoteCardUpdate = () => {
   const queryClient = useQueryClient();
@@ -17,9 +17,9 @@ export const useQuoteCardUpdate = () => {
         return;
       }
 
-      const response = await fetch("/api/quotecard", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/quotecard', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
         signal,
       });

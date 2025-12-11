@@ -1,12 +1,13 @@
-"use client";
+'use client';
 
-import React, { FC } from "react";
-import { useMyQuoteCardList } from "@/hooks/quoteCard/useMyQuoteCardList";
-import { MyQuoteCardListPlaceholder } from "./MyQuoteCardListPlaceholder";
+import React, { FC } from 'react';
 
-import { MyQuoteCardItem } from "./MyQuoteCardItem";
-import { MyQuoteCardItemLoading } from "./MyQuoteCardItemLoading";
-import { Visibility } from "@/components/blocks/visibility/Visibility";
+import { Visibility } from '@/components/blocks/visibility/Visibility';
+import { useMyQuoteCardList } from '@/hooks/quoteCard/useMyQuoteCardList';
+
+import { MyQuoteCardItem } from './MyQuoteCardItem';
+import { MyQuoteCardItemLoading } from './MyQuoteCardItemLoading';
+import { MyQuoteCardListPlaceholder } from './MyQuoteCardListPlaceholder';
 
 export const MyQuoteCardList: FC = () => {
   const { list, isEmpty, isFetchingNextPage, hasNextPage, onEndReached } =
@@ -18,7 +19,7 @@ export const MyQuoteCardList: FC = () => {
 
   return (
     <>
-      {list.map((item) => (
+      {list.map(item => (
         <MyQuoteCardItem key={item.id} item={item} />
       ))}
       {isFetchingNextPage ? <MyQuoteCardItemLoading count={5} /> : null}

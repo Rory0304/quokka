@@ -1,7 +1,9 @@
-import React, { FC } from "react";
-import { Select as RadixSelect } from "radix-ui";
-import { SelectItem } from "./SelectItem";
-import { ChevronDownIcon } from "@radix-ui/react-icons";
+import React, { FC } from 'react';
+
+import { ChevronDownIcon } from '@radix-ui/react-icons';
+import { Select as RadixSelect } from 'radix-ui';
+
+import { SelectItem } from './SelectItem';
 
 interface SelectProps {
   value: string;
@@ -40,7 +42,7 @@ export const Select: FC<SelectProps> = ({
           <RadixSelect.Content className="overflow-hidden rounded-md bg-white shadow-xl border border-gray-50">
             <RadixSelect.Viewport className="p-2">
               <RadixSelect.Group>
-                {items.map((item) => (
+                {items.map(item => (
                   <SelectItem
                     key={item.value}
                     value={item.value}
