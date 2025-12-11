@@ -3,17 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
     "build": "prisma generate && next build --turbopack",
-    "start": "next start",
-    "lint": "eslint",
-    "test": "vitest",
     "ci:format": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\"",
     "ci:lint": "next lint",
     "ci:sort-package-json": "npx sort-package-json",
-    "test:run": "vitest run",
+    "dev": "next dev --turbopack",
+    "lint": "eslint",
     "script:prisma-generate": "prisma generate",
-    "script:prisma-push": "npx prisma db push"
+    "script:prisma-push": "npx prisma db push",
+    "start": "next start",
+    "test": "vitest",
+    "test:run": "vitest run"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",
