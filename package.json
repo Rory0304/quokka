@@ -8,7 +8,6 @@
     "ci:lint": "eslint",
     "ci:sort-package-json": "npx sort-package-json",
     "dev": "next dev --turbopack",
-    "lint": "eslint",
     "script:prisma-generate": "prisma generate",
     "script:prisma-push": "npx prisma db push",
     "start": "next start",
