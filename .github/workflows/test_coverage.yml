@@ -18,24 +18,19 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: actions/checkout@v3
-
-      - name: 'Install node'
-        uses: actions/setup-node@v6
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: 20
+          cache: 'yarn'
 
-      - name: 'Install Deps'
-        run: npm install
-
-      - name: 'Test'
+      - name: Run Test
         run: npx vitest --coverage.enabled true
 
-      - name: 'Report Coverage'
+      - name: Report Coverage
         # Set if: always() to also generate the report if tests are failing
         # Only works if you set `reportOnFailure: true` in your vite config as specified above
         if: always()
-        uses:  davelosert/vitest-coverage-report-action@v2
+        uses: davelosert/vitest-coverage-report-action@v2
         with:
           threshold-icons: "{0: '🔴', 80: '🟠', 90: '🟢'}"
-
