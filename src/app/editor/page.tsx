@@ -53,7 +53,7 @@ const EditorContent: FC = () => {
       }}
     >
       <EditorNavigation />
-      <div className="relative w-full bg-gray-100 flex flex-row justify-between h-full gap-4 pt-16">
+      <div className="relative w-full bg-gray-100 flex flex-row justify-between min-h-full gap-4 pt-16">
         <EditorMain />
         <EditorTool />
       </div>

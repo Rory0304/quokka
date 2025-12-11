@@ -17,7 +17,7 @@ export const EditorMain: FC = () => {
   return (
     <div
       onClick={handleClick}
-      className="w-full flex h-full flex-1 justify-center items-center"
+      className="w-full flex flex-1 justify-center items-center"
     >
       {editorData.map((element) => (
         <QuoteCard ref={quoteCardRef} key={element.id} {...element} />
