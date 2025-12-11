@@ -1,18 +1,15 @@
-import { NextRequest, NextResponse } from "next/server";
-
-import { prisma } from "@/libs/prisma/prisma";
-import { authOptions } from "@/libs/auth/auth";
-import { getServerSession } from "next-auth/next";
-
-import { Prisma } from "@prisma/client";
-
-import zod from "zod";
-import { QuoteCardCategory } from "@/data/constants/quoteCard/QuoteCardCategory";
+import { QuoteCardCategory } from '@/data/constants/quoteCard/QuoteCardCategory';
+import { authOptions } from '@/libs/auth/auth';
+import { prisma } from '@/libs/prisma/prisma';
+import { Prisma } from '@prisma/client';
+import { getServerSession } from 'next-auth/next';
+import { NextRequest, NextResponse } from 'next/server';
+import zod from 'zod';
 
 const querySchema = zod.object({
   cursor: zod.string().optional(),
   limit: zod.string().transform(Number),
-  sort: zod.enum(["asc", "desc"]).optional(),
+  sort: zod.enum(['asc', 'desc']).optional(),
   category: zod.enum(QuoteCardCategory).optional(),
   searchKey: zod.string().optional(),
 });
@@ -71,7 +68,7 @@ export const GET = async (request: NextRequest) => {
           {
             title: {
               contains: searchKey.trim(),
-              mode: "insensitive",
+              mode: 'insensitive',
             },
           },
           {
@@ -92,7 +89,7 @@ export const GET = async (request: NextRequest) => {
 
     const quoteCards = await prisma.quoteCard.findMany(query);
 
-    const quoteCardsWithBookmark = quoteCards.map((quote) => {
+    const quoteCardsWithBookmark = quoteCards.map(quote => {
       const cardWithCount = quote as typeof quote & {
         _count?: { bookmarks: number };
       };
@@ -112,7 +109,7 @@ export const GET = async (request: NextRequest) => {
 
     const nextCursor = hasNextPage
       ? data.length > 0
-        ? data[data.length - 1]?.id ?? null
+        ? (data[data.length - 1]?.id ?? null)
         : null
       : null;
 
@@ -125,10 +122,10 @@ export const GET = async (request: NextRequest) => {
       },
     });
   } catch (error) {
-    console.error("Error fetching QuoteCards:", error);
+    console.error('Error fetching QuoteCards:', error);
 
     return NextResponse.json(
-      { error: "Failed to fetch QuoteCards" },
+      { error: 'Failed to fetch QuoteCards' },
       { status: 500 }
     );
   }

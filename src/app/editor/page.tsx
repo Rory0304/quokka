@@ -1,32 +1,32 @@
-"use client";
+'use client';
 
-import { EditorTool } from "@/components/pages/editor/tools/EditorTool";
-import React, { FC, useEffect, useReducer, useRef, useState } from "react";
-import { EditorMain } from "@/components/pages/editor/EditorMain";
-import { EditorNavigation } from "@/components/pages/editor/navigation/EditorNavigation";
-import { useSearchParams } from "next/navigation";
-import { useQuoteCard } from "@/hooks/quoteCard/useQuoteCard";
-import { AsyncBoundary } from "@/components/blocks/asyncBoundary/AsyncBoundary";
-import { ErrorAlert } from "@/components/blocks/alert/ErrorAlert";
+import React, { FC, useEffect, useReducer, useRef, useState } from 'react';
 
-import { createEditorStateFromQuoteCard } from "@/app/editor/utils";
+import { createEditorStateFromQuoteCard } from '@/app/editor/utils';
+import { ErrorAlert } from '@/components/blocks/alert/ErrorAlert';
+import { AsyncBoundary } from '@/components/blocks/asyncBoundary/AsyncBoundary';
+import { EditorDesktopOnlyView } from '@/components/pages/editor/EditorDesktopOnlyView';
+import { EditorMain } from '@/components/pages/editor/EditorMain';
 import {
+  EditorDispatchContext,
   EditorHandlerContext,
   EditorValueContext,
-  EditorDispatchContext,
-} from "@/components/pages/editor/contexts/context";
-import { reducer } from "@/components/pages/editor/contexts/reducer";
-import { useEditor } from "@/hooks/editor/useEditor";
-import { EditorDesktopOnlyView } from "@/components/pages/editor/EditorDesktopOnlyView";
+} from '@/components/pages/editor/contexts/context';
+import { reducer } from '@/components/pages/editor/contexts/reducer';
+import { EditorNavigation } from '@/components/pages/editor/navigation/EditorNavigation';
+import { EditorTool } from '@/components/pages/editor/tools/EditorTool';
+import { useEditor } from '@/hooks/editor/useEditor';
+import { useQuoteCard } from '@/hooks/quoteCard/useQuoteCard';
+import { useSearchParams } from 'next/navigation';
 
 const EditorContent: FC = () => {
   const searchParams = useSearchParams();
 
   const { dispatch } = useEditor();
-  const [id, setId] = useState("");
+  const [id, setId] = useState('');
 
   useEffect(() => {
-    const idQuery = searchParams.get("id");
+    const idQuery = searchParams.get('id');
 
     if (idQuery) {
       setId(idQuery);
@@ -40,7 +40,7 @@ const EditorContent: FC = () => {
   useEffect(() => {
     if (quoteCard) {
       dispatch({
-        type: "INIT_STATE",
+        type: 'INIT_STATE',
         payload: createEditorStateFromQuoteCard(quoteCard),
       });
     }

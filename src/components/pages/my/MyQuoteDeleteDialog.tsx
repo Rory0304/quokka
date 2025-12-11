@@ -1,9 +1,9 @@
-import { DialogActionButton } from "@/components/blocks/dialog/DialogActionButton";
-import { DialogClose } from "@/components/blocks/dialog/DialogClose";
-import { DialogOverlay } from "@/components/blocks/dialog/DialogOverlay";
+import React, { FC } from 'react';
 
-import { Dialog } from "radix-ui";
-import React, { FC } from "react";
+import { DialogActionButton } from '@/components/blocks/dialog/DialogActionButton';
+import { DialogClose } from '@/components/blocks/dialog/DialogClose';
+import { DialogOverlay } from '@/components/blocks/dialog/DialogOverlay';
+import { Dialog } from 'radix-ui';
 
 interface MyQuoteDeleteDialogProps {
   onConfirm: () => void;

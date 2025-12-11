@@ -1,6 +1,7 @@
-import { GradientColorPicker } from "@/components/blocks/colorPicker/GradientColorPicker";
-import { useEditor } from "@/hooks/editor/useEditor";
-import { FC, useState } from "react";
+import { FC, useState } from 'react';
+
+import { GradientColorPicker } from '@/components/blocks/colorPicker/GradientColorPicker';
+import { useEditor } from '@/hooks/editor/useEditor';
 
 export const TemplateColorSelcetor: FC = () => {
   const { editorTemplate, dispatch } = useEditor();
@@ -9,7 +10,7 @@ export const TemplateColorSelcetor: FC = () => {
 
   const handleTemplateColorChange = (color: string) => {
     dispatch({
-      type: "UPDATE_TEMPLATE",
+      type: 'UPDATE_TEMPLATE',
       payload: {
         template: {
           color: color,
@@ -20,7 +21,7 @@ export const TemplateColorSelcetor: FC = () => {
 
   return (
     <div>
-      <button type="button" onClick={() => setOpen((current) => !current)}>
+      <button type="button" onClick={() => setOpen(current => !current)}>
         <div
           className="w-6 h-6 rounded-md"
           style={{

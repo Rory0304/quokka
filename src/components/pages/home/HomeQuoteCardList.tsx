@@ -1,13 +1,14 @@
-"use client";
+'use client';
 
-import React, { FC } from "react";
+import React, { FC } from 'react';
 
-import { useQuoteCardList } from "@/hooks/quoteCard/useQuoteCardList";
-import { HomeQuoteCardItem } from "./HomeQuoteCardItem";
-import { QuoteCardCategoryType } from "@/data/constants/quoteCard/QuoteCardCategory";
-import { HomeQuoteCardListPlaceholder } from "./HomeQuoteCardListPlaceholder";
-import { HomeQuoteCardItemLoading } from "./HomeQuoteCardItemLoading";
-import { Visibility } from "@/components/blocks/visibility/Visibility";
+import { Visibility } from '@/components/blocks/visibility/Visibility';
+import { QuoteCardCategoryType } from '@/data/constants/quoteCard/QuoteCardCategory';
+import { useQuoteCardList } from '@/hooks/quoteCard/useQuoteCardList';
+
+import { HomeQuoteCardItem } from './HomeQuoteCardItem';
+import { HomeQuoteCardItemLoading } from './HomeQuoteCardItemLoading';
+import { HomeQuoteCardListPlaceholder } from './HomeQuoteCardListPlaceholder';
 
 interface HomeQuoteCardListProps {
   category?: QuoteCardCategoryType;
@@ -31,7 +32,7 @@ export const HomeQuoteCardList: FC<HomeQuoteCardListProps> = ({
 
   return (
     <div className="flex flex-col gap-10 pb-25">
-      {list.map((item) => (
+      {list.map(item => (
         <HomeQuoteCardItem key={item.id} item={item} />
       ))}
       {isFetchingNextPage && <HomeQuoteCardItemLoading count={5} />}

@@ -1,7 +1,7 @@
-import { QueryKey } from "@/data/constants/querykey/QueryKey";
-import { QuoteCardType } from "@/data/interfaces/quoteCard/QuoteCardType";
-import { skipToken, useSuspenseQuery } from "@tanstack/react-query";
-import qs from "query-string";
+import { QueryKey } from '@/data/constants/querykey/QueryKey';
+import { QuoteCardType } from '@/data/interfaces/quoteCard/QuoteCardType';
+import { skipToken, useSuspenseQuery } from '@tanstack/react-query';
+import qs from 'query-string';
 
 interface QuoteCardResponse {
   data: QuoteCardType;

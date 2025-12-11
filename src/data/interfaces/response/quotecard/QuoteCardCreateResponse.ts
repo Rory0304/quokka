@@ -1,5 +1,5 @@
-import { EditorData } from "../../editor";
+import { EditorData } from '../../editor';
 
 export interface QuoteCardCreateResponse {
-  id: EditorData["id"];
+  id: EditorData['id'];
 }

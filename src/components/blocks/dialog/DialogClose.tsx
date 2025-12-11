@@ -1,6 +1,7 @@
-import { Cross2Icon } from "@radix-ui/react-icons";
-import { Dialog } from "radix-ui";
-import React, { FC } from "react";
+import React, { FC } from 'react';
+
+import { Cross2Icon } from '@radix-ui/react-icons';
+import { Dialog } from 'radix-ui';
 
 export const DialogClose: FC = () => {
   return (

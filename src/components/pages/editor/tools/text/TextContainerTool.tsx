@@ -1,14 +1,16 @@
-"use client";
+'use client';
 
-import { FC } from "react";
+import { FC } from 'react';
+
+import { EditorElement } from '@/data/interfaces/editor/EditorElement';
+
 import {
   FontFamilySelector,
   FontSizeSelector,
   TextAlignSelector,
-} from "../selector";
-import { Sheet } from "../sheet";
-import { EditorElement } from "@/data/interfaces/editor/EditorElement";
-import { TextColorSelector } from "./TextColorSelector";
+} from '../selector';
+import { Sheet } from '../sheet';
+import { TextColorSelector } from './TextColorSelector';
 
 interface TextContainerToolProps {
   selectedElement: EditorElement;

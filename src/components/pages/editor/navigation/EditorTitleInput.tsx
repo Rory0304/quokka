@@ -1,16 +1,17 @@
-import { LoadingIndicator } from "@/components/blocks/loading/LoadingIndicator";
-import { Editor } from "@/data/interfaces/editor/Editor";
-import { useDebounce } from "@/hooks/common";
-import { useEditor } from "@/hooks/editor/useEditor";
-import { useQuoteCardUpdate } from "@/hooks/quoteCard/useQuoteCardUpdate";
-import { cn } from "@/libs/styles/cn";
-import { delay } from "@/libs/utils/delay";
-import { useMutation } from "@tanstack/react-query";
-import { CheckIcon, Cross1Icon } from "@radix-ui/react-icons";
-import React, { FC, useEffect, useRef, useState } from "react";
-import { toast } from "sonner";
-import { useAuth } from "@/hooks/auth";
-import { LoginTooltip } from "@/components/blocks/tooltip/LoginTooltip";
+import React, { FC, useEffect, useRef, useState } from 'react';
+
+import { LoadingIndicator } from '@/components/blocks/loading/LoadingIndicator';
+import { LoginTooltip } from '@/components/blocks/tooltip/LoginTooltip';
+import { Editor } from '@/data/interfaces/editor/Editor';
+import { useAuth } from '@/hooks/auth';
+import { useDebounce } from '@/hooks/common';
+import { useEditor } from '@/hooks/editor/useEditor';
+import { useQuoteCardUpdate } from '@/hooks/quoteCard/useQuoteCardUpdate';
+import { cn } from '@/libs/styles/cn';
+import { delay } from '@/libs/utils/delay';
+import { CheckIcon, Cross1Icon } from '@radix-ui/react-icons';
+import { useMutation } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
 export const EditorTitleInput: FC = () => {
   const {
@@ -49,7 +50,7 @@ export const EditorTitleInput: FC = () => {
     title,
     signal,
   }: {
-    quoteCardId: Editor["id"];
+    quoteCardId: Editor['id'];
     title: string;
     signal: AbortSignal;
   }) => {
@@ -69,8 +70,8 @@ export const EditorTitleInput: FC = () => {
             delayMutation.mutate();
           },
           onError: () => {
-            toast.error("제목 수정에 오류가 발생했습니다.", {
-              position: "top-right",
+            toast.error('제목 수정에 오류가 발생했습니다.', {
+              position: 'top-right',
             });
           },
         }
@@ -94,7 +95,7 @@ export const EditorTitleInput: FC = () => {
 
   const handleTitleInput = (title: string) => {
     dispatch({
-      type: "UPDATE_CONFIG",
+      type: 'UPDATE_CONFIG',
       payload: {
         title,
       },
@@ -120,19 +121,19 @@ export const EditorTitleInput: FC = () => {
     <div className="flex items-center gap-2 relative">
       <LoginTooltip
         contentProps={{
-          side: "right",
+          side: 'right',
         }}
       >
         <input
           placeholder="제목을 입력해주세요"
           type="text"
           className={cn(
-            "border border-gray-200 px-2 py-1 rounded-md",
-            mutation.isError && "focus-within:bg-red-50",
-            mutation.isPending && "bg-gray-100 text-muted-foreground",
-            isLogin === false && "bg-gray-100 text-muted-foreground"
+            'border border-gray-200 px-2 py-1 rounded-md',
+            mutation.isError && 'focus-within:bg-red-50',
+            mutation.isPending && 'bg-gray-100 text-muted-foreground',
+            isLogin === false && 'bg-gray-100 text-muted-foreground'
           )}
-          onChange={(e) => {
+          onChange={e => {
             isUserInputRef.current = true;
             setValue(e.target.value);
           }}
@@ -142,9 +143,9 @@ export const EditorTitleInput: FC = () => {
       </LoginTooltip>
       <div
         className={cn(
-          "pointer-events-none opacity-0 transition",
+          'pointer-events-none opacity-0 transition',
           (mutation.isError || mutation.isPending || delayMutation.isPending) &&
-            "opacity-100"
+            'opacity-100'
         )}
       >
         {mutation.isPending ? (

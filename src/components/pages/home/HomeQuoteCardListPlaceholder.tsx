@@ -1,6 +1,6 @@
-import Image from "next/image";
+import React, { FC } from 'react';
 
-import React, { FC } from "react";
+import Image from 'next/image';
 
 interface HomeQuoteCardListPlaceholderProps {
   searchKey?: string;
@@ -15,7 +15,7 @@ export const HomeQuoteCardListPlaceholder: FC<
       <div className="flex flex-col gap-6 justify-center items-center">
         <div>
           <h2 className="text-foreground text-center mb-1">
-            {searchKey ? `'${searchKey}'` : ""} 관련된 검색 결과가 없습니다.
+            {searchKey ? `'${searchKey}'` : ''} 관련된 검색 결과가 없습니다.
           </h2>
         </div>
       </div>

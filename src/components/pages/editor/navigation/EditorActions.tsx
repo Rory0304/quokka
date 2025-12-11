@@ -1,18 +1,20 @@
-"use client";
+'use client';
 
-import React, { FC } from "react";
-import { DownloadIcon, FilePlusIcon, GearIcon } from "@radix-ui/react-icons";
-import { Button } from "@/components/blocks/button/Button";
-import { EditorSettingDialog } from "../setting/EditorSettingDialog";
-import { Dialog } from "radix-ui";
-import { useEditor } from "@/hooks/editor/useEditor";
-import { useEditorCreate } from "@/hooks/editor/useEditorCreate";
-import { useAuth } from "@/hooks/auth";
-import { LoginTooltip } from "@/components/blocks/tooltip/LoginTooltip";
-import { EditorSaveDialog } from "./EditorSaveDialog";
-import { toast } from "sonner";
-import { useEditorImageHandle } from "@/hooks/editor/useEditorImageHandle";
-import { useEditorUpdate } from "@/hooks/editor/useEditorUpdate";
+import React, { FC } from 'react';
+
+import { Button } from '@/components/blocks/button/Button';
+import { LoginTooltip } from '@/components/blocks/tooltip/LoginTooltip';
+import { useAuth } from '@/hooks/auth';
+import { useEditor } from '@/hooks/editor/useEditor';
+import { useEditorCreate } from '@/hooks/editor/useEditorCreate';
+import { useEditorImageHandle } from '@/hooks/editor/useEditorImageHandle';
+import { useEditorUpdate } from '@/hooks/editor/useEditorUpdate';
+import { DownloadIcon, FilePlusIcon, GearIcon } from '@radix-ui/react-icons';
+import { Dialog } from 'radix-ui';
+import { toast } from 'sonner';
+
+import { EditorSettingDialog } from '../setting/EditorSettingDialog';
+import { EditorSaveDialog } from './EditorSaveDialog';
 
 export const EditorActions: FC = () => {
   const { createQuoteCard } = useEditorCreate();
@@ -37,10 +39,10 @@ export const EditorActions: FC = () => {
   const handleQuoteCardSave = () => {
     if (state.id) {
       toast.promise(updateQuoteCard(state), {
-        loading: "저장중...",
-        success: "저장되었습니다.",
-        error: "일시적인 오류가 발생되었습니다.",
-        position: "top-center",
+        loading: '저장중...',
+        success: '저장되었습니다.',
+        error: '일시적인 오류가 발생되었습니다.',
+        position: 'top-center',
       });
     } else {
       createQuoteCard(state);

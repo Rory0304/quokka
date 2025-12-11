@@ -1,11 +1,11 @@
-import { FontFamilyType } from "@/data/constants/editor/FontFamily";
-import { TextAlignType } from "@/data/constants/editor/TextAlign";
+import { FontFamilyType } from '@/data/constants/editor/FontFamily';
+import { TextAlignType } from '@/data/constants/editor/TextAlign';
 
 /**
  * Text Element
  */
 export interface EditorElement {
-  type: "text";
+  type: 'text';
   content: TextElement;
 }
 

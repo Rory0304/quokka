@@ -1,8 +1,10 @@
-import Image from "next/image";
-import React, { FC } from "react";
-import { Button } from "../button/Button";
-import Link from "next/link";
-import { RouteConfig } from "@/data/constants/route";
+import React, { FC } from 'react';
+
+import { RouteConfig } from '@/data/constants/route';
+import Image from 'next/image';
+import Link from 'next/link';
+
+import { Button } from '../button/Button';
 
 interface ErrorAlertProps {
   title: string;
@@ -36,7 +38,7 @@ export const ErrorAlert: FC<ErrorAlertProps> = ({
           <Button variant="outline" asChild>
             <Link href={RouteConfig.home}>홈으로</Link>
           </Button>
-          {typeof onReset === "function" ? (
+          {typeof onReset === 'function' ? (
             <Button variant="default" onClick={handleReset}>
               다시 시도
             </Button>

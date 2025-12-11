@@ -1,17 +1,14 @@
-import { NextResponse } from "next/server";
-
-import { prisma } from "@/libs/prisma/prisma";
-
-import { Prisma } from "@prisma/client";
-import { withAuthHandler } from "@/middlewares/withAuthHandler";
-import zod from "zod";
-
-import { QuoteCardCreateRequest } from "@/data/interfaces/request/quotecard/QuoteCardCreateRequest";
+import { QuoteCardCreateRequest } from '@/data/interfaces/request/quotecard/QuoteCardCreateRequest';
+import { prisma } from '@/libs/prisma/prisma';
+import { withAuthHandler } from '@/middlewares/withAuthHandler';
+import { Prisma } from '@prisma/client';
+import { NextResponse } from 'next/server';
+import zod from 'zod';
 
 const querySchema = zod.object({
   limit: zod.string().transform(Number),
   cursor: zod.string().optional(),
-  sort: zod.enum(["asc", "desc"]).optional(),
+  sort: zod.enum(['asc', 'desc']).optional(),
 });
 
 export const GET = withAuthHandler(async ({ request, sessionCtx }) => {
@@ -60,7 +57,7 @@ export const GET = withAuthHandler(async ({ request, sessionCtx }) => {
 
     const nextCursor = hasNextPage
       ? data.length > 0
-        ? data[data.length - 1]?.id ?? null
+        ? (data[data.length - 1]?.id ?? null)
         : null
       : null;
 
@@ -73,10 +70,10 @@ export const GET = withAuthHandler(async ({ request, sessionCtx }) => {
       },
     });
   } catch (error) {
-    console.error("Error fetching QuoteCards:", error);
+    console.error('Error fetching QuoteCards:', error);
 
     return NextResponse.json(
-      { error: "Failed to fetch QuoteCards" },
+      { error: 'Failed to fetch QuoteCards' },
       { status: 500 }
     );
   }
@@ -103,15 +100,15 @@ export const POST = withAuthHandler(async ({ request, sessionCtx }) => {
     return NextResponse.json(
       {
         id: quoteCard.id,
-        message: "QuoteCard saved successfully",
+        message: 'QuoteCard saved successfully',
       },
       { status: 201 }
     );
   } catch (error) {
-    console.error("Error saving QuoteCard:", error);
+    console.error('Error saving QuoteCard:', error);
 
     return NextResponse.json(
-      { error: "Failed to save QuoteCard" },
+      { error: 'Failed to save QuoteCard' },
       { status: 500 }
     );
   }

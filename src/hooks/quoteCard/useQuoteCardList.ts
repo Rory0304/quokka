@@ -1,10 +1,11 @@
-import { QueryKey } from "@/data/constants/querykey/QueryKey";
-import { QuoteCardListResponse } from "@/data/interfaces/response/quotecard/QuoteCardListResponse";
-import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
-import qs from "query-string";
-import { QuoteCardCategoryType } from "@/data/constants/quoteCard/QuoteCardCategory";
-import { useCallback } from "react";
-import { SortBy } from "@/data/interfaces/sortBy/SortBy";
+import { useCallback } from 'react';
+
+import { QueryKey } from '@/data/constants/querykey/QueryKey';
+import { QuoteCardCategoryType } from '@/data/constants/quoteCard/QuoteCardCategory';
+import { QuoteCardListResponse } from '@/data/interfaces/response/quotecard/QuoteCardListResponse';
+import { SortBy } from '@/data/interfaces/sortBy/SortBy';
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
+import qs from 'query-string';
 
 interface UseQuoteCardListOptions {
   category?: QuoteCardCategoryType;
@@ -14,7 +15,7 @@ interface UseQuoteCardListOptions {
 }
 
 export const useQuoteCardList = (options?: UseQuoteCardListOptions) => {
-  const { category, searchKey, limit = 10, sort = "desc" } = options || {};
+  const { category, searchKey, limit = 10, sort = 'desc' } = options || {};
 
   const fetchItems = async ({ pageParam }: { pageParam: number | null }) => {
     const query = qs.stringify({
@@ -56,7 +57,7 @@ export const useQuoteCardList = (options?: UseQuoteCardListOptions) => {
       lastPage.pagination.nextCursor,
   });
 
-  const list = data?.pages.flatMap((page) => page.data) ?? [];
+  const list = data?.pages.flatMap(page => page.data) ?? [];
   const isEmpty = isSuccess && list.length === 0;
 
   const onEndReached = useCallback(() => {

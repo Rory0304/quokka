@@ -1,4 +1,4 @@
-import { EditorElement } from "./EditorElement";
+import { EditorElement } from './EditorElement';
 
 export interface EditorState {
   isSaving?: boolean;

@@ -1,8 +1,9 @@
+import React, { FC } from 'react';
+
 import {
   QuoteCardCategoryMap,
   QuoteCardCategoryType,
-} from "@/data/constants/quoteCard/QuoteCardCategory";
-import React, { FC } from "react";
+} from '@/data/constants/quoteCard/QuoteCardCategory';
 
 export const QuoteCardCategory: FC<{ category: string }> = ({ category }) => {
   return (

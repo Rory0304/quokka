@@ -1,17 +1,18 @@
+import React, { FC } from 'react';
+
 import {
   TextAlign,
   TextAlignMap,
   TextAlignType,
-} from "@/data/constants/editor/TextAlign";
-import { EditorElement } from "@/data/interfaces/editor/EditorElement";
-import { useEditor } from "@/hooks/editor/useEditor";
+} from '@/data/constants/editor/TextAlign';
+import { EditorElement } from '@/data/interfaces/editor/EditorElement';
+import { useEditor } from '@/hooks/editor/useEditor';
 import {
   TextAlignCenterIcon,
   TextAlignLeftIcon,
   TextAlignRightIcon,
   TextIcon,
-} from "@radix-ui/react-icons";
-import React, { FC } from "react";
+} from '@radix-ui/react-icons';
 
 interface TextAlignSelectorProps {
   element: EditorElement;
@@ -26,14 +27,14 @@ export const TextAlignSelector: FC<TextAlignSelectorProps> = ({ element }) => {
   return (
     <div className="flex items-center gap-6 py-4">
       <TextIcon color="gray" />
-      {(Object.keys(TextAlign) as TextAlignType[]).map((item) => (
+      {(Object.keys(TextAlign) as TextAlignType[]).map(item => (
         <TextAlignItem
           textAlign={item}
           key={item}
           active={item === textAlign}
           onClick={() =>
             dispatch({
-              type: "UPDATE_ELEMENT",
+              type: 'UPDATE_ELEMENT',
               payload: {
                 element: {
                   ...element,
@@ -56,11 +57,11 @@ const TextAlignIcon: FC<{
   label: string;
 }> = ({ textAlign, label }) => {
   switch (textAlign) {
-    case "center":
+    case 'center':
       return <TextAlignCenterIcon aria-label={label} />;
-    case "left":
+    case 'left':
       return <TextAlignLeftIcon aria-label={label} />;
-    case "right":
+    case 'right':
       return <TextAlignRightIcon aria-label={label} />;
     default:
       return null;
@@ -77,7 +78,7 @@ const TextAlignItem: FC<{
       <div
         className="rounded-md p-2"
         style={{
-          backgroundColor: active ? "#f1f1f1" : "transparent",
+          backgroundColor: active ? '#f1f1f1' : 'transparent',
         }}
       >
         <TextAlignIcon textAlign={textAlign} label={TextAlignMap[textAlign]} />

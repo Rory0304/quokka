@@ -1,15 +1,16 @@
-import { QueryKey } from "@/data/constants/querykey/QueryKey";
-import { QuoteCardListResponse } from "@/data/interfaces/response/quotecard/QuoteCardListResponse";
-import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
-import qs from "query-string";
-import { useCallback } from "react";
+import { useCallback } from 'react';
+
+import { QueryKey } from '@/data/constants/querykey/QueryKey';
+import { QuoteCardListResponse } from '@/data/interfaces/response/quotecard/QuoteCardListResponse';
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
+import qs from 'query-string';
 
 export const useMyQuoteCardList = () => {
   const fetchItems = async ({ pageParam }: { pageParam: number | null }) => {
     const query = qs.stringify({
       cursor: pageParam ?? undefined,
       limit: 10,
-      sort: "desc",
+      sort: 'desc',
     });
 
     const response = await fetch(`/api/quotecard-list?${query}`);

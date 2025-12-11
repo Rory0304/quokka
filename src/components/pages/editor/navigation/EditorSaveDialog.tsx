@@ -1,10 +1,10 @@
-import { DialogActionButton } from "@/components/blocks/dialog/DialogActionButton";
-import { DialogClose } from "@/components/blocks/dialog/DialogClose";
-import { DialogOverlay } from "@/components/blocks/dialog/DialogOverlay";
-import { useEditorNavigationGuard } from "@/hooks/editor/useEditorNavigationGuard";
+import React, { FC } from 'react';
 
-import { Dialog } from "radix-ui";
-import React, { FC } from "react";
+import { DialogActionButton } from '@/components/blocks/dialog/DialogActionButton';
+import { DialogClose } from '@/components/blocks/dialog/DialogClose';
+import { DialogOverlay } from '@/components/blocks/dialog/DialogOverlay';
+import { useEditorNavigationGuard } from '@/hooks/editor/useEditorNavigationGuard';
+import { Dialog } from 'radix-ui';
 
 export const EditorSaveDialog: FC = () => {
   const { openSaveModal, onCancel, onDiscard } = useEditorNavigationGuard();
@@ -23,12 +23,12 @@ export const EditorSaveDialog: FC = () => {
 
           <div className="flex items-center justify-end gap-2">
             <DialogActionButton
-              label={"나가기"}
+              label={'나가기'}
               onClick={onDiscard}
               variant="blue"
             />
             <DialogActionButton
-              label={"취소"}
+              label={'취소'}
               onClick={onCancel}
               variant="outline"
             />

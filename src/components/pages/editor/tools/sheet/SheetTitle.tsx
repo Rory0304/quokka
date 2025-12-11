@@ -1,5 +1,6 @@
-import { cn } from "@/libs/styles/cn";
-import React, { FC } from "react";
+import React, { FC } from 'react';
+
+import { cn } from '@/libs/styles/cn';
 
 interface SheetTitleProps {
   title: string;
@@ -11,8 +12,8 @@ export const SheetTitle: FC<SheetTitleProps> = ({ title, description }) => {
     <div className="flex flex-col border-b border-gray-100 px-6 w-full py-5">
       <h3
         className={cn(
-          "text-lg font-semibold text-foreground",
-          typeof description === "string" ? "mb-2" : ""
+          'text-lg font-semibold text-foreground',
+          typeof description === 'string' ? 'mb-2' : ''
         )}
       >
         {title}

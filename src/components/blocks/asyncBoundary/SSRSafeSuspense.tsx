@@ -1,5 +1,6 @@
-import { useMounted } from "@/hooks/common/useMounted";
-import { ComponentProps, Suspense } from "react";
+import { ComponentProps, Suspense } from 'react';
+
+import { useMounted } from '@/hooks/common/useMounted';
 
 export default function SSRSafeSuspense(
   props: ComponentProps<typeof Suspense>

@@ -1,18 +1,19 @@
-import type { Metadata } from "next";
-import { Noto_Sans_KR } from "next/font/google";
-import "./globals.css";
-import { AppProvider } from "@/providers/AppProvider";
-import { AuthProvider } from "@/providers/AuthProvider";
-import { NavigationGuardProvider } from "next-navigation-guard";
+import { AppProvider } from '@/providers/AppProvider';
+import { AuthProvider } from '@/providers/AuthProvider';
+import type { Metadata } from 'next';
+import { NavigationGuardProvider } from 'next-navigation-guard';
+import { Noto_Sans_KR } from 'next/font/google';
+
+import './globals.css';
 
 const notoSansKR = Noto_Sans_KR({
-  variable: "--font-noto-sans-kr",
-  subsets: ["latin"],
+  variable: '--font-noto-sans-kr',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "Quokka | 기억하고 싶은 문구를 나만의 카드로",
-  description: "기억하고 싶은 문장을 나만의 카드로",
+  title: 'Quokka | 기억하고 싶은 문구를 나만의 카드로',
+  description: '기억하고 싶은 문장을 나만의 카드로',
 };
 
 export default function RootLayout({

@@ -1,13 +1,14 @@
-import Image from "next/image";
+import React, { FC } from 'react';
 
-import React, { FC } from "react";
-import { QuoteCardCategory } from "../quoteCard/QuoteCardCategory";
-import { QuoteCardType } from "@/data/interfaces/quoteCard/QuoteCardType";
-import { HomeBookMarkButton } from "./HomeBookMarkButton";
-import { Avatar } from "radix-ui";
-import { PersonIcon } from "@radix-ui/react-icons";
-import { formatRelativeTime } from "@/libs/utils/formatRelativeTime";
-import { QueryKey } from "@/data/constants/querykey/QueryKey";
+import { QueryKey } from '@/data/constants/querykey/QueryKey';
+import { QuoteCardType } from '@/data/interfaces/quoteCard/QuoteCardType';
+import { formatRelativeTime } from '@/libs/utils/formatRelativeTime';
+import { PersonIcon } from '@radix-ui/react-icons';
+import Image from 'next/image';
+import { Avatar } from 'radix-ui';
+
+import { QuoteCardCategory } from '../quoteCard/QuoteCardCategory';
+import { HomeBookMarkButton } from './HomeBookMarkButton';
 
 interface HomeQuoteCardItemProps {
   item: QuoteCardType;
@@ -27,7 +28,7 @@ export const HomeQuoteCardItem: FC<HomeQuoteCardItemProps> = ({ item }) => {
           </Avatar.Root>
 
           <p className="text-muted-foreground font-medium text-xs">
-            {item.user?.name || "Anonymous"}
+            {item.user?.name || 'Anonymous'}
           </p>
 
           <span className="text-muted-foreground font-medium text-xs before:content-['·'] before:left-[-5px] before:absolute relative">
@@ -49,7 +50,7 @@ export const HomeQuoteCardItem: FC<HomeQuoteCardItemProps> = ({ item }) => {
         <p className="text-foreground font-medium text-sm mb-4">{item.title}</p>
 
         <div className="flex items-center gap-1 mb-4">
-          {item.tags.map((tag) => (
+          {item.tags.map(tag => (
             <span
               className="flex items-center justify-center bg-gray-50 p-2 text-xs text-muted-foreground"
               key={tag}

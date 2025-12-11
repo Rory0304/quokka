@@ -1,10 +1,11 @@
-import { GradientColorPicker } from "@/components/blocks/colorPicker/GradientColorPicker";
-import { BackgroundColor } from "@/data/constants/editor/BackgroundColor";
-import { EditorBackgroundColorType } from "@/data/interfaces/editor/EditorBackgroundColor";
-import { useEditor } from "@/hooks/editor/useEditor";
-import { cn } from "@/libs/styles/cn";
-import { BlendingModeIcon } from "@radix-ui/react-icons";
-import React, { FC, useState } from "react";
+import React, { FC, useState } from 'react';
+
+import { GradientColorPicker } from '@/components/blocks/colorPicker/GradientColorPicker';
+import { BackgroundColor } from '@/data/constants/editor/BackgroundColor';
+import { EditorBackgroundColorType } from '@/data/interfaces/editor/EditorBackgroundColor';
+import { useEditor } from '@/hooks/editor/useEditor';
+import { cn } from '@/libs/styles/cn';
+import { BlendingModeIcon } from '@radix-ui/react-icons';
 
 export const BackgroundSelector: FC = () => {
   const { dispatch, editorLayout } = useEditor();
@@ -20,7 +21,7 @@ export const BackgroundSelector: FC = () => {
   }) => {
     if (color) {
       dispatch({
-        type: "UPDATE_LAYOUT",
+        type: 'UPDATE_LAYOUT',
         payload: {
           layout: { customBackgroundColor: color, backgroundColor: undefined },
         },
@@ -31,7 +32,7 @@ export const BackgroundSelector: FC = () => {
 
     if (backgroundColorType) {
       dispatch({
-        type: "UPDATE_LAYOUT",
+        type: 'UPDATE_LAYOUT',
         payload: {
           layout: {
             customBackgroundColor: undefined,
@@ -45,7 +46,7 @@ export const BackgroundSelector: FC = () => {
   };
 
   const handleColorPickerOpen = () => {
-    setOpen((current) => !current);
+    setOpen(current => !current);
   };
 
   return (
@@ -54,16 +55,16 @@ export const BackgroundSelector: FC = () => {
         type="button"
         onClick={handleColorPickerOpen}
         className={cn(
-          "p-2 w-12 h-12 rounded-md flex items-center justify-center",
+          'p-2 w-12 h-12 rounded-md flex items-center justify-center',
           Boolean(editorLayout?.customBackgroundColor)
-            ? "border-2 border-blue-500"
-            : "border border-gray-400"
+            ? 'border-2 border-blue-500'
+            : 'border border-gray-400'
         )}
         style={{
           background: editorLayout?.customBackgroundColor,
         }}
       >
-        {typeof editorLayout?.customBackgroundColor === "undefined" ? (
+        {typeof editorLayout?.customBackgroundColor === 'undefined' ? (
           <BlendingModeIcon color="gray" />
         ) : null}
       </button>
@@ -71,7 +72,7 @@ export const BackgroundSelector: FC = () => {
       <GradientColorPicker
         open={open}
         value={editorLayout?.customBackgroundColor}
-        onChange={(color) => handleBackgroundChange({ color })}
+        onChange={color => handleBackgroundChange({ color })}
       />
 
       {BackgroundColor.map((item, index) => (
@@ -99,8 +100,8 @@ const BackgroundColorItem: FC<{
     <button type="button" onClick={onClick} aria-label={item.alt}>
       <div
         className={cn(
-          "rounded-md w-12 h-12 border-2",
-          active ? "border-blue-500" : "border-gray-50"
+          'rounded-md w-12 h-12 border-2',
+          active ? 'border-blue-500' : 'border-gray-50'
         )}
         style={{
           background: item.bgColor,

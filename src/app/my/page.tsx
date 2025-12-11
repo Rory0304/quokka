@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { ErrorAlert } from "@/components/blocks/alert/ErrorAlert";
-import { AsyncBoundary } from "@/components/blocks/asyncBoundary/AsyncBoundary";
-import { GlobalLayout } from "@/components/blocks/global";
-import { MyQuoteCardItemLoading } from "@/components/pages/my/MyQuoteCardItemLoading";
-import { MyQuoteCardList } from "@/components/pages/my/MyQuoteCardList";
-import { RouteConfig } from "@/data/constants/route";
-import { useAuth } from "@/hooks/auth";
-import { PlusIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
+import { ErrorAlert } from '@/components/blocks/alert/ErrorAlert';
+import { AsyncBoundary } from '@/components/blocks/asyncBoundary/AsyncBoundary';
+import { GlobalLayout } from '@/components/blocks/global';
+import { MyQuoteCardItemLoading } from '@/components/pages/my/MyQuoteCardItemLoading';
+import { MyQuoteCardList } from '@/components/pages/my/MyQuoteCardList';
+import { RouteConfig } from '@/data/constants/route';
+import { useAuth } from '@/hooks/auth';
+import { PlusIcon } from '@radix-ui/react-icons';
+import Link from 'next/link';
 
 export default function MyPage() {
   const { isLogin, status } = useAuth();
 
-  if (status === "loading") {
+  if (status === 'loading') {
     return <div></div>;
   }
 

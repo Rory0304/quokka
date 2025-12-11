@@ -1,21 +1,20 @@
-"use client";
+'use client';
 
-import { CaretDownIcon, ExitIcon } from "@radix-ui/react-icons";
-import { signOut, useSession } from "next-auth/react";
+import React, { FC } from 'react';
 
-import Link from "next/link";
-import { Avatar, DropdownMenu } from "radix-ui";
+import { GoogleLoginButton } from '@/components/pages/login/GoogleLoginButton';
+import { CaretDownIcon, ExitIcon } from '@radix-ui/react-icons';
+import { signOut, useSession } from 'next-auth/react';
+import Link from 'next/link';
+import { Avatar, DropdownMenu } from 'radix-ui';
 
-import React, { FC } from "react";
-
-import { SearchViewToggle } from "./parts/SearchViewToggle";
-import { GoogleLoginButton } from "@/components/pages/login/GoogleLoginButton";
+import { SearchViewToggle } from './parts/SearchViewToggle';
 
 export const DefaultHeader: FC = () => {
   const { data: session } = useSession();
 
   const handleSignOut = () => {
-    signOut({ callbackUrl: "/" });
+    signOut({ callbackUrl: '/' });
   };
 
   const renderMainLogoArea = () => {
@@ -48,7 +47,7 @@ export const DefaultHeader: FC = () => {
                         </span>
                       </div>
                       <p className="text-xs font-medium text-muted-foreground">
-                        {session.user.email?.split("@")[0]}
+                        {session.user.email?.split('@')[0]}
                       </p>
                     </Avatar.Fallback>
                   </Avatar.Root>

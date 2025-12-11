@@ -1,12 +1,13 @@
-import { DialogOverlay } from "@/components/blocks/dialog/DialogOverlay";
-import { useBookmarkList } from "@/hooks/bookmark";
+import React, { FC, useEffect } from 'react';
 
-import { Dialog } from "radix-ui";
-import React, { FC, useEffect } from "react";
-import { BookmarkItem } from "./BookmarkItem";
-import { DialogClose } from "@/components/blocks/dialog/DialogClose";
-import { Visibility } from "@/components/blocks/visibility/Visibility";
-import { LoadingIndicator } from "@/components/blocks/loading/LoadingIndicator";
+import { DialogClose } from '@/components/blocks/dialog/DialogClose';
+import { DialogOverlay } from '@/components/blocks/dialog/DialogOverlay';
+import { LoadingIndicator } from '@/components/blocks/loading/LoadingIndicator';
+import { Visibility } from '@/components/blocks/visibility/Visibility';
+import { useBookmarkList } from '@/hooks/bookmark';
+import { Dialog } from 'radix-ui';
+
+import { BookmarkItem } from './BookmarkItem';
 
 interface BookmarkDialogProps {
   open: boolean;
@@ -59,7 +60,7 @@ export const BookmarkDialog: FC<BookmarkDialogProps> = ({ open }) => {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {list.map((item) => (
+              {list.map(item => (
                 <BookmarkItem key={item.id} item={item.quoteCard} />
               ))}
               {isFetchingNextPage ? <LoadingIndicator /> : null}

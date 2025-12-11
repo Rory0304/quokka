@@ -1,6 +1,8 @@
-import { Portal } from "@radix-ui/react-tooltip";
-import React, { ComponentProps, FC } from "react";
-import { TooltipContent, TooltipTrigger, Tooltip } from "./Tooltip";
+import React, { ComponentProps, FC } from 'react';
+
+import { Portal } from '@radix-ui/react-tooltip';
+
+import { Tooltip, TooltipContent, TooltipTrigger } from './Tooltip';
 
 interface TooltipProps extends React.PropsWithChildren {
   disabled?: boolean;

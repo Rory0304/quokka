@@ -1,5 +1,6 @@
-import React, { ComponentProps, FC } from "react";
-import { Button } from "../button/Button";
+import React, { ComponentProps, FC } from 'react';
+
+import { Button } from '../button/Button';
 
 interface DialogActionButtonProps extends ComponentProps<typeof Button> {
   label: string;

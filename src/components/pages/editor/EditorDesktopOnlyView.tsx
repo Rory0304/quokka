@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/blocks/button/Button";
-import { RouteConfig } from "@/data/constants/route";
-import { motion, useInView } from "framer-motion";
-import Link from "next/link";
-import { FC, useRef } from "react";
+import { FC, useRef } from 'react';
+
+import { Button } from '@/components/blocks/button/Button';
+import { RouteConfig } from '@/data/constants/route';
+import { motion, useInView } from 'framer-motion';
+import Link from 'next/link';
 
 const defaultVariants = {
   hidden: { opacity: 0 },
@@ -19,7 +20,7 @@ export const EditorDesktopOnlyView: FC = () => {
     <motion.div
       ref={ref}
       initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      animate={isInView ? 'visible' : 'hidden'}
       variants={defaultVariants}
     >
       <div className="flex flex-col items-center justify-center py-12">

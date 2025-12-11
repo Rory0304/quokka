@@ -1,7 +1,8 @@
-import { cn } from "@/libs/styles/cn";
-import { ArrowRightIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
-import React, { FC } from "react";
+import React, { FC } from 'react';
+
+import { cn } from '@/libs/styles/cn';
+import { ArrowRightIcon } from '@radix-ui/react-icons';
+import Link from 'next/link';
 
 export const HomeFloatingButton: FC = () => {
   return (
@@ -10,8 +11,8 @@ export const HomeFloatingButton: FC = () => {
         <Link href="/editor">
           <div
             className={cn(
-              "border-primary border bg-[#e9631ad8] rounded-lg p-3 shadow-xl flex items-center gap-2",
-              "hover:scale-110 transition-all duration-150"
+              'border-primary border bg-[#e9631ad8] rounded-lg p-3 shadow-xl flex items-center gap-2',
+              'hover:scale-110 transition-all duration-150'
             )}
           >
             <span className="text-white text-sm font-semibold">

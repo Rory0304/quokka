@@ -1,7 +1,9 @@
-import { useEditor } from "@/hooks/editor/useEditor";
-import React, { FC, useContext } from "react";
-import { QuoteCard } from "./element/QuoteCard";
-import { EditorHandlerContext } from "./contexts/context";
+import React, { FC, useContext } from 'react';
+
+import { useEditor } from '@/hooks/editor/useEditor';
+
+import { EditorHandlerContext } from './contexts/context';
+import { QuoteCard } from './element/QuoteCard';
 
 export const EditorMain: FC = () => {
   const { editorData, dispatch } = useEditor();
@@ -9,7 +11,7 @@ export const EditorMain: FC = () => {
 
   const handleClick = () => {
     dispatch({
-      type: "UPDATE_SELECTED_ELEMENT",
+      type: 'UPDATE_SELECTED_ELEMENT',
       payload: null,
     });
   };
@@ -19,7 +21,7 @@ export const EditorMain: FC = () => {
       onClick={handleClick}
       className="w-full flex flex-1 justify-center items-center"
     >
-      {editorData.map((element) => (
+      {editorData.map(element => (
         <QuoteCard ref={quoteCardRef} key={element.id} {...element} />
       ))}
     </div>

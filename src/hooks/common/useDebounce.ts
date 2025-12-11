@@ -1,5 +1,6 @@
-import { DependencyList, useEffect } from "react";
-import { useTimeout } from "./useTimeout";
+import { DependencyList, useEffect } from 'react';
+
+import { useTimeout } from './useTimeout';
 
 interface DebounceProps {
   deps: DependencyList;

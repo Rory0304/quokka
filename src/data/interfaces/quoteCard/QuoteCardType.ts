@@ -1,4 +1,4 @@
-import { Editor } from "../editor/Editor";
+import { Editor } from '../editor/Editor';
 
 export interface QuoteCardUser {
   id: string;
@@ -10,7 +10,7 @@ export interface QuoteCardUser {
 export interface QuoteCardType {
   id: string;
   userId: string;
-  customFields: Pick<Editor, "data">;
+  customFields: Pick<Editor, 'data'>;
   title: string;
   isPublic: boolean;
   tags: string[];

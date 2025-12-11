@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
-import { cn } from "@/libs/styles/cn";
-import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-import * as React from "react";
+import * as React from 'react';
+
+import { cn } from '@/libs/styles/cn';
+import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 
 const TooltipProvider = TooltipPrimitive.Provider;
 
@@ -18,7 +19,7 @@ const TooltipContent = React.forwardRef<
     ref={ref}
     sideOffset={sideOffset}
     className={cn(
-      "z-50 overflow-hidden rounded-md bg-slate-100 px-3 py-1.5 text-xs text-muted-foreground",
+      'z-50 overflow-hidden rounded-md bg-slate-100 px-3 py-1.5 text-xs text-muted-foreground',
       className
     )}
     {...props}

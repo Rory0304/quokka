@@ -1,6 +1,7 @@
-import { CheckIcon } from "@radix-ui/react-icons";
-import { Select } from "radix-ui";
-import { FC } from "react";
+import { FC } from 'react';
+
+import { CheckIcon } from '@radix-ui/react-icons';
+import { Select } from 'radix-ui';
 
 interface SelectItemProps {
   value: string;

@@ -1,4 +1,4 @@
-import { QuoteCardCategoryType } from "@/data/constants/quoteCard/QuoteCardCategory";
+import { QuoteCardCategoryType } from '@/data/constants/quoteCard/QuoteCardCategory';
 
 /**
  * 기본 정보

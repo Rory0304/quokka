@@ -1,8 +1,10 @@
-import { ArrowRightIcon, BookmarkIcon } from "@radix-ui/react-icons";
-import React, { FC, useState } from "react";
-import { BookmarkDialog } from "../bookmark/BookmarkDialog";
-import { Dialog } from "radix-ui";
-import { useAuth } from "@/hooks/auth";
+import React, { FC, useState } from 'react';
+
+import { useAuth } from '@/hooks/auth';
+import { ArrowRightIcon, BookmarkIcon } from '@radix-ui/react-icons';
+import { Dialog } from 'radix-ui';
+
+import { BookmarkDialog } from '../bookmark/BookmarkDialog';
 
 export const HomeBookMarkedQuoteCardList: FC = () => {
   const [open, setOpen] = useState(false);

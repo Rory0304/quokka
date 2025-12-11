@@ -1,4 +1,4 @@
-import { useNavigationGuard } from "next-navigation-guard";
+import { useNavigationGuard } from 'next-navigation-guard';
 
 interface useNavgationGuardProps {
   enabled: boolean;

@@ -1,9 +1,10 @@
-import { InfiniteData, useQueryClient } from "@tanstack/react-query";
-import { BookmarkCreateResponse, useBookmarkCreate } from "./useBookmarkCreate";
-import { BookmarkDeleteResponse, useBookmarkDelete } from "./useBookmarkDelete";
-import { toast } from "sonner";
-import { useOptimisticMutation } from "../common";
-import { QuoteCardListResponse } from "@/data/interfaces/response/quotecard/QuoteCardListResponse";
+import { QuoteCardListResponse } from '@/data/interfaces/response/quotecard/QuoteCardListResponse';
+import { InfiniteData, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
+
+import { useOptimisticMutation } from '../common';
+import { BookmarkCreateResponse, useBookmarkCreate } from './useBookmarkCreate';
+import { BookmarkDeleteResponse, useBookmarkDelete } from './useBookmarkDelete';
 
 interface Variables {
   isBookmarked: boolean;
@@ -24,16 +25,16 @@ export const useBookmarkToggle = ({
 
   const onError = (error: unknown) => {
     console.log(error);
-    toast.error("북마크 업데이트에 실패했습니다.");
+    toast.error('북마크 업데이트에 실패했습니다.');
   };
 
   const cachedQueryKey = queryClient
     .getQueryCache()
     .getAll()
-    .map((item) => item.queryKey);
+    .map(item => item.queryKey);
 
   const exactQueryKey =
-    cachedQueryKey.findLast((key) => key[0] === queryKey) ?? [];
+    cachedQueryKey.findLast(key => key[0] === queryKey) ?? [];
 
   const mutate = async ({
     isBookmarked,
@@ -55,15 +56,15 @@ export const useBookmarkToggle = ({
     InfiniteData<QuoteCardListResponse>
   >({
     queryKey: exactQueryKey,
-    invalidates: [invalidateKeys ?? [""]],
+    invalidates: [invalidateKeys ?? ['']],
     mutationFn: mutate,
     updater: (prev, variables) => {
       if (!prev) return prev;
 
-      const pages = prev.pages.map((page) => {
+      const pages = prev.pages.map(page => {
         const data = page.data;
         const pagination = page.pagination;
-        const newData = data.map((item) => {
+        const newData = data.map(item => {
           if (item.id === variables.quoteCardId) {
             return {
               ...item,

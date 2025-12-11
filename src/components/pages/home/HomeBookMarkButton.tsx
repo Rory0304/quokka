@@ -1,12 +1,11 @@
-"use client";
+'use client';
 
-import { LoginTooltip } from "@/components/blocks/tooltip/LoginTooltip";
-import { useAuth } from "@/hooks/auth";
-import { useBookmarkToggle } from "@/hooks/bookmark";
+import React, { FC } from 'react';
 
-import { BookmarkFilledIcon, BookmarkIcon } from "@radix-ui/react-icons";
-
-import React, { FC } from "react";
+import { LoginTooltip } from '@/components/blocks/tooltip/LoginTooltip';
+import { useAuth } from '@/hooks/auth';
+import { useBookmarkToggle } from '@/hooks/bookmark';
+import { BookmarkFilledIcon, BookmarkIcon } from '@radix-ui/react-icons';
 
 interface HomeBookMarkButtonProps {
   quoteCardId: string;

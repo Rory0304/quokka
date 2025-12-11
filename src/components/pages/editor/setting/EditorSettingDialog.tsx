@@ -1,17 +1,17 @@
-import { Button } from "@/components/blocks/button/Button";
-import { DialogClose } from "@/components/blocks/dialog/DialogClose";
-import { DialogOverlay } from "@/components/blocks/dialog/DialogOverlay";
+import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 
-import { Switch } from "@/components/blocks/switch/Switch";
-import { useEditor } from "@/hooks/editor/useEditor";
-import { useQuoteCardUpdate } from "@/hooks/quoteCard/useQuoteCardUpdate";
-import { Cross1Icon } from "@radix-ui/react-icons";
+import { Button } from '@/components/blocks/button/Button';
+import { DialogClose } from '@/components/blocks/dialog/DialogClose';
+import { DialogOverlay } from '@/components/blocks/dialog/DialogOverlay';
+import { Switch } from '@/components/blocks/switch/Switch';
+import { QuoteCardCategoryType } from '@/data/constants/quoteCard/QuoteCardCategory';
+import { useEditor } from '@/hooks/editor/useEditor';
+import { useQuoteCardUpdate } from '@/hooks/quoteCard/useQuoteCardUpdate';
+import { Cross1Icon } from '@radix-ui/react-icons';
+import { Dialog } from 'radix-ui';
+import { toast } from 'sonner';
 
-import { Dialog } from "radix-ui";
-import React, { ChangeEvent, FC, useEffect, useState } from "react";
-import { CategorySelector } from "../tools/selector/CategorySelector";
-import { QuoteCardCategoryType } from "@/data/constants/quoteCard/QuoteCardCategory";
-import { toast } from "sonner";
+import { CategorySelector } from '../tools/selector/CategorySelector';
 
 interface EditorSettingDialogProps {
   closeDialog: () => void;
@@ -25,7 +25,7 @@ export const EditorSettingDialog: FC<EditorSettingDialogProps> = ({
 
   const [tags, setTags] = useState<string[]>([]);
   const [category, setCategory] = useState<QuoteCardCategoryType>();
-  const [tagInput, setTagInput] = useState("");
+  const [tagInput, setTagInput] = useState('');
   const [isPublic, setIsPublic] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
 
@@ -50,14 +50,14 @@ export const EditorSettingDialog: FC<EditorSettingDialogProps> = ({
       return;
     }
 
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       e.preventDefault();
 
       const value = e.currentTarget.value;
 
-      setTags((current) => [...current, value]);
+      setTags(current => [...current, value]);
 
-      setTagInput("");
+      setTagInput('');
     }
   };
 
@@ -66,7 +66,7 @@ export const EditorSettingDialog: FC<EditorSettingDialogProps> = ({
   };
 
   const handleRemove = (index: number) => {
-    setTags((current) => current.filter((item, _index) => _index !== index));
+    setTags(current => current.filter((item, _index) => _index !== index));
   };
 
   const renderTag = (tag: string, index: number) => {
@@ -99,7 +99,7 @@ export const EditorSettingDialog: FC<EditorSettingDialogProps> = ({
         {
           onSuccess: () => {
             dispatch({
-              type: "UPDATE_CONFIG",
+              type: 'UPDATE_CONFIG',
               payload: {
                 isPublic,
                 tags,
@@ -107,11 +107,11 @@ export const EditorSettingDialog: FC<EditorSettingDialogProps> = ({
               },
             });
 
-            toast.success("성공적으로 저장되었습니다");
+            toast.success('성공적으로 저장되었습니다');
             closeDialog();
           },
           onError: () => {
-            toast.error("인용 카드 업데이트에 실패했습니다. 다시 시도해주세요");
+            toast.error('인용 카드 업데이트에 실패했습니다. 다시 시도해주세요');
             closeDialog();
           },
         }
@@ -165,7 +165,7 @@ export const EditorSettingDialog: FC<EditorSettingDialogProps> = ({
 
         <CategorySelector
           category={category as string}
-          onValueChange={(value) => setCategory(value as QuoteCardCategoryType)}
+          onValueChange={value => setCategory(value as QuoteCardCategoryType)}
         />
 
         <div className="mt-[25px] flex justify-end">

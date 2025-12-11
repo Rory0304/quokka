@@ -1,6 +1,6 @@
-import { EditorConfig } from "./EditorConfig";
-import { EditorData } from "./EditorData";
-import { EditorState } from "./EditorState";
+import { EditorConfig } from './EditorConfig';
+import { EditorData } from './EditorData';
+import { EditorState } from './EditorState';
 
 export interface Editor {
   id?: string;
