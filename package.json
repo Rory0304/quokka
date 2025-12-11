@@ -9,6 +9,8 @@
     "lint": "eslint",
     "test": "vitest",
     "ci:format": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\"",
+    "ci:lint": "next lint",
+    "ci:sort-package-json": "npx sort-package-json",
     "test:run": "vitest run",
     "script:prisma-generate": "prisma generate",
     "script:prisma-push": "npx prisma db push"
