@@ -2,7 +2,7 @@ name: Unit Test
 
 on:
   workflow_run:
-    workflows: [CI]
+    workflows: ['CI']
     types:
       - completed
 
@@ -22,8 +22,10 @@ jobs:
       - name: Run Test with coverage
         run: npx vitest --coverage.enabled true
 
-      - name: Report Coverage
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
-        uses: davelosert/vitest-coverage-report-action@v2
         with:
-          threshold-icons: "{0: '🔴', 80: '🟠', 90: '🟢'}"
+          check_name: 'unit-test result'
+          files: |
+            test-results.xml # 사용하는 테스트 환경에서 출력하는 테스트 결과 경로와 일치하도록한다

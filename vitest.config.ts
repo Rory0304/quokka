@@ -11,6 +11,8 @@ export default defineConfig({
     coverage: {
       reporter: ['text', 'json-summary', 'json'],
     },
+    reporters: ['junit', 'default'],
+    outputFile: 'test-results.xml',
   },
   resolve: {
     alias: {
