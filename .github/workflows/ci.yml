@@ -8,22 +8,40 @@ on:
       - main
 
 jobs:
-  lint:
+  CI:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
     steps:
       - uses: actions/checkout@v4
-
-      - name: 'Install node'
-        uses: actions/setup-node@v6
+      - uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
-          cache: npm
+          node-version: 20
 
-      - name: 'Install Deps'
-        run: npm ci
+      - name: Install dependencies
+        run: |
+          yarn install
 
-      - name: 'Run Prettier'
-        run: npx prettier --check .
+      - name: Sort package.json
+        run: |
+          npm run ci:sort-package-json
 
-      - name: 'Run ESLint'
-        run: npm run lint
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: sort package.json'
+          push_options: --force
+
+      - name: Format
+        run: |
+          npm run ci:format
+
+      - name: Lint
+        run: |
+          npm run ci:lint
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: lint'
+          push_options: --force
