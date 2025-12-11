@@ -5,7 +5,7 @@
   "scripts": {
     "build": "prisma generate && next build --turbopack",
     "ci:format": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\"",
-    "ci:lint": "next lint",
+    "ci:lint": "eslint",
     "ci:sort-package-json": "npx sort-package-json",
     "dev": "next dev --turbopack",
     "lint": "eslint",
