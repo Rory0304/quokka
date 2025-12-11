@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest",
+    "ci:format": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\"",
     "test:run": "vitest run",
     "script:prisma-generate": "prisma generate",
     "script:prisma-push": "npx prisma db push"
