@@ -10,6 +10,7 @@
   <img alt="Static Badge" src="https://img.shields.io/badge/framework-Next.js-000000">
   <img alt="Static Badge" src="https://img.shields.io/badge/host-vercel-eeeeee">
   <img alt="Static Badge" src="https://img.shields.io/badge/database-supabase-00E599">
+  <img alt="Static Badge" src="https://img.shields.io/badge/test-cypress/vitest-0096FF">
 
 </p>
 
