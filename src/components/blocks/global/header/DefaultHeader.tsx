@@ -37,7 +37,11 @@ export const DefaultHeader: FC = () => {
         {session ? (
           <DropdownMenu.Root>
             <DropdownMenu.Trigger asChild>
-              <button aria-label="Profile Menu" className="outline-none">
+              <button
+                data-id="authenticated"
+                aria-label="Profile Menu"
+                className="outline-none"
+              >
                 <div className="flex gap-1 items-center p-2 hover:bg-slate-50 transition-colors ease-in-out duration-100 rounded-md bg-white border border-gray-300">
                   <Avatar.Root>
                     <Avatar.Fallback className="flex items-center justify-center">
