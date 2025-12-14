@@ -90,6 +90,7 @@ export const EditorActions: FC = () => {
       <LoginTooltip>
         <Button
           type="button"
+          id="save_button"
           className="bg-blue-500 hover:bg-blue-600 flex items-center gap-2"
           onClick={handleQuoteCardSave}
           disabled={isLogin === false}

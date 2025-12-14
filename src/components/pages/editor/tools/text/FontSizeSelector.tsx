@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 
 import { EditorElement } from '@/data/interfaces/editor/EditorElement';
 import { useEditor } from '@/hooks/editor/useEditor';
+import { cn } from '@/libs/styles/cn';
 import { FontSizeIcon } from '@radix-ui/react-icons';
 
 interface FontSizeSelectorProps {
@@ -53,7 +54,10 @@ export const FontSizeSelector: FC<FontSizeSelectorProps> = ({ element }) => {
         min="1"
         value={inputValue}
         onChange={handleInputChange}
-        className="w-20 px-2 py-1 border border-gray-300 rounded text-sm"
+        className={cn(
+          'font_size',
+          'w-20 px-2 py-1 border border-gray-300 rounded text-sm'
+        )}
         title="숫자로 입력해주세요"
       />
       <span>px</span>

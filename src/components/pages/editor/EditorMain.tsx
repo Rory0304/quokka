@@ -1,6 +1,7 @@
 import React, { FC, useContext } from 'react';
 
 import { useEditor } from '@/hooks/editor/useEditor';
+import { cn } from '@/libs/styles/cn';
 
 import { EditorHandlerContext } from './contexts/context';
 import { QuoteCard } from './element/QuoteCard';
@@ -19,7 +20,10 @@ export const EditorMain: FC = () => {
   return (
     <div
       onClick={handleClick}
-      className="w-full flex flex-1 justify-center items-center"
+      className={cn(
+        'editor_main',
+        'w-full flex flex-1 justify-center items-center'
+      )}
     >
       {editorData.map(element => (
         <QuoteCard ref={quoteCardRef} key={element.id} {...element} />
