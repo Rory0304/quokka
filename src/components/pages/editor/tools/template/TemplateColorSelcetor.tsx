@@ -21,7 +21,11 @@ export const TemplateColorSelcetor: FC = () => {
 
   return (
     <div>
-      <button type="button" onClick={() => setOpen(current => !current)}>
+      <button
+        type="button"
+        className="template_color_picker"
+        onClick={() => setOpen(current => !current)}
+      >
         <div
           className="w-6 h-6 rounded-md"
           style={{

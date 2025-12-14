@@ -34,7 +34,11 @@ export const TextColorSelector: FC<TextColorSelectorProps> = ({ element }) => {
     <div className="flex relative items-center gap-6 py-4 ">
       <BlendingModeIcon color="gray" />
 
-      <button type="button" onClick={() => setOpen(current => !current)}>
+      <button
+        className="text_color_picker"
+        type="button"
+        onClick={() => setOpen(current => !current)}
+      >
         <div
           className="w-6 h-6 rounded-md border border-gray-400"
           style={{

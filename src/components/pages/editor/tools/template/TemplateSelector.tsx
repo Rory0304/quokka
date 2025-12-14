@@ -85,7 +85,12 @@ const TemplateSelectorItem: FC<TemplateSelectorItemProps> = ({
   onClick,
 }) => {
   return (
-    <button type="button" onClick={onClick} className="cursor-pointer">
+    <button
+      type="button"
+      onClick={onClick}
+      className="cursor-pointer"
+      aria-label={`${TemplateMap[template].label} 템플릿`}
+    >
       <div
         className="rounded-md bg-[#f1f1f1] border border-[#f1f1f1] flex flex-col gap-2 p-3 justify-center items-center text-muted-foreground"
         style={{

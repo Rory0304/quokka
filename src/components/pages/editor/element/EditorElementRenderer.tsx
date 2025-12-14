@@ -17,6 +17,7 @@ export const EditorElementRenderer: FC<{
       {elements.map(element => (
         <ElementWrapper key={element.content.id} element={element}>
           <TextElement
+            className="text_element"
             defaultValue={element.content.text}
             placeholder={'내용을 입력해주세요'}
             fontSize={element.content.fontSize}

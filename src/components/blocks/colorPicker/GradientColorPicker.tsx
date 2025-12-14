@@ -36,7 +36,7 @@ export const GradientColorPicker: FC<GradientColorPickerProps> = ({
     <ColorPicker
       width={240}
       height={240}
-      className={cn('absolute', className)}
+      className={cn('gradient_color_picker', 'absolute', className)}
       hideColorGuide
       hidePresets
       hideInputs
