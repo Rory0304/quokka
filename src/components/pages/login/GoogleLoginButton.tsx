@@ -22,7 +22,9 @@ export const GoogleLoginButton: FC = () => {
               height={20}
             />
 
-            <span className="text-xs text-foreground">Sign in with Google</span>
+            <span className="text-[10px] sm:text-xs text-foreground">
+              Sign in with Google
+            </span>
           </div>
         </div>
       </button>
