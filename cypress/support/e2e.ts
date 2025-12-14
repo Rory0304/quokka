@@ -14,3 +14,12 @@
 // ***********************************************************
 // Import commands.js using ES2015 syntax:
 import './commands';
+
+// Run login before each test (skip for login.cy.ts)
+beforeEach(function () {
+  // Skip global login for login test file
+  if (Cypress.spec.name.includes('login.cy.ts')) {
+    return;
+  }
+  cy.login();
+});
