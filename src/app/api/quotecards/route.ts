@@ -33,9 +33,6 @@ export const GET = async (request: NextRequest) => {
     const userId = session?.user?.id;
 
     const query: Prisma.QuoteCardFindManyArgs = {
-      where: {
-        isPublic: true,
-      },
       orderBy: { createdAt: sort },
       take: limit + 1,
       include: {
@@ -56,7 +53,7 @@ export const GET = async (request: NextRequest) => {
 
     // 카테고리 및 검색어 필터링 설정
     if (category || searchKey || cursor) {
-      const whereConditions: Prisma.QuoteCardWhereInput = {};
+      const whereConditions: Prisma.QuoteCardWhereInput = { isPublic: true };
 
       if (category) {
         whereConditions.category = category;

@@ -4,7 +4,7 @@ import { EditorHandlerContext } from '@/components/pages/editor/contexts/context
 import { AspectRatioType } from '@/data/constants/editor/AspectRatio';
 import { canvasToBlob } from '@/libs/canvas/canvasToBlob';
 import { saveAs } from 'file-saver';
-import html2canvas from 'html2canvas';
+import * as htmlToImage from 'html-to-image';
 
 import { useImageUpload } from '../image/useImageUpload';
 
@@ -40,7 +40,13 @@ export const useEditorImageHandle = () => {
       throw new Error('Not found matched quote card element');
     }
 
-    const canvas = await html2canvas(elem, _getImageSize(aspectRatio));
+    const { windowHeight, windowWidth } = _getImageSize(aspectRatio);
+
+    const canvas = await htmlToImage.toCanvas(elem, {
+      canvasWidth: windowWidth,
+      canvasHeight: windowHeight,
+    });
+
     const blob = await canvasToBlob(canvas, 'image/jpg');
 
     const fileName = _getImageFileName(id);
