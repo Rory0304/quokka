@@ -24,7 +24,7 @@ export const MyQuoteCardList: FC = () => {
       ))}
       {isFetchingNextPage ? <MyQuoteCardItemLoading count={5} /> : null}
       {hasNextPage ? (
-        <Visibility onChange={onEndReached} rootMargin="0px 0px 200px 0px" />
+        <Visibility onChange={onEndReached} rootMargin="0px 0px 100px 0px" />
       ) : null}
     </>
   );

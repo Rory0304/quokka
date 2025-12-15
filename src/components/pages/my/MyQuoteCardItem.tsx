@@ -68,7 +68,7 @@ export const MyQuoteCardItem: FC<QuoteCardItemProps> = ({ item }) => {
 
   const renderImage = () => {
     return (
-      <div className="rounded-2xl shadow-md overflow-hidden self-start bg-gray-50">
+      <div className="rounded-2xl shadow-md overflow-hidden self-start bg-gray-50 shrink-0">
         {item.thumbnailUrl ? (
           <Image
             alt="thumbnail-image"
