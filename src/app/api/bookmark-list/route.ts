@@ -26,7 +26,12 @@ export const GET = withAuthHandler(async ({ request, sessionCtx }) => {
     const { limit, sort, cursor } = safeParams.data;
 
     const query: Prisma.BookmarkFindManyArgs = {
-      where: { userId: sessionCtx.userId },
+      where: {
+        userId: sessionCtx.userId,
+        quoteCard: {
+          isPublic: true,
+        },
+      },
       take: limit + 1,
       include: {
         quoteCard: {

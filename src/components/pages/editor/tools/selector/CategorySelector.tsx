@@ -1,22 +1,12 @@
 import React, { FC, useRef } from 'react';
 
+import {
+  QuoteCardCategory,
+  QuoteCardCategoryMap,
+  QuoteCardCategoryType,
+} from '@/data/constants/quoteCard/QuoteCardCategory';
 import { CheckIcon, ChevronDownIcon } from '@radix-ui/react-icons';
 import { Select } from 'radix-ui';
-
-const categoryItems = [
-  {
-    value: 'movie',
-    label: '영화',
-  },
-  {
-    value: 'book',
-    label: '책',
-  },
-  {
-    value: 'etc',
-    label: '기타',
-  },
-];
 
 interface CategorySelectorProps {
   category: string;
@@ -28,6 +18,10 @@ export const CategorySelector: FC<CategorySelectorProps> = ({
   onValueChange,
 }) => {
   const selectorRef = useRef(null);
+  const categoryItems = Object.keys(QuoteCardCategory).map(value => ({
+    value,
+    label: QuoteCardCategoryMap[value as QuoteCardCategoryType],
+  }));
 
   return (
     <div className="relative mb-8 flex items-center z-20" ref={selectorRef}>

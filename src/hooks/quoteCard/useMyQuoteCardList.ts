@@ -39,7 +39,7 @@ export const useMyQuoteCardList = () => {
       lastPage.pagination.nextCursor,
   });
 
-  const list = data?.pages[0].data ?? [];
+  const list = data?.pages.flatMap(page => page.data) ?? [];
   const isEmpty = isSuccess && list.length === 0;
 
   const onEndReached = useCallback(() => {
