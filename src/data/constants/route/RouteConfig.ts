@@ -4,6 +4,7 @@ export const RouteConfig = {
   login: '/login',
   register: '/register',
   my: '/my',
+  about: '/about',
 };
 
 export type RouteConfigKeys = keyof typeof RouteConfig;
