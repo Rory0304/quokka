@@ -33,6 +33,9 @@ export const GET = async (request: NextRequest) => {
     const userId = session?.user?.id;
 
     const query: Prisma.QuoteCardFindManyArgs = {
+      where: {
+        isPublic: true,
+      },
       orderBy: { createdAt: sort },
       take: limit + 1,
       include: {
