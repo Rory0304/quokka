@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import ColorPicker from 'react-best-gradient-color-picker';
 
 import { cn } from '@/libs/styles/cn';
@@ -20,7 +20,15 @@ export const GradientColorPicker: FC<GradientColorPickerProps> = ({
   className = 'bottom-0 left-[-240px]',
   onChange,
 }) => {
+  const initialColor = useRef(value);
   const [color, setColor] = useState(value);
+
+  useEffect(() => {
+    if (initialColor.current !== value) {
+      initialColor.current = value;
+      setColor(value);
+    }
+  }, [value]);
 
   const handleColorChange = throttle((color: string) => {
     setColor(color);
