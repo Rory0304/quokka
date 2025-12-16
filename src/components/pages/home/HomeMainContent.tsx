@@ -8,11 +8,12 @@ import { QuoteCardCategoryType } from '@/data/constants/quoteCard/QuoteCardCateg
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 
 import { QuoteCardCategoryFilter } from '../quoteCard/QuoteCardCategoryFilter';
+import { HomeAboutNavigation } from './HomeAboutNavigation';
 import { HomeBookMarkedQuoteCardList } from './HomeBookMarkedQuoteCardList';
 import { HomeQuoteCardItemLoading } from './HomeQuoteCardItemLoading';
 import { HomeQuoteCardList } from './HomeQuoteCardList';
 
-export const HomeBookCardList: FC = () => {
+export const HomeMainContent: FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<
     QuoteCardCategoryType | undefined
   >(undefined);
@@ -73,7 +74,10 @@ export const HomeBookCardList: FC = () => {
         </AsyncBoundary>
       </div>
 
-      <HomeBookMarkedQuoteCardList />
+      <div className="flex-col gap-4 h-fit sticky top-20 md:flex hidden">
+        <HomeBookMarkedQuoteCardList />
+        <HomeAboutNavigation />
+      </div>
     </div>
   );
 };

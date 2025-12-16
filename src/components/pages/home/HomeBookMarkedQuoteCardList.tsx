@@ -13,7 +13,7 @@ export const HomeBookMarkedQuoteCardList: FC = () => {
 
   if (!isLogin) {
     return (
-      <div className="flex-col bg-white sticky top-20 h-fit border border-gray-100 rounded-xl p-4 hidden md:flex">
+      <div className="flex-col bg-white h-fit border border-gray-100 rounded-xl p-4 hidden md:flex">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <BookmarkIcon />
@@ -33,7 +33,7 @@ export const HomeBookMarkedQuoteCardList: FC = () => {
       <Dialog.Trigger asChild>
         <button
           type="button"
-          className="flex-col bg-white sticky top-20 h-fit border border-gray-100 rounded-xl p-4 hidden md:flex"
+          className="flex-col bg-white h-fit border border-gray-100 rounded-xl p-4 hidden md:flex"
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">

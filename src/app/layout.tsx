@@ -12,7 +12,7 @@ const notoSansKR = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  title: 'Quokka | 기억하고 싶은 문구를 나만의 카드로',
+  title: 'Quokka | 기억하고 싶은 문장을 나만의 카드로',
   description: '기억하고 싶은 문장을 나만의 카드로',
 };
 
