@@ -1,5 +1,6 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
+import { SmoothImageLoader } from '@/components/blocks/image/SmoothImageLoader';
 import { QueryKey } from '@/data/constants/querykey/QueryKey';
 import { QuoteCardType } from '@/data/interfaces/quoteCard/QuoteCardType';
 import { formatRelativeTime } from '@/libs/utils/formatRelativeTime';
@@ -62,12 +63,14 @@ export const HomeQuoteCardItem: FC<HomeQuoteCardItemProps> = ({ item }) => {
 
         <div className="aspect-square relative overflow-hidden border rounded-2xl border-gray-300 flex-1">
           {item.thumbnailUrl ? (
-            <Image
+            <SmoothImageLoader
               fill
               alt="thumbnail-image"
               src={item.thumbnailUrl}
-              className="scale-100 group-hover:scale-110 duration-200 object-contain"
-              quality={80}
+              loading="lazy"
+              decoding="async"
+              className="scale-100 group-hover:scale-110 ease-in-out opacity-100 w-full object-cover aspect-[1] transition-all duration-500"
+              quality={100}
             />
           ) : null}
         </div>
